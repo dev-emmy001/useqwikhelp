@@ -1,69 +1,152 @@
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import HeroImageStage from "@/components/HeroImageStage";
+import AboutSection from "@/components/AboutSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import PhilosophyBanner from "@/components/PhilosophyBanner";
+import ServicesGridSection from "@/components/ServicesGridSection";
+import WhyUsBentoSection from "@/components/WhyUsBentoSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import PricingSection from "@/components/PricingSection";
+import AppCtaBanner from "@/components/AppCtaBanner";
+import FaqSection from "@/components/FaqSection";
+import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="relative min-h-screen bg-white flex flex-col overflow-x-hidden selection:bg-blue-100 selection:text-brand-blue">
+      {/* =========================================================================
+          NAVIGATION BAR
+          - Floating pill on Desktop (md+)
+          - Non-floating docked top bar on Mobile (< md)
+          ========================================================================= */}
+      <Navbar />
+
+      {/* =========================================================================
+          1. HERO SECTION
+          ========================================================================= */}
+      <main className="flex-1 flex flex-col items-center justify-start pt-8 md:pt-28 lg:pt-32 pb-8 sm:pb-12 px-4 sm:px-6 relative">
+        {/* Soft Ambient Background Highlights */}
+        <div
+          className="absolute top-12 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-gradient-to-b from-blue-50/70 via-indigo-50/30 to-transparent blur-3xl rounded-full pointer-events-none -z-10"
+          aria-hidden="true"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+
+        {/* Hero Text Content Container */}
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          {/* Main Display Headline */}
+          <h1 className="text-[34px] sm:text-5xl md:text-[56px] lg:text-[62px] font-extrabold tracking-[-0.03em] leading-[1.12] text-gray-950 font-sans text-balance">
+            Based on our Calculations,
+            <span className="block mt-1 sm:mt-2">
+              You Need{" "}
+              <span className="text-brand-blue font-extrabold">
+                Qwikhelp!
+              </span>
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          {/* Subtitle / Value Proposition */}
+          <p className="mt-5 sm:mt-6 text-[15px] sm:text-lg md:text-[18.5px] leading-relaxed text-gray-600 max-w-2xl font-normal text-pretty px-2">
+            Find verified cooks, cleaners, plumbers, and more near you; pay
+            securely, communicate in-app, and get real recourse if anything goes
+            wrong.
           </p>
+
+          {/* Action CTAs */}
+          <div className="mt-8 flex flex-row items-center justify-center gap-3.5 sm:gap-4 flex-wrap">
+            {/* Primary CTA */}
+            <Link
+              href="#get-started"
+              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-blue text-white text-sm sm:text-[15px] font-semibold shadow-[0_4px_16px_0_rgba(30,91,247,0.38)] transition-[background-color,box-shadow,transform] duration-150 hover:bg-brand-blue-hover hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.48)] motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+            >
+              <span>Get Started</span>
+              <svg
+                className="size-4 transition-transform duration-150 group-hover:translate-x-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </Link>
+
+            {/* Secondary CTA */}
+            <Link
+              href="#provider"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-gray-800 text-sm sm:text-[15px] font-medium border border-gray-200/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.04)] transition-[background-color,border-color,transform] duration-150 hover:bg-gray-50/80 hover:border-gray-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+            >
+              Join as a Provider
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* HERO IMAGE STAGE */}
+        <section
+          aria-label="Verified Service Professionals"
+          className="w-full flex justify-center"
+        >
+          <HeroImageStage
+            imageSrc="/hero-workers.png"
+            imageAlt="QwikHelp verified team: chef, electrician, plumber, and carpenter"
+          />
+        </section>
       </main>
+
+      {/* =========================================================================
+          2. ABOUT / WHAT IS QWIKHELP (Modeled after bimm.app #what-is-bimm)
+          ========================================================================= */}
+      <AboutSection />
+
+      {/* =========================================================================
+          3. HOW IT WORKS 3-STEP FLOW (Modeled after bimm.app #how-it-works)
+          ========================================================================= */}
+      <HowItWorksSection />
+
+      {/* =========================================================================
+          4. CORE PHILOSOPHY / IMPACT BANNER (Modeled after bimm.app statement banner)
+          ========================================================================= */}
+      <PhilosophyBanner />
+
+      {/* =========================================================================
+          5. SERVICES DIRECTORY & CATEGORIES (Modeled after bimm.app #deals)
+          ========================================================================= */}
+      <ServicesGridSection />
+
+      {/* =========================================================================
+          6. WHY US BENTO GRID (Modeled after bimm.app why section)
+          ========================================================================= */}
+      <WhyUsBentoSection />
+
+      {/* =========================================================================
+          7. VERIFIED REVIEWS & STORIES (Modeled after bimm.app reviews section)
+          ========================================================================= */}
+      <TestimonialsSection />
+
+      {/* =========================================================================
+          8. PRICING & PASSES (Concentric radii, strict skill compliance)
+          ========================================================================= */}
+      <PricingSection />
+
+      {/* =========================================================================
+          9. APP DOWNLOAD & PROVIDER CTA (Modeled after bimm.app download banner)
+          ========================================================================= */}
+      <AppCtaBanner />
+
+      {/* =========================================================================
+          10. FREQUENTLY ASKED QUESTIONS ACCORDION (Modeled after bimm.app FAQ)
+          ========================================================================= */}
+      <FaqSection />
+
+      {/* =========================================================================
+          11. COMPREHENSIVE MULTI-COLUMN FOOTER
+          ========================================================================= */}
+      <Footer />
     </div>
   );
 }

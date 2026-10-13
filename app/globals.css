@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
 :root {
+  /* ==========================================================================
+     QwikHelp Design System - Color Palette
+     ========================================================================== */
+  
+  /* Primary Brand Blues */
+  --brand-blue: #1e5bf7;
+  --brand-blue-hover: #1649d8;
+  --brand-blue-active: #113cb3;
+  --brand-blue-light: #eff5ff;
+  --brand-blue-tint: #dbeafe;
+  --brand-dark: #0f172a;
+
+  /* Playful Hero Decorative Accents (Doodle badges) */
+  --accent-orange: #f97316;
+  --accent-orange-light: #ffedd5;
+  --accent-green: #10b981;
+  --accent-green-light: #d1fae5;
+  --accent-yellow: #eab308;
+  --accent-yellow-light: #fef9c3;
+  --accent-sky: #0ea5e9;
+  --accent-sky-light: #e0f2fe;
+
+  /* Neutrals & Typography */
+  --text-main: #111827;
+  --text-body: #4b5563;
+  --text-muted: #9ca3af;
+  --text-inverse: #ffffff;
+
+  /* Backgrounds & Surfaces */
+  --bg-page: #ffffff;
+  --bg-soft: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-floating: rgba(255, 255, 255, 0.94);
+
+  /* Borders & Dividers */
+  --border-subtle: #e5e7eb;
+  --border-muted: #f1f5f9;
+  --border-hover: #cbd5e1;
+  --border-focus: #1e5bf7;
+
+  /* Shadows & Elevations */
+  --shadow-floating-nav: 0 12px 34px -4px rgba(17, 24, 39, 0.08), 0 4px 12px -2px rgba(17, 24, 39, 0.03);
+  --shadow-primary-btn: 0 8px 22px -4px rgba(30, 91, 247, 0.38);
+  --shadow-secondary-btn: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  --shadow-image-stage: 0 30px 60px -15px rgba(15, 23, 42, 0.08);
+
+  /* Base theme variables */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827;
 }
 
 @theme inline {
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-hover: var(--brand-blue-hover);
+  --color-brand-blue-active: var(--brand-blue-active);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-blue-tint: var(--brand-blue-tint);
+  --color-brand-dark: var(--brand-dark);
+
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-orange-light: var(--accent-orange-light);
+  --color-accent-green: var(--accent-green);
+  --color-accent-green-light: var(--accent-green-light);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-yellow-light: var(--accent-yellow-light);
+  --color-accent-sky: var(--accent-sky);
+  --color-accent-sky-light: var(--accent-sky-light);
+
+  --color-text-main: var(--text-main);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-bg-page: var(--bg-page);
+  --color-bg-soft: var(--bg-soft);
+  --color-bg-card: var(--bg-card);
+  --color-bg-floating: var(--bg-floating);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-muted: var(--border-muted);
+  --color-border-hover: var(--border-hover);
+  --color-border-focus: var(--border-focus);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Animations for lively whimsical decorative doodle badges */
+@keyframes doodle-float-1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
   }
 }
 
+@keyframes doodle-float-2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-5deg);
+  }
+}
+
+@keyframes doodle-pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.animate-doodle-float-1 {
+  animation: doodle-float-1 4.5s ease-in-out infinite;
+}
+
+.animate-doodle-float-2 {
+  animation: doodle-float-2 5.2s ease-in-out infinite;
+}
+
+.animate-doodle-pulse {
+  animation: doodle-pulse-subtle 4s ease-in-out infinite;
+}
+
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--brand-blue-tint);
+  color: var(--brand-dark);
 }
