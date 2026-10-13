@@ -123,19 +123,6 @@ export default function HeroImageStage({
             </div>
           )}
         </div>
-
-        {/* Developer / Designer Helper Pill */}
-        <div className="flex justify-center mt-3">
-          <button
-            type="button"
-            onClick={() => setShowSlotGuide(!showSlotGuide)}
-            className="text-[11px] font-medium text-gray-400 hover:text-brand-blue inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-gray-200/60 bg-white/70 hover:bg-white hover:border-blue-200 shadow-2xs transition-[color,background-color,border-color] duration-150 [-webkit-tap-highlight-color:transparent]"
-            title="Inspect hero image container specifications"
-          >
-            <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            {showSlotGuide ? "Hide Image Slot Guide" : "Hero Image Slot Info"}
-          </button>
-        </div>
       </div>
     </div>
   );

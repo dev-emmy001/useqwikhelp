@@ -2,19 +2,12 @@ import Navbar from "@/components/Navbar";
 import HeroImageStage from "@/components/HeroImageStage";
 import AboutSection from "@/components/AboutSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
-import PhilosophyBanner from "@/components/PhilosophyBanner";
-import ServicesGridSection from "@/components/ServicesGridSection";
-import WhyUsBentoSection from "@/components/WhyUsBentoSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import PricingSection from "@/components/PricingSection";
-import AppCtaBanner from "@/components/AppCtaBanner";
-import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-white flex flex-col overflow-x-hidden selection:bg-blue-100 selection:text-brand-blue">
+    <div className="relative min-h-screen bg-[#F8FAFF] flex flex-col overflow-x-hidden selection:bg-blue-100 selection:text-brand-blue">
       {/* =========================================================================
           NAVIGATION BAR
           - Floating pill on Desktop (md+)
@@ -108,44 +101,6 @@ export default function Home() {
           ========================================================================= */}
       <HowItWorksSection />
 
-      {/* =========================================================================
-          4. CORE PHILOSOPHY / IMPACT BANNER (Modeled after bimm.app statement banner)
-          ========================================================================= */}
-      <PhilosophyBanner />
-
-      {/* =========================================================================
-          5. SERVICES DIRECTORY & CATEGORIES (Modeled after bimm.app #deals)
-          ========================================================================= */}
-      <ServicesGridSection />
-
-      {/* =========================================================================
-          6. WHY US BENTO GRID (Modeled after bimm.app why section)
-          ========================================================================= */}
-      <WhyUsBentoSection />
-
-      {/* =========================================================================
-          7. VERIFIED REVIEWS & STORIES (Modeled after bimm.app reviews section)
-          ========================================================================= */}
-      <TestimonialsSection />
-
-      {/* =========================================================================
-          8. PRICING & PASSES (Concentric radii, strict skill compliance)
-          ========================================================================= */}
-      <PricingSection />
-
-      {/* =========================================================================
-          9. APP DOWNLOAD & PROVIDER CTA (Modeled after bimm.app download banner)
-          ========================================================================= */}
-      <AppCtaBanner />
-
-      {/* =========================================================================
-          10. FREQUENTLY ASKED QUESTIONS ACCORDION (Modeled after bimm.app FAQ)
-          ========================================================================= */}
-      <FaqSection />
-
-      {/* =========================================================================
-          11. COMPREHENSIVE MULTI-COLUMN FOOTER
-          ========================================================================= */}
       <Footer />
     </div>
   );

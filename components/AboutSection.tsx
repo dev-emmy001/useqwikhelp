@@ -9,7 +9,7 @@ export default function AboutSection() {
     <section
       id="about"
       aria-label="About"
-      className="w-full bg-white py-16 sm:py-24 border-y border-gray-100"
+      className="w-full py-16 sm:py-24 border-y border-gray-100"
     >
       <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* =========================================================================

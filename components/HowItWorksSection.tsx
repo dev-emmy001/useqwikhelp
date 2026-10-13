@@ -1,121 +1,185 @@
-import React from "react";
+"use client";
+
+import {
+  CalendarCheckIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  MagnifyingGlassIcon,
+  MapPinIcon,
+  ShieldCheckIcon,
+  WrenchIcon,
+} from "@phosphor-icons/react";
+import Link from "next/link";
+
+const steps = [
+  {
+    number: "01",
+    title: "Find the right pro",
+    description:
+      "Choose the service you need and explore trusted professionals available in your area.",
+    visual: "discover",
+  },
+  {
+    number: "02",
+    title: "Book with confidence",
+    description:
+      "Pick a time that works for you. Your payment stays protected until the job is done.",
+    visual: "book",
+  },
+  {
+    number: "03",
+    title: "Get it done, worry-free",
+    description:
+      "Review the completed work, then approve payment. If something is not right, we are here to help.",
+    visual: "complete",
+  },
+] as const;
+
+function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative flex min-h-[220px] items-center justify-center overflow-hidden rounded-2xl bg-[#0a60d9] p-5 sm:min-h-[240px]"
+    >
+       <div
+                className="absolute -left-[20%] top-[-10%] size-[600px] pointer-events-none"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 600 600" className="w-full h-full" fill="none">
+                  <circle cx="240" cy="300" r="140" stroke="#5087FF" strokeWidth="48" opacity="0.9" />
+                  <circle cx="240" cy="300" r="235" stroke="#5087FF" strokeWidth="52" opacity="0.9" />
+                  <circle cx="240" cy="300" r="335" stroke="#5087FF" strokeWidth="58" opacity="0.9" />
+                </svg>
+              </div>
+
+      {step === "discover" && (
+        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 shadow-md">
+          <div className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm text-gray-500">
+            <MagnifyingGlassIcon size={17} />
+            <span>What do you need help with?</span>
+          </div>
+          <div className="mt-3 flex items-center gap-3 rounded-xl bg-gray-50 p-3">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue text-white">
+              <WrenchIcon size={20} weight="fill" />
+            </span>
+            <span className="min-w-0 flex-1 text-left">
+              <span className="block text-sm font-semibold text-gray-900">
+                Plumbing
+              </span>
+              <span className="mt-0.5 flex items-center gap-1 text-xs text-gray-500">
+                <MapPinIcon size={13} />
+                Available near you
+              </span>
+            </span>
+            <CheckCircleIcon
+              className="shrink-0 text-brand-blue"
+              size={19}
+              weight="fill"
+            />
+          </div>
+        </div>
+      )}
+
+      {step === "book" && (
+        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 text-left shadow-md">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-semibold text-gray-900">
+              Your booking
+            </span>
+            <CalendarCheckIcon
+              className="text-brand-blue"
+              size={20}
+              weight="fill"
+            />
+          </div>
+          <div className="mt-3 rounded-xl bg-gray-50 p-3">
+            <span className="block text-sm font-medium text-gray-800">
+              Plumbing visit
+            </span>
+            <span className="mt-1 flex items-center gap-1.5 text-xs text-gray-500">
+              <ClockIcon size={14} />
+              Tomorrow, 10:00 AM
+            </span>
+          </div>
+          <div className="mt-3 flex items-center gap-2 rounded-lg bg-accent-green-light px-3 py-2 text-xs font-medium text-emerald-800">
+            <ShieldCheckIcon size={16} weight="fill" />
+            Payment protected in escrow
+          </div>
+        </div>
+      )}
+
+      {step === "complete" && (
+        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 text-left shadow-md">
+          <div className="flex items-center gap-3">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-emerald-700">
+              <CheckCircleIcon size={25} weight="fill" />
+            </span>
+            <span>
+              <span className="block text-sm font-semibold text-gray-900">
+                Job completed
+              </span>
+              <span className="mt-0.5 block text-xs text-gray-500">
+                Your home, back in order
+              </span>
+            </span>
+          </div>
+          <div className="mt-4 border-t border-gray-100 pt-3">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-500">Your protection</span>
+              <span className="font-semibold text-emerald-700">Active</span>
+            </div>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-100">
+              <div className="h-full w-full rounded-full bg-accent-green" />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function HowItWorksSection() {
-  const steps = [
-    {
-      number: "01",
-      title: "Choose service & describe the task",
-      tagline: "Instant fixed quotes",
-      description:
-        "Select your service category (cook, cleaner, plumber, electrician, AC tech) and specify what you need done. Receive transparent, upfront pricing with no hidden contractor add-ons.",
-      visualBadge: "Step 1: Booking",
-      visualPreview: {
-        title: "Selected: Deep Cleaning + AC Service",
-        meta: "Scheduled for Tomorrow, 10:00 AM",
-        tag: "Fixed Quote: $45",
-      },
-    },
-    {
-      number: "02",
-      title: "Match pro & lock funds in escrow",
-      tagline: "Zero prepayment risk",
-      description:
-        "An identity-verified, background-checked professional accepts your job. Your payment is held securely in escrow — the artisan never receives payout until you inspect the finished work.",
-      visualBadge: "Step 2: Safe Escrow",
-      visualPreview: {
-        title: "Funds Held Securely in Vault",
-        meta: "Artisan dispatched with verified ID",
-        tag: "Escrow Locked",
-      },
-    },
-    {
-      number: "03",
-      title: "Inspect work & release payment",
-      tagline: "Backed by Recourse Guarantee",
-      description:
-        "Once the service is completed, inspect the results. Approve in the app to release funds. If anything isn't right, our 24-hour guarantee sends a fix-it specialist free of charge or refunds you.",
-      visualBadge: "Step 3: Peace of Mind",
-      visualPreview: {
-        title: "Job Approved & Guaranteed",
-        meta: "Coverage active for 24 hours",
-        tag: "100% Satisfied",
-      },
-    },
-  ];
-
   return (
     <section
       id="how-it-works"
-      aria-label="How QwikHelp Works"
-      className="w-full bg-white py-16 sm:py-24 border-b border-gray-100"
+      aria-labelledby="how-it-works-title"
+      className="w-full py-16 sm:py-20 lg:py-24"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100/80">
-            <span className="text-xs font-semibold text-brand-blue font-sans">
-              How It Works
-            </span>
-          </div>
-
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-gray-950 tracking-tight text-balance font-sans">
-            Three simple steps to verified help.
+      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <header className="mx-auto max-w-2xl text-center">
+          <h2
+            id="how-it-works-title"
+            className="mt-5 text-4xl font-extrabold leading-tight text-gray-950 text-balance sm:text-5xl lg:text-[56px]"
+          >
+            How QwikHelp works
           </h2>
-
-          <p className="mt-3.5 text-base sm:text-lg text-gray-600 leading-relaxed text-pretty font-normal">
-            No roadside haggling, no unverified strangers, and no fear of unfinished jobs. Here is how QwikHelp protects every booking.
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-600 text-pretty sm:text-lg">
+            From finding a trusted professional to getting the job done, every
+            step is clear, convenient, and protected.
           </p>
-        </div>
+        </header>
 
-        {/* 3 Step Cards Grid */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <ol className="mt-10 grid grid-cols-1 gap-5 sm:mt-12 md:grid-cols-3 md:gap-4 lg:gap-6">
           {steps.map((step) => (
-            <div
+            <li
               key={step.number}
-              className="relative flex flex-col justify-between rounded-3xl p-6 sm:p-7 bg-white border border-gray-200/90 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.05)] transition-[border-color,box-shadow] duration-200 hover:border-gray-300 hover:shadow-[0_14px_36px_-10px_rgba(15,23,42,0.09)]"
+              className="flex min-w-0 flex-col rounded-[28px] bg-white p-5 shadow-sm sm:p-6 lg:p-7"
             >
-              <div>
-                {/* Step Number & Tagline */}
-                <div className="flex items-center justify-between pb-4 border-b border-gray-100">
-                  <span className="text-3xl font-extrabold text-brand-blue tabular-nums tracking-tight">
-                    {step.number}
-                  </span>
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-brand-blue border border-blue-100">
-                    {step.tagline}
-                  </span>
-                </div>
-
-                {/* Step Title & Description */}
-                <h3 className="mt-4 text-lg sm:text-xl font-bold text-gray-900 text-balance font-sans">
-                  {step.title}
-                </h3>
-                <p className="mt-2.5 text-sm text-gray-600 leading-relaxed text-pretty">
-                  {step.description}
-                </p>
+              <div className="mb-3 text-center text-sm font-semibold text-brand-blue">
+                Step {Number(step.number)}
               </div>
-
-              {/* Visual Simulation Block inside step */}
-              <div className="mt-6 pt-5 border-t border-gray-100">
-                <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200/70 text-left">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-gray-500">
-                      {step.visualBadge}
-                    </span>
-                    <span className="text-[11px] font-bold text-brand-blue bg-white px-2 py-0.5 rounded-md border border-gray-200/60 shadow-2xs">
-                      {step.visualPreview.tag}
-                    </span>
-                  </div>
-                  <h4 className="mt-2 text-xs font-bold text-gray-900 truncate">
-                    {step.visualPreview.title}
-                  </h4>
-                  <p className="text-[11px] text-gray-500 mt-0.5">
-                    {step.visualPreview.meta}
-                  </p>
-                </div>
+              <h3 className="min-h-[3.5rem] text-center text-xl font-bold leading-snug text-gray-950 text-balance sm:text-2xl">
+                {step.title}
+              </h3>
+              <p className="mt-2 min-h-[4.5rem] text-center text-sm leading-relaxed text-gray-600 text-pretty">
+                {step.description}
+              </p>
+              <div className="mt-5">
+                <StepVisual step={step.visual} />
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
