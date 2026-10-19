@@ -49,12 +49,48 @@ const steps = [
 ];
 
 const categories = [
-  { label: "Cooking", icon: CookingPotIcon },
-  { label: "Cleaning", icon: BroomIcon },
-  { label: "Plumbing", icon: WrenchIcon },
-  { label: "Electrical", icon: LightningIcon },
-  { label: "AC servicing", icon: SnowflakeIcon },
-  { label: "Carpentry", icon: HammerIcon },
+  {
+    label: "Cooking",
+    icon: CookingPotIcon,
+    bg: "bg-[#EF4444]", // Red
+    fg: "text-white",
+    iconBg: "bg-white/20",
+  },
+  {
+    label: "Cleaning",
+    icon: BroomIcon,
+    bg: "bg-[#F97316]", // Orange
+    fg: "text-white",
+    iconBg: "bg-white/20",
+  },
+  {
+    label: "Plumbing",
+    icon: WrenchIcon,
+    bg: "bg-[#FACC15]", // Yellow
+    fg: "text-gray-950",
+    iconBg: "bg-black/10",
+  },
+  {
+    label: "Electrical",
+    icon: LightningIcon,
+    bg: "bg-[#10B981]", // Green
+    fg: "text-white",
+    iconBg: "bg-white/20",
+  },
+  {
+    label: "AC servicing",
+    icon: SnowflakeIcon,
+    bg: "bg-[#2563EB]", // Blue
+    fg: "text-white",
+    iconBg: "bg-white/20",
+  },
+  {
+    label: "Carpentry",
+    icon: HammerIcon,
+    bg: "bg-[#8B5CF6]", // Purple
+    fg: "text-white",
+    iconBg: "bg-white/20",
+  },
 ];
 
 const faqItems = [
@@ -266,7 +302,7 @@ export default function ProviderLandingPage() {
                   className="flex items-start gap-4 rounded-2xl border border-gray-200/80 bg-[#F8FAFF] p-5 sm:p-6 transition-all duration-150 hover:bg-white hover:border-brand-blue/30 hover:shadow-[0_4px_16px_0_rgba(30,91,247,0.06)]"
                 >
                   <span className="mt-0.5 flex shrink-0 size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
-                    <b.icon size={22} className="text-brand-blue" aria-hidden="true" />
+                    <b.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="text-base font-bold text-gray-950 font-sans">
@@ -316,7 +352,7 @@ export default function ProviderLandingPage() {
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="inline-flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
-                      <step.icon size={22} className="text-brand-blue" aria-hidden="true" />
+                      <step.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                     </span>
                     <span className="text-xs font-extrabold text-brand-blue/60 tracking-wider tabular-nums uppercase bg-blue-50/70 px-2.5 py-1 rounded-full border border-blue-100/50">
                       Step {String(i + 1).padStart(2, "0")}
@@ -341,12 +377,12 @@ export default function ProviderLandingPage() {
       <section
         id="about"
         aria-labelledby="provider-escrow-title"
-        className="w-full scroll-mt-20 py-16 sm:py-24 border-b border-gray-100"
+        className="w-full scroll-mt-20 py-16 sm:py-24 "
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
             {/* Visual Escrow Card */}
-            <div className="relative overflow-hidden rounded-3xl bg-brand-blue p-8 sm:p-10 text-white min-h-[380px] flex flex-col justify-between shadow-[0_16px_40px_0_rgba(30,91,247,0.28)]">
+            <div className="relative overflow-hidden rounded-3xl bg-brand-blue p-8 sm:p-10 text-white min-h-[380px] flex flex-col justify-between">
               {/* Background Concentric Pattern */}
               <div
                 className="absolute -right-16 -top-16 size-72 pointer-events-none opacity-20"
@@ -370,11 +406,11 @@ export default function ProviderLandingPage() {
                 </p>
               </div>
 
-              <div className="relative z-10 mt-8 rounded-2xl bg-white p-5 sm:p-6 text-gray-950 shadow-lg border border-white/20">
+              <div className="relative z-10 mt-8 rounded-2xl bg-white p-5 sm:p-6 text-gray-950 border border-white/20">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
-                      <ShieldCheckIcon size={22} className="text-brand-blue" aria-hidden="true" />
+                      <ShieldCheckIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                     </span>
                     <div>
                       <span className="block text-sm sm:text-[15px] font-bold text-gray-950">
@@ -388,6 +424,7 @@ export default function ProviderLandingPage() {
                   <CheckCircleIcon
                     className="shrink-0 text-brand-blue"
                     size={22}
+                    weight="fill"
                     aria-hidden="true"
                   />
                 </div>
@@ -427,6 +464,7 @@ export default function ProviderLandingPage() {
                     <CheckCircleIcon
                       className="mt-1 shrink-0 text-brand-blue"
                       size={18}
+                      weight="fill"
                       aria-hidden="true"
                     />
                     <span className="text-gray-700 leading-relaxed">{item}</span>
@@ -481,10 +519,10 @@ export default function ProviderLandingPage() {
             ].map((s) => (
               <article
                 key={s.title}
-                className="flex flex-col bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_0_rgba(0,0,0,0.03)] hover:border-brand-blue/30 hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+                className="flex flex-col bg-white rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_0_rgba(0,0,0,0.03)] hover:border-brand-blue/30 hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.08)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
-                  <s.icon size={22} className="text-brand-blue" aria-hidden="true" />
+                  <s.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                 </span>
                 <h3 className="mt-6 text-base sm:text-lg font-bold text-gray-950 font-sans">
                   {s.title}
@@ -503,7 +541,7 @@ export default function ProviderLandingPage() {
           ========================================================================= */}
       <section
         aria-labelledby="provider-categories-title"
-        className="w-full py-16 sm:py-24 border-b border-gray-100"
+        className="w-full py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -522,15 +560,17 @@ export default function ProviderLandingPage() {
           </div>
 
           <ul className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-6">
-            {categories.map(({ label, icon: Icon }) => (
+            {categories.map(({ label, icon: Icon, bg, fg, iconBg }) => (
               <li
                 key={label}
-                className="group flex min-h-[128px] flex-col justify-between rounded-2xl border border-gray-200/80 bg-[#F8FAFF] p-5 transition-all duration-200 hover:border-brand-blue/40 hover:bg-white hover:shadow-[0_8px_20px_0_rgba(30,91,247,0.08)] hover:-translate-y-1"
+                className={`group flex min-h-[136px] flex-col justify-between rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1.5 ${bg} ${fg}`}
               >
-                <span className="flex size-10 items-center justify-center rounded-xl bg-white border border-gray-200/70 group-hover:bg-blue-50 group-hover:border-blue-100 transition-colors">
-                  <Icon size={22} className="text-brand-blue" aria-hidden="true" />
+                <span
+                  className={`flex size-10 items-center justify-center rounded-xl ${iconBg} transition-transform duration-200 group-hover:scale-110`}
+                >
+                  <Icon size={24} weight="fill" className="currentColor" aria-hidden="true" />
                 </span>
-                <span className="text-sm sm:text-[15px] font-bold text-gray-950 font-sans group-hover:text-brand-blue transition-colors">
+                <span className="text-[15px] sm:text-base font-bold font-sans tracking-tight">
                   {label}
                 </span>
               </li>
@@ -545,7 +585,7 @@ export default function ProviderLandingPage() {
       <section
         id="getting-started"
         aria-labelledby="getting-started-title"
-        className="w-full scroll-mt-20 py-16 sm:py-24 border-b border-gray-100"
+        className="w-full scroll-mt-20 py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
@@ -577,6 +617,7 @@ export default function ProviderLandingPage() {
                     <CheckCircleIcon
                       className="shrink-0 text-brand-blue"
                       size={18}
+                      weight="fill"
                       aria-hidden="true"
                     />
                     {req}
@@ -588,7 +629,7 @@ export default function ProviderLandingPage() {
             <div className="rounded-3xl bg-white p-7 sm:p-8">
               <div className="flex items-center gap-3">
                 <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
-                  <IdentificationCardIcon size={22} className="text-brand-blue" aria-hidden="true" />
+                  <IdentificationCardIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                 </span>
                 <div>
                   <p className="text-sm font-bold text-gray-950 font-sans">
