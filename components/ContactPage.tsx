@@ -137,11 +137,6 @@ export default function ContactPage() {
         <div className="w-full max-w-[1440px] mx-auto grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* Left: Text & Action */}
           <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
-            {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 text-brand-blue text-xs font-semibold mb-5">
-              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Direct Channels · No Ticket Blackholes</span>
-            </div>
 
             {/* Main Display Headline */}
             <h1 className="text-3xl sm:text-5xl md:text-[56px] font-extrabold tracking-[-0.03em] leading-tight sm:leading-[1.12] text-gray-950 font-sans text-balance text-center lg:text-left">
@@ -382,19 +377,17 @@ export default function ContactPage() {
                       <span>{item.q}</span>
                       <span
                         aria-hidden="true"
-                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-base font-medium transition-all duration-200 ${
-                          isOpen
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-base font-medium transition-all duration-200 ${isOpen
                             ? "rotate-45 bg-blue-50 text-brand-blue"
                             : "text-gray-500 bg-gray-100 hover:bg-gray-200/80"
-                        }`}
+                          }`}
                       >
                         +
                       </span>
                     </button>
                     <div
-                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
-                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                      }`}
+                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                        }`}
                     >
                       <div className="overflow-hidden">
                         <p className="pt-3 text-sm sm:text-[15px] leading-relaxed text-gray-600 text-pretty">

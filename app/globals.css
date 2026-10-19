@@ -131,6 +131,33 @@
   animation: doodle-pulse-subtle 4s ease-in-out infinite;
 }
 
+/* Smooth continuous orbital rotation */
+@keyframes spin-anticlockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes spin-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-anticlockwise {
+  animation: spin-anticlockwise 30s linear infinite;
+}
+
+.animate-spin-clockwise {
+  animation: spin-clockwise 30s linear infinite;
+}
+
 /* Base styles */
 body {
   background-color: var(--bg-page);

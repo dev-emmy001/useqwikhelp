@@ -1,9 +1,12 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import {
   CalendarCheckIcon,
   CheckCircleIcon,
   ClockIcon,
+  DownloadSimpleIcon,
   BroomIcon,
   CookingPotIcon,
   HammerIcon,
@@ -13,7 +16,6 @@ import {
   ShieldCheckIcon,
   WrenchIcon,
 } from "@phosphor-icons/react";
-import Link from "next/link";
 
 const steps = [
   {
@@ -53,19 +55,19 @@ function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
       aria-hidden="true"
       className="relative flex min-h-[220px] items-center justify-center overflow-hidden rounded-2xl bg-[#0a60d9] p-5 sm:min-h-[240px]"
     >
-       <div
-                className="absolute -left-[20%] top-[-10%] size-[600px] pointer-events-none"
-                aria-hidden="true"
-              >
-                <svg viewBox="0 0 600 600" className="w-full h-full" fill="none">
-                  <circle cx="240" cy="300" r="140" stroke="#5087FF" strokeWidth="48" opacity="0.9" />
-                  <circle cx="240" cy="300" r="235" stroke="#5087FF" strokeWidth="52" opacity="0.9" />
-                  <circle cx="240" cy="300" r="335" stroke="#5087FF" strokeWidth="58" opacity="0.9" />
-                </svg>
-              </div>
+      <div
+        className="absolute -left-[20%] top-[-10%] size-[600px] pointer-events-none"
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 600 600" className="w-full h-full" fill="none">
+          <circle cx="240" cy="300" r="140" stroke="#5087FF" strokeWidth="48" opacity="0.9" />
+          <circle cx="240" cy="300" r="235" stroke="#5087FF" strokeWidth="52" opacity="0.9" />
+          <circle cx="240" cy="300" r="335" stroke="#5087FF" strokeWidth="58" opacity="0.9" />
+        </svg>
+      </div>
 
       {step === "discover" && (
-        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 shadow-md">
+        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4">
           <div className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm text-gray-500">
             <MagnifyingGlassIcon size={17} />
             <span>What do you need help with?</span>
@@ -93,7 +95,7 @@ function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
       )}
 
       {step === "book" && (
-        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 text-left shadow-md">
+        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 text-left">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-gray-900">
               Your booking
@@ -113,7 +115,7 @@ function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
               Tomorrow, 10:00 AM
             </span>
           </div>
-          <div className="mt-3 flex items-center gap-2 rounded-lg bg-accent-green-light px-3 py-2 text-xs font-medium text-emerald-800">
+          <div className="mt-3 flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-800">
             <ShieldCheckIcon size={16} weight="fill" />
             Payment protected in escrow
           </div>
@@ -121,9 +123,9 @@ function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
       )}
 
       {step === "complete" && (
-        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 text-left shadow-md">
+        <div className="relative w-full max-w-[270px] rounded-2xl bg-white p-4 text-left">
           <div className="flex items-center gap-3">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-emerald-700">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
               <CheckCircleIcon size={25} weight="fill" />
             </span>
             <span>
@@ -141,7 +143,7 @@ function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
               <span className="font-semibold text-emerald-700">Active</span>
             </div>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-100">
-              <div className="h-full w-full rounded-full bg-accent-green" />
+              <div className="h-full w-full rounded-full bg-emerald-500" />
             </div>
           </div>
         </div>
@@ -175,12 +177,12 @@ export default function HowItWorksSection() {
           {steps.map((step) => (
             <li
               key={step.number}
-              className="flex min-w-0 flex-col rounded-[28px] bg-white p-5 shadow-sm sm:p-6 lg:p-7"
+              className="flex min-w-0 flex-col rounded-[28px] bg-white p-5 sm:p-6 lg:p-7 transition-all duration-200 hover:-translate-y-1"
             >
               <div className="mb-3 text-center text-sm font-semibold text-brand-blue">
                 Step {Number(step.number)}
               </div>
-              <h3 className="min-h-[3.5rem] text-center text-xl font-bold leading-snug text-gray-950 text-balance sm:text-2xl">
+              <h3 className="min-h-[3.5rem] text-center text-xl font-bold leading-snug text-gray-950 text-balance sm:text-2xl font-sans">
                 {step.title}
               </h3>
               <p className="mt-2 min-h-[4.5rem] text-center text-sm leading-relaxed text-gray-600 text-pretty">
@@ -193,56 +195,126 @@ export default function HowItWorksSection() {
           ))}
         </ol>
 
+        {/* =========================================================================
+            BOTTOM CALLOUT: SINGLE CIRCLES ROTATING ANTICLOCKWISE WITH "Home help should feel simple, not stressful."
+            ========================================================================= */}
         <aside
           aria-labelledby="how-it-works-cta-title"
-          className="relative mt-16 overflow-hidden rounded-[32px] bg-[#f4f3ec] px-5 py-10 text-center sm:mt-20 sm:rounded-[40px] sm:px-8 sm:py-14 lg:py-16"
+          className="relative mt-16 sm:mt-24 overflow-hidden rounded-[36px] sm:rounded-[48px] bg-[#FAF9F5] px-5 pt-8 pb-12 sm:pt-12 sm:pb-16 text-center"
         >
+          {/* Subtle curved background crest / dome */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-[-460px] h-[620px] w-[min(1000px,140vw)] -translate-x-1/2 rounded-[50%] bg-white/60"
+            className="pointer-events-none absolute left-1/2 top-[-260px] sm:top-[-360px] h-[480px] sm:h-[620px] w-[min(1100px,150vw)] -translate-x-1/2 rounded-[50%] bg-white/70"
           />
 
-          <div className="relative mx-auto max-w-2xl">
-            <div
-              aria-hidden="true"
-              className="mx-auto flex h-36 max-w-sm items-start justify-center gap-2 sm:h-44 sm:gap-4"
-            >
-              {serviceIcons.map(({ label, icon: Icon, position }, index) => (
-                <span
-                  key={label}
-                  className={`flex size-14 shrink-0 items-center justify-center rounded-[20px] shadow-sm sm:size-[72px] sm:rounded-[24px] ${
-                    index % 2 === 0
-                      ? "bg-white text-brand-blue"
-                      : "bg-brand-blue text-white"
-                  } ${position}`}
-                >
-                  <Icon size={28} weight="fill" className="sm:hidden" />
-                  <Icon size={34} weight="fill" className="hidden sm:block" />
-                </span>
-              ))}
+          <div className="relative mx-auto max-w-4xl flex flex-col items-center">
+            {/* Orbital Stage: Single circles containing images rotating anticlockwise */}
+            <div className="relative w-full h-[180px] sm:h-[230px] md:h-[260px] overflow-hidden flex items-end justify-center mb-4 sm:mb-6">
+              {/* Giant Orbital Ring Rotating Anticlockwise */}
+              <div
+                className="absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 size-[620px] sm:size-[780px] md:size-[880px] rounded-full border border-dashed border-blue-200/50 animate-spin-anticlockwise pointer-events-auto hover:[animation-play-state:paused]"
+              >
+                {[
+                  {
+                    label: "Identity Verification",
+                    image: "/illustrations/verify.svg",
+                    accent: "border-blue-200",
+                  },
+                  {
+                    label: "Escrow Payment",
+                    image: "/illustrations/wallet.svg",
+                    accent: "border-emerald-200",
+                  },
+                  {
+                    label: "Nearby Artisans",
+                    image: "/illustrations/users.svg",
+                    accent: "border-amber-200",
+                  },
+                  {
+                    label: "Guaranteed Payout",
+                    image: "/illustrations/paid.svg",
+                    accent: "border-cyan-200",
+                  },
+                  {
+                    label: "Biometric Review",
+                    image: "/illustrations/id-check.svg",
+                    accent: "border-purple-200",
+                  },
+                  {
+                    label: "Proximity Matching",
+                    image: "/illustrations/proximity.svg",
+                    accent: "border-indigo-200",
+                  },
+                  {
+                    label: "Approved Pro",
+                    image: "/illustrations/approved.svg",
+                    accent: "border-rose-200",
+                  },
+                ].map((item, index, arr) => {
+                  const angle = (index * 360) / arr.length;
+                  return (
+                    <div
+                      key={item.label}
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        transform: `rotate(${angle}deg) translate(clamp(220px, 34vw, 350px)) rotate(-${angle}deg)`,
+                      }}
+                    >
+                      {/* Counter-rotation to keep image upright */}
+                      <div className="animate-spin-clockwise hover:[animation-play-state:paused]">
+                        <div
+                          className={`group/circle relative size-16 sm:size-20 md:size-24 rounded-full bg-white p-3 sm:p-4 shadow-[0_8px_24px_rgba(0,0,0,0.06)] ${item.accent} flex items-center justify-center transition-transform duration-200 hover:scale-115 cursor-pointer`}
+                          title={item.label}
+                        >
+                          {/* Inner spinning accent ring */}
+                          <div className="absolute -inset-1 rounded-full animate-spin-anticlockwise pointer-events-none" />
+                          <Image
+                            src={item.image}
+                            alt={item.label}
+                            width={64}
+                            height={64}
+                            className="size-full object-contain pointer-events-none"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
-            <span className="inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand-blue shadow-sm">
-              Help is closer than you think
-            </span>
+            {/* Eyebrow Pill */}
+
+
+            {/* Headline */}
             <h3
               id="how-it-works-cta-title"
-              className="mx-auto mt-4 max-w-xl text-3xl font-extrabold leading-tight text-gray-950 text-balance sm:text-4xl lg:text-5xl"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-gray-950 font-sans tracking-[-0.03em] leading-[1.12] text-balance max-w-2xl"
             >
               Home help should feel simple, not stressful.
             </h3>
-            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600 text-pretty sm:text-lg">
-              Book trusted local professionals, pay securely, and know you have
-              support if anything goes wrong.
+
+            {/* Subtitle */}
+            <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg text-gray-600 leading-relaxed text-pretty">
+              QwikHelp brings payments, domestic assistance, and verified trade services
+              together — giving you one trusted place to handle more of your everyday.
             </p>
-            <Link
-              href="#get-started"
-              className="mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-gray-950 px-6 text-sm font-semibold text-white shadow-md transition-colors hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-950"
-            >
-              Find your help
-            </Link>
-            <p className="mt-3 text-sm text-gray-500">
-              Trusted help for the jobs that matter.
+
+            {/* Primary Action Button */}
+            <div className="mt-8">
+              <a
+                href="#download"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 sm:py-4 rounded-full bg-brand-blue text-white font-bold text-sm sm:text-base shadow-[0_6px_20px_rgba(30,91,247,0.28)] transition-all duration-150 hover:bg-brand-blue-hover hover:shadow-[0_8px_24px_rgba(30,91,247,0.38)] active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+              >
+                <DownloadSimpleIcon size={19} weight="bold" />
+                <span>Download the App</span>
+              </a>
+            </div>
+
+            {/* Bottom Caption */}
+            <p className="mt-3.5 text-xs sm:text-[13px] text-gray-400 font-normal">
+              Payments, vetted artisans and local home services
             </p>
           </div>
         </aside>

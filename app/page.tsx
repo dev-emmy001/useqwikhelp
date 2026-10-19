@@ -1,7 +1,12 @@
 import Navbar from "@/components/Navbar";
 import HeroImageStage from "@/components/HeroImageStage";
 import AboutSection from "@/components/AboutSection";
+import ServicesGridSection from "@/components/ServicesGridSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
+import WhyUsBentoSection from "@/components/WhyUsBentoSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import FaqSection from "@/components/FaqSection";
+import AppCtaBanner from "@/components/AppCtaBanner";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
@@ -49,10 +54,10 @@ export default function Home() {
           <div className="mt-8 flex flex-row items-center justify-center gap-3.5 sm:gap-4 flex-wrap">
             {/* Primary CTA */}
             <Link
-              href="#get-started"
-              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-blue text-white text-sm sm:text-[15px] font-semibold shadow-[0_4px_16px_0_rgba(30,91,247,0.38)] transition-[background-color,box-shadow,transform] duration-150 hover:bg-brand-blue-hover hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.48)] motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+              href="#services"
+              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-blue text-white text-sm sm:text-[15px] font-semibold transition-all duration-150 hover:bg-brand-blue-hover motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
             >
-              <span>Get Started</span>
+              <span>Explore Services</span>
               <svg
                 className="size-4 transition-transform duration-150 group-hover:translate-x-0.5"
                 fill="none"
@@ -71,8 +76,8 @@ export default function Home() {
 
             {/* Secondary CTA */}
             <Link
-              href="#provider"
-              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-gray-800 text-sm sm:text-[15px] font-medium border border-gray-200/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.04)] transition-[background-color,border-color,transform] duration-150 hover:bg-gray-50/80 hover:border-gray-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+              href="/provider"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-gray-800 text-sm sm:text-[15px] font-medium transition-all duration-150 hover:bg-gray-50 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
             >
               Join as a Provider
             </Link>
@@ -92,15 +97,43 @@ export default function Home() {
       </main>
 
       {/* =========================================================================
-          2. ABOUT / WHAT IS QWIKHELP (Modeled after bimm.app #what-is-bimm)
+          2. ABOUT / WHAT IS QWIKHELP
           ========================================================================= */}
       <AboutSection />
 
       {/* =========================================================================
-          3. HOW IT WORKS 3-STEP FLOW (Modeled after bimm.app #how-it-works)
+          3. VERIFIED SERVICES DIRECTORY (Cooks, Cleaners, Plumbers, Electricians...)
+          ========================================================================= */}
+      <ServicesGridSection />
+
+      {/* =========================================================================
+          4. HOW IT WORKS 3-STEP FLOW
           ========================================================================= */}
       <HowItWorksSection />
 
+      {/* =========================================================================
+          5. WHY QWIKHELP / TRUST PILLARS
+          ========================================================================= */}
+      <WhyUsBentoSection />
+
+      {/* =========================================================================
+          6. VERIFIED STORIES / TESTIMONIALS
+          ========================================================================= */}
+      <TestimonialsSection />
+
+      {/* =========================================================================
+          7. FREQUENTLY ASKED QUESTIONS
+          ========================================================================= */}
+      <FaqSection />
+
+      {/* =========================================================================
+          8. APP CTA BANNER (iOS & Android)
+          ========================================================================= */}
+      <AppCtaBanner />
+
+      {/* =========================================================================
+          FOOTER
+          ========================================================================= */}
       <Footer />
     </div>
   );
