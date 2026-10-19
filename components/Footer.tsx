@@ -10,10 +10,10 @@ import {
 } from "@phosphor-icons/react";
 
 const navItems = [
-  { label: "Our Work", href: "#work" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Our Work", href: "/#work" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [

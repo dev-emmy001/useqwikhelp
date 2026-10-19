@@ -16,7 +16,7 @@ export default function Navbar({ variant = "customer" }: NavbarProps) {
     { label: "Work", href: `${isProviderPage ? "/" : ""}#work` },
     { label: "Services", href: `${isProviderPage ? "/" : ""}#services` },
     { label: "About", href: `${isProviderPage ? "/" : ""}#about` },
-    { label: "Contact", href: `${isProviderPage ? "/" : ""}#contact` },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
