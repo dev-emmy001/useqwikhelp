@@ -79,26 +79,14 @@ export default function Navbar({ variant = "customer" }: NavbarProps) {
           MOBILE NAVIGATION (< md) — Fixed, white, no shadow, hairline border
           ========================================================================= */}
       <header className="fixed inset-x-0 top-0 z-50 block w-full bg-white md:hidden">
-        <div className="relative mx-auto flex min-h-[60px] w-full max-w-[1440px] items-center justify-between px-5 sm:px-8">
+        <div className="relative mx-auto flex min-h-[60px] w-full max-w-[1440px] items-center justify-between px-5 sm:px-10">
           {/* Logo */}
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-sm [-webkit-tap-highlight-color:transparent] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
-            aria-label="QwikHelp Home"
           >
-            <div className="flex size-7 items-center justify-center rounded-full bg-brand-blue text-white">
-              <svg
-                className="size-3.5 fill-current"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M13 2L3 14h7v8l10-12h-7l0-8z" />
-              </svg>
-            </div>
-            <span className="text-[17px] font-bold tracking-tight text-gray-900">
-              Qwik<span className="text-brand-blue font-extrabold">Help</span>
-            </span>
+            <Image src="/logo-qh.png" alt="QwikHelp Logo" width={160} height={100} />
+
+
           </Link>
 
           {/* Hamburger */}
@@ -165,7 +153,7 @@ export default function Navbar({ variant = "customer" }: NavbarProps) {
             </div>
           </div>
         )}
-      </header>
+      </header >
     </>
   );
 }

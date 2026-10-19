@@ -143,7 +143,7 @@ export default function ProviderLandingPage() {
       <main
         id="provider"
         aria-labelledby="provider-title"
-        className="flex-1 flex flex-col items-center justify-start pt-8 md:pt-28 lg:pt-32 pb-16 sm:pb-24 px-5 sm:px-8 lg:px-12 relative w-full"
+        className="flex-1 flex flex-col items-center justify-start pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 px-5 sm:px-8 lg:px-12 relative w-full"
       >
         {/* Soft Ambient Background Highlights */}
         <div
@@ -156,7 +156,7 @@ export default function ProviderLandingPage() {
           {/* Main Display Headline */}
           <h1
             id="provider-title"
-            className="text-[34px] sm:text-5xl md:text-[56px] lg:text-[62px] font-extrabold tracking-[-0.03em] leading-[1.12] text-gray-950 font-sans text-balance"
+            className="text-3xl sm:text-5xl md:text-[56px] lg:text-[62px] font-extrabold tracking-[-0.03em] leading-tight sm:leading-[1.12] text-gray-950 font-sans text-balance text-center"
           >
             Good work deserves
             <span className="block mt-1 sm:mt-2">
@@ -165,7 +165,7 @@ export default function ProviderLandingPage() {
           </h1>
 
           {/* Subtitle / Value Proposition */}
-          <p className="mt-5 sm:mt-6 text-[15px] sm:text-lg md:text-[18.5px] leading-relaxed text-gray-600 max-w-2xl font-normal text-pretty px-2">
+          <p className="mt-5 sm:mt-6 text-[15px] sm:text-lg md:text-[18.5px] leading-relaxed text-gray-600 max-w-2xl font-normal text-pretty text-center px-2">
             Find customers beyond your usual circle. Agree on the job in-app. Know
             payment is protected in escrow before you begin.
           </p>
@@ -175,7 +175,7 @@ export default function ProviderLandingPage() {
             {/* Primary CTA */}
             <Link
               href="#getting-started"
-              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-blue text-white text-sm sm:text-[15px] font-semibold shadow-[0_4px_16px_0_rgba(30,91,247,0.38)] transition-[background-color,box-shadow,transform] duration-150 hover:bg-brand-blue-hover hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.48)] motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-blue text-white text-sm sm:text-[15px] font-semibold transition-[background-color,transform] duration-150 hover:bg-brand-blue-hover motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
             >
               <span>Join as a provider</span>
               <svg
@@ -197,20 +197,23 @@ export default function ProviderLandingPage() {
             {/* Secondary CTA */}
             <Link
               href="#provider-journey"
-              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-gray-800 text-sm sm:text-[15px] font-medium border border-gray-200/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.04)] transition-[background-color,border-color,transform] duration-150 hover:bg-gray-50/80 hover:border-gray-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-gray-800 text-sm sm:text-[15px] font-medium transition-[background-color,transform] duration-150 hover:bg-gray-100 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
             >
               See how it works
             </Link>
           </div>
 
-          {/* Inline Trust Signals */}
-          <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-gray-200/70 pt-6">
+          {/* Inline Trust Signals (Centralized on mobile) */}
+          <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-y-2.5 sm:gap-x-8 pt-4">
             {[
               { label: "Every job", meta: "Escrow-protected" },
               { label: "All providers", meta: "Verified identities" },
               { label: "No paid slots", meta: "Merit-based ranking" },
             ].map((s) => (
-              <div key={s.label} className="flex items-baseline gap-2">
+              <div
+                key={s.label}
+                className="flex items-center justify-center gap-2 text-center"
+              >
                 <span className="text-sm sm:text-[15px] font-bold text-gray-950">
                   {s.label}
                 </span>
@@ -246,14 +249,14 @@ export default function ProviderLandingPage() {
       <section
         id="services"
         aria-labelledby="provider-intro-title"
-        className="w-full scroll-mt-20 py-16 sm:py-24 border-y border-gray-100"
+        className="w-full scroll-mt-20 py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 md:grid-cols-2 md:items-center lg:gap-20">
-            <div>
+            <div className="text-center md:text-left flex flex-col items-center md:items-start">
               <h2
                 id="provider-intro-title"
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
               >
                 Less chasing work.
                 <br />
@@ -261,7 +264,7 @@ export default function ProviderLandingPage() {
                 <br />
                 you do best.
               </h2>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty font-normal">
+              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty font-normal text-center md:text-left">
                 Skilled people should not need a perfect word-of-mouth network to
                 find customers. QwikHelp gives you a verified profile, proximity
                 search visibility, and a clearer process for every booking.
@@ -269,7 +272,7 @@ export default function ProviderLandingPage() {
               <div className="mt-8">
                 <Link
                   href="#provider-journey"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-800 text-sm font-semibold border border-gray-200/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.04)] hover:bg-gray-50 hover:border-gray-300 transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-800 text-sm font-semibold hover:bg-gray-100 transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
                 >
                   See how it works
                 </Link>
@@ -299,9 +302,9 @@ export default function ProviderLandingPage() {
               ].map((b) => (
                 <div
                   key={b.title}
-                  className="flex items-start gap-4 rounded-2xl border border-gray-200/80 bg-[#F8FAFF] p-5 sm:p-6 transition-all duration-150 hover:bg-white hover:border-brand-blue/30 hover:shadow-[0_4px_16px_0_rgba(30,91,247,0.06)]"
+                  className="flex items-start gap-4 rounded-2xl bg-white p-5 sm:p-6 transition-all duration-150 hover:bg-white/80 text-left"
                 >
-                  <span className="mt-0.5 flex shrink-0 size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
+                  <span className="mt-0.5 flex shrink-0 size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                     <b.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                   </span>
                   <div>
@@ -325,19 +328,19 @@ export default function ProviderLandingPage() {
       <section
         id="provider-journey"
         aria-labelledby="provider-journey-title"
-        className="w-full scroll-mt-20 bg-[#F8FAFF] py-16 sm:py-24 border-b border-gray-100"
+        className="w-full scroll-mt-20 py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="mb-12 sm:mb-16 max-w-2xl">
+          <div className="mb-12 sm:mb-16 max-w-2xl text-center md:text-left mx-auto md:mx-0">
             <h2
               id="provider-journey-title"
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
             >
               From profile
               <br />
               to payday.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed text-pretty">
+            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center md:text-left">
               A straightforward path to getting discovered, doing the work, and
               receiving your earnings securely.
             </p>
@@ -347,14 +350,14 @@ export default function ProviderLandingPage() {
             {steps.map((step, i) => (
               <li
                 key={step.title}
-                className="flex flex-col justify-between bg-white border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-[0_1px_3px_0_rgba(0,0,0,0.03)] hover:border-brand-blue/30 hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+                className="flex flex-col justify-between bg-white rounded-2xl p-6 sm:p-7 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="inline-flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
+                    <span className="inline-flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                       <step.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                     </span>
-                    <span className="text-xs font-extrabold text-brand-blue/60 tracking-wider tabular-nums uppercase bg-blue-50/70 px-2.5 py-1 rounded-full border border-blue-100/50">
+                    <span className="text-xs font-extrabold text-brand-blue/60 tracking-wider tabular-nums uppercase bg-blue-50/70 px-2.5 py-1 rounded-full">
                       Step {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -377,7 +380,7 @@ export default function ProviderLandingPage() {
       <section
         id="about"
         aria-labelledby="provider-escrow-title"
-        className="w-full scroll-mt-20 py-16 sm:py-24 "
+        className="w-full scroll-mt-20 py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
@@ -395,7 +398,7 @@ export default function ProviderLandingPage() {
                 </svg>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10 text-center sm:text-left">
                 <h3 className="text-2xl sm:text-3xl font-extrabold leading-tight text-white font-sans text-balance">
                   The payment
                   <br />
@@ -406,13 +409,13 @@ export default function ProviderLandingPage() {
                 </p>
               </div>
 
-              <div className="relative z-10 mt-8 rounded-2xl bg-white p-5 sm:p-6 text-gray-950 border border-white/20">
+              <div className="relative z-10 mt-8 rounded-2xl bg-white p-5 sm:p-6 text-gray-950">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                       <ShieldCheckIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                     </span>
-                    <div>
+                    <div className="text-left">
                       <span className="block text-sm sm:text-[15px] font-bold text-gray-950">
                         Payment secured
                       </span>
@@ -429,11 +432,11 @@ export default function ProviderLandingPage() {
                   />
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-brand-blue">
-                  <span className="rounded-full bg-blue-50 px-3 py-1 border border-blue-100/60">
+                  <span className="rounded-full bg-blue-50 px-3 py-1">
                     Customer confirms
                   </span>
                   <span className="h-px flex-1 bg-gray-200" />
-                  <span className="rounded-full bg-blue-50 px-3 py-1 border border-blue-100/60">
+                  <span className="rounded-full bg-blue-50 px-3 py-1">
                     You confirm
                   </span>
                 </div>
@@ -441,20 +444,20 @@ export default function ProviderLandingPage() {
             </div>
 
             {/* Description */}
-            <div>
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <h2
                 id="provider-escrow-title"
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center lg:text-left"
               >
                 No more starting
                 <br />a job on a promise.
               </h2>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty">
+              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center lg:text-left">
                 Customers pay through QwikHelp. Funds stay in escrow while the
                 work is underway, then move to your wallet after both sides confirm
                 the job is complete.
               </p>
-              <ul className="mt-8 space-y-4">
+              <ul className="mt-8 space-y-4 text-left">
                 {[
                   "Check escrow payment before you begin.",
                   "Confirm the finished job together in the app.",
@@ -481,19 +484,19 @@ export default function ProviderLandingPage() {
           ========================================================================= */}
       <section
         aria-labelledby="provider-reputation-title"
-        className="w-full bg-[#F8FAFF] py-16 sm:py-24 border-b border-gray-100"
+        className="w-full py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="mb-12 max-w-2xl">
+          <div className="mb-12 max-w-2xl text-center md:text-left mx-auto md:mx-0">
             <h2
               id="provider-reputation-title"
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
             >
               Your place is earned,
               <br />
               never bought.
             </h2>
-            <p className="mt-4 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty">
+            <p className="mt-4 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center md:text-left">
               There is no paid shortcut to the top. Provider visibility is based on
               how customers experience your work and how reliably you respond.
             </p>
@@ -519,9 +522,9 @@ export default function ProviderLandingPage() {
             ].map((s) => (
               <article
                 key={s.title}
-                className="flex flex-col bg-white rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_0_rgba(0,0,0,0.03)] hover:border-brand-blue/30 hover:shadow-[0_8px_24px_0_rgba(30,91,247,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+                className="flex flex-col bg-white rounded-2xl p-6 sm:p-8 hover:-translate-y-0.5 transition-all duration-200"
               >
-                <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
+                <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                   <s.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                 </span>
                 <h3 className="mt-6 text-base sm:text-lg font-bold text-gray-950 font-sans">
@@ -537,23 +540,23 @@ export default function ProviderLandingPage() {
       </section>
 
       {/* =========================================================================
-          6. SERVICE CATEGORIES
+          6. SERVICE CATEGORIES (Solid Rainbow Boxes, No Borders/Shadows)
           ========================================================================= */}
       <section
         aria-labelledby="provider-categories-title"
         className="w-full py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between text-center sm:text-left">
             <h2
               id="provider-categories-title"
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center sm:text-left"
             >
               Bring your craft
               <br />
               to the neighbourhood.
             </h2>
-            <p className="max-w-xs text-sm sm:text-base leading-relaxed text-gray-600 text-pretty sm:text-right">
+            <p className="max-w-xs text-sm sm:text-base leading-relaxed text-gray-600 text-pretty mx-auto sm:mx-0 sm:text-right">
               QwikHelp connects customers with verified professionals across
               everyday household needs and skilled trades.
             </p>
@@ -589,21 +592,21 @@ export default function ProviderLandingPage() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-            <div>
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <h2
                 id="getting-started-title"
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center lg:text-left"
               >
                 Get ready to build
                 <br />a profile people
                 <br />
                 can trust.
               </h2>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty">
+              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center lg:text-left">
                 Provider accounts are thoroughly reviewed before they go live. Keep
                 these ready for the identity verification process.
               </p>
-              <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-8 grid gap-3 sm:grid-cols-2 w-full text-left">
                 {[
                   "NIN or BVN check",
                   "Photo ID",
@@ -612,7 +615,7 @@ export default function ProviderLandingPage() {
                 ].map((req) => (
                   <li
                     key={req}
-                    className="flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-gray-900 bg-white rounded-xl px-4 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
+                    className="flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-gray-900 bg-white rounded-xl px-4 py-3"
                   >
                     <CheckCircleIcon
                       className="shrink-0 text-brand-blue"
@@ -626,9 +629,9 @@ export default function ProviderLandingPage() {
               </ul>
             </div>
 
-            <div className="rounded-3xl bg-white p-7 sm:p-8">
+            <div className="rounded-3xl bg-white p-7 sm:p-8 text-left">
               <div className="flex items-center gap-3">
-                <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue border border-blue-100/60">
+                <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                   <IdentificationCardIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                 </span>
                 <div>
@@ -664,7 +667,7 @@ export default function ProviderLandingPage() {
               </p>
               <Link
                 href="mailto:support@qwikhelp.com?subject=Provider%20onboarding"
-                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-brand-blue px-6 text-sm font-semibold text-white shadow-[0_4px_14px_0_rgba(30,91,247,0.32)] hover:bg-brand-blue-hover transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-brand-blue px-6 text-sm font-semibold text-white hover:bg-brand-blue-hover transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
               >
                 Ask about joining
               </Link>
@@ -679,20 +682,20 @@ export default function ProviderLandingPage() {
       <section
         id="contact"
         aria-labelledby="provider-faq-title"
-        className="w-full scroll-mt-20 py-16 sm:py-24 border-b border-gray-100"
+        className="w-full scroll-mt-20 py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 md:grid-cols-[0.65fr_1.35fr] md:gap-20 md:items-start">
-            <div className="md:sticky md:top-28">
+            <div className="md:sticky md:top-28 text-center md:text-left">
               <h2
                 id="provider-faq-title"
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
               >
                 Questions,
                 <br />
                 answered.
               </h2>
-              <p className="mt-4 max-w-xs text-sm sm:text-base leading-relaxed text-gray-600 text-pretty">
+              <p className="mt-4 max-w-xs text-sm sm:text-base leading-relaxed text-gray-600 text-pretty mx-auto md:mx-0 text-center md:text-left">
                 The essentials on verification, jobs, payments, and how QwikHelp
                 works for providers.
               </p>
@@ -704,31 +707,30 @@ export default function ProviderLandingPage() {
                 return (
                   <div
                     key={item.question}
-                    className={`rounded-2xl bg-white p-5 sm:p-6 transition-all duration-200 ${isOpen
-                      ? ""
-                      : "shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]"
-                      }`}
+                    className="rounded-2xl bg-white p-5 sm:p-6 transition-all duration-200"
                   >
                     <button
                       type="button"
                       onClick={() => toggleFaq(index)}
                       aria-expanded={isOpen}
-                      className="flex w-full cursor-pointer items-center justify-between gap-4 text-left font-sans text-sm sm:text-[16px] font-semibold text-gray-950 transition-colors  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+                      className="flex w-full cursor-pointer items-center justify-between gap-4 text-left font-sans text-sm sm:text-[16px] font-semibold text-gray-950 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
                     >
                       <span>{item.question}</span>
                       <span
                         aria-hidden="true"
-                        className={`flex size-8 shrink-0 items-center justify-center rounded-full border text-base font-medium transition-all duration-200 ${isOpen
-                          ? "rotate-45 bg-blue-50 text-brand-blue border-brand-blue/30"
-                          : "border-gray-200 text-gray-500 bg-gray-50/70 hover:bg-gray-100"
-                          }`}
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-base font-medium transition-all duration-200 ${
+                          isOpen
+                            ? "rotate-45 bg-blue-50 text-brand-blue"
+                            : "text-gray-500 bg-gray-100 hover:bg-gray-200/80"
+                        }`}
                       >
                         +
                       </span>
                     </button>
                     <div
-                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                        }`}
+                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
+                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      }`}
                     >
                       <div className="overflow-hidden">
                         <p className="pt-3 text-sm sm:text-[15px] leading-relaxed text-gray-600 text-pretty">
@@ -743,8 +745,6 @@ export default function ProviderLandingPage() {
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }
