@@ -20,31 +20,50 @@ import {
   WalletIcon,
   WrenchIcon,
 } from "@phosphor-icons/react";
+import IllustrationSlot from "@/components/IllustrationSlot";
+import {
+  OrangeFlower,
+  BlueRibbon,
+  GreenDaisy,
+  YellowSunburst,
+} from "@/components/DoodleBadges";
 
 const steps = [
   {
     title: "Get verified",
     description:
-      "Create your profile with your NIN or BVN, photo ID, face verification, and a guarantor.",
+      "Submit your NIN or BVN, photo ID, and guarantor for fast, secure onboarding.",
     icon: IdentificationCardIcon,
+    illustrationLabel: "Identity Verification",
+    illustrationHint: "e.g. Photo ID & biometric scan illustration",
+    imageSrc: "/illustrations/verify.svg", // Step 1 image
   },
   {
     title: "Get approved",
     description:
-      "The QwikHelp team reviews your details. When your account is approved, your profile goes live.",
+      "Our team reviews your credentials and your pro profile goes live in the community.",
     icon: UserCheckIcon,
+    illustrationLabel: "Profile Goes Live",
+    illustrationHint: "e.g. Verified pro badge illustration",
+    imageSrc: "/illustrations/approved.svg", // Step 2 image: place your path here e.g. "/illustrations/approved.svg"
   },
   {
-    title: "Meet nearby customers",
+    title: "Meet nearby clients",
     description:
-      "Go online to appear in proximity search. Receive direct requests or respond to broadcast jobs.",
+      "Appear in local proximity searches and get matched directly with nearby households.",
     icon: MagnifyingGlassIcon,
+    illustrationLabel: "Proximity Matching",
+    illustrationHint: "e.g. Map search & booking request illustration",
+    imageSrc: "/illustrations/users.svg", // Step 3 image: place your path here e.g. "/illustrations/clients.svg"
   },
   {
-    title: "Do the work. Get paid.",
+    title: "Do work. Get paid.",
     description:
-      "Check that payment is in escrow before starting. After both sides confirm completion, funds reach your wallet.",
+      "Funds stay protected in escrow until you both sign off, then withdraw instantly to your bank.",
     icon: WalletIcon,
+    illustrationLabel: "Escrow & Wallet Payout",
+    illustrationHint: "e.g. Secure payout & earnings illustration",
+    imageSrc: "/illustrations/paid.svg", // Step 4 image: place your path here e.g. "/illustrations/get-paid.svg"
   },
 ];
 
@@ -223,8 +242,17 @@ export default function ProviderLandingPage() {
           </div>
         </div>
 
-        {/* HERO IMAGE STAGE */}
+        {/* HERO IMAGE STAGE WITH DOODLE ACCENTS */}
         <div className="relative z-10 mx-auto mt-10 sm:mt-14 w-full max-w-[960px] flex justify-center">
+          {/* Top Left Doodle */}
+          <div className="absolute -top-6 left-4 sm:left-8 z-20 hidden sm:block">
+            <OrangeFlower />
+          </div>
+          {/* Top Right Doodle */}
+          <div className="absolute -top-5 right-6 sm:right-10 z-20 hidden sm:block">
+            <GreenDaisy />
+          </div>
+
           <div className="relative w-full">
             <span
               aria-hidden="true"
@@ -244,7 +272,7 @@ export default function ProviderLandingPage() {
       </main>
 
       {/* =========================================================================
-          2. WHY QWIKHELP (#services)
+          2. WHY QWIKHELP: 2-COLUMN WITH DEDICATED ILLUSTRATION STAGE
           ========================================================================= */}
       <section
         id="services"
@@ -252,11 +280,13 @@ export default function ProviderLandingPage() {
         className="w-full scroll-mt-20 py-16 sm:py-24"
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid gap-12 md:grid-cols-2 md:items-center lg:gap-20">
-            <div className="text-center md:text-left flex flex-col items-center md:items-start">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+            {/* Left: Punchy Text & Value Proposition */}
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+
               <h2
                 id="provider-intro-title"
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center lg:text-left"
               >
                 Less chasing work.
                 <br />
@@ -264,66 +294,44 @@ export default function ProviderLandingPage() {
                 <br />
                 you do best.
               </h2>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty font-normal text-center md:text-left">
-                Skilled people should not need a perfect word-of-mouth network to
-                find customers. QwikHelp gives you a verified profile, proximity
-                search visibility, and a clearer process for every booking.
+              <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty font-normal text-center lg:text-left">
+                Skip relying entirely on word-of-mouth. QwikHelp puts your verified
+                skills in front of nearby homeowners searching for trusted hands right now.
               </p>
-              <div className="mt-8">
+
+              <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+                <Link
+                  href="#getting-started"
+                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:bg-brand-blue-hover transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+                >
+                  Join the network
+                </Link>
                 <Link
                   href="#provider-journey"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-800 text-sm font-semibold hover:bg-gray-100 transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-white text-gray-800 text-sm font-semibold hover:bg-gray-100 transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
                 >
                   See how it works
                 </Link>
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              {[
-                {
-                  title: "Get discovered",
-                  description:
-                    "Show up for customers searching for skilled help in your area. Your profile does the work when you're offline.",
-                  icon: MagnifyingGlassIcon,
-                },
-                {
-                  title: "Keep the details clear",
-                  description:
-                    "Discuss the job in-app before you accept. No misunderstandings, no chasing calls.",
-                  icon: ChatCircleDotsIcon,
-                },
-                {
-                  title: "Grow your reputation",
-                  description:
-                    "Build a visible record through ratings and completed jobs that attract more work.",
-                  icon: StarIcon,
-                },
-              ].map((b) => (
-                <div
-                  key={b.title}
-                  className="flex items-start gap-4 rounded-2xl bg-white p-5 sm:p-6 transition-all duration-150 hover:bg-white/80 text-left"
-                >
-                  <span className="mt-0.5 flex shrink-0 size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
-                    <b.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="text-base font-bold text-gray-950 font-sans">
-                      {b.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-gray-600 text-pretty">
-                      {b.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            {/* Right: Large Dedicated Illustration Stage */}
+            <div className="w-full flex justify-center">
+              <IllustrationSlot
+                // label="Proximity Matching & Customer Discovery"
+                // hint="Place your map / incoming booking illustration here"
+                aspect="aspect-[4/3] sm:aspect-[16/11]"
+                variant="light"
+                imageSrc="/illustrations/proximity.svg"
+              >
+              </IllustrationSlot>
             </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          3. HOW IT WORKS / PROVIDER JOURNEY (#provider-journey)
+          3. HOW IT WORKS: 4-STEP FLOW WITH ILLUSTRATION CARDS
           ========================================================================= */}
       <section
         id="provider-journey"
@@ -332,6 +340,9 @@ export default function ProviderLandingPage() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="mb-12 sm:mb-16 max-w-2xl text-center md:text-left mx-auto md:mx-0">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider mb-4">
+              Step-by-Step Flow
+            </span>
             <h2
               id="provider-journey-title"
               className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
@@ -341,30 +352,41 @@ export default function ProviderLandingPage() {
               to payday.
             </h2>
             <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center md:text-left">
-              A straightforward path to getting discovered, doing the work, and
-              receiving your earnings securely.
+              A transparent journey from initial identity review to receiving secure payments in your bank account.
             </p>
           </div>
 
-          <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
               <li
                 key={step.title}
-                className="flex flex-col justify-between bg-white rounded-2xl p-6 sm:p-7 hover:-translate-y-0.5 transition-all duration-200"
+                className="flex flex-col justify-between bg-white rounded-3xl p-5 sm:p-6 hover:-translate-y-1 transition-all duration-200"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="inline-flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
-                      <step.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
+                  {/* Step Illustration Frame */}
+                  <IllustrationSlot
+                    label={step.illustrationLabel}
+                    hint={step.illustrationHint}
+                    aspect="aspect-[16/10]"
+                    variant="light"
+                    className="mb-5 rounded-2xl"
+                    imageSrc={step.imageSrc}
+                  />
+
+                  {/* Step Header */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="inline-flex size-10 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
+                      <step.icon size={20} weight="fill" className="text-brand-blue" aria-hidden="true" />
                     </span>
-                    <span className="text-xs font-extrabold text-brand-blue/60 tracking-wider tabular-nums uppercase bg-blue-50/70 px-2.5 py-1 rounded-full">
+                    <span className="text-xs font-extrabold text-brand-blue tracking-wider tabular-nums uppercase bg-blue-50 px-2.5 py-1 rounded-full">
                       Step {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="text-base sm:text-[17px] font-bold text-gray-950 font-sans text-balance">
+
+                  <h3 className="text-base sm:text-lg font-bold text-gray-950 font-sans text-balance">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600 text-pretty">
+                  <p className="mt-1.5 text-sm leading-relaxed text-gray-600 text-pretty">
                     {step.description}
                   </p>
                 </div>
@@ -375,7 +397,7 @@ export default function ProviderLandingPage() {
       </section>
 
       {/* =========================================================================
-          4. ESCROW PROTECTION / ABOUT (#about)
+          4. ESCROW PROTECTION: 2-COLUMN WITH ILLUSTRATION STAGE
           ========================================================================= */}
       <section
         id="about"
@@ -384,67 +406,45 @@ export default function ProviderLandingPage() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-            {/* Visual Escrow Card */}
-            <div className="relative overflow-hidden rounded-3xl bg-brand-blue p-8 sm:p-10 text-white min-h-[380px] flex flex-col justify-between">
-              {/* Background Concentric Pattern */}
-              <div
-                className="absolute -right-16 -top-16 size-72 pointer-events-none opacity-20"
-                aria-hidden="true"
+            {/* Visual Escrow Illustration Stage */}
+            <div className="w-full flex justify-center">
+              <IllustrationSlot
+                label="Escrow Guarantee & Safe Wallet Release"
+                hint="Place your escrow / wallet transfer illustration here"
+                aspect="aspect-[4/3] sm:aspect-[16/11]"
+                variant="blue"
+                imageSrc="/illustrations/wallet.svg"
               >
-                <svg viewBox="0 0 300 300" fill="none">
-                  <circle cx="150" cy="150" r="140" stroke="white" strokeWidth="24" />
-                  <circle cx="150" cy="150" r="90" stroke="white" strokeWidth="20" />
-                  <circle cx="150" cy="150" r="40" stroke="white" strokeWidth="16" />
-                </svg>
-              </div>
-
-              <div className="relative z-10 text-center sm:text-left">
-                <h3 className="text-2xl sm:text-3xl font-extrabold leading-tight text-white font-sans text-balance">
-                  The payment
-                  <br />
-                  is already there.
-                </h3>
-                <p className="mt-2 text-sm text-blue-100 font-medium">
-                  Before work begins
-                </p>
-              </div>
-
-              <div className="relative z-10 mt-8 rounded-2xl bg-white p-5 sm:p-6 text-gray-950">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
-                      <ShieldCheckIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
-                    </span>
-                    <div className="text-left">
-                      <span className="block text-sm sm:text-[15px] font-bold text-gray-950">
-                        Payment secured
+                {/* Floating Payment Status Card overlay */}
+                <div className="absolute bottom-6 inset-x-6 z-20 rounded-2xl bg-white p-4 sm:p-5 text-gray-950">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className="flex size-10 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
+                        <ShieldCheckIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
                       </span>
-                      <span className="block mt-0.5 text-xs text-gray-500">
-                        Held safely until the job is confirmed
-                      </span>
+                      <div className="text-left">
+                        <span className="block text-sm font-bold text-gray-950">
+                          Payment in Escrow
+                        </span>
+                        <span className="block text-xs text-gray-500">
+                          Funds locked safely before you start
+                        </span>
+                      </div>
                     </div>
+                    <CheckCircleIcon
+                      className="shrink-0 text-brand-blue"
+                      size={20}
+                      weight="fill"
+                      aria-hidden="true"
+                    />
                   </div>
-                  <CheckCircleIcon
-                    className="shrink-0 text-brand-blue"
-                    size={22}
-                    weight="fill"
-                    aria-hidden="true"
-                  />
                 </div>
-                <div className="mt-4 flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-brand-blue">
-                  <span className="rounded-full bg-blue-50 px-3 py-1">
-                    Customer confirms
-                  </span>
-                  <span className="h-px flex-1 bg-gray-200" />
-                  <span className="rounded-full bg-blue-50 px-3 py-1">
-                    You confirm
-                  </span>
-                </div>
-              </div>
+              </IllustrationSlot>
             </div>
 
             {/* Description */}
             <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+
               <h2
                 id="provider-escrow-title"
                 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center lg:text-left"
@@ -452,16 +452,16 @@ export default function ProviderLandingPage() {
                 No more starting
                 <br />a job on a promise.
               </h2>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center lg:text-left">
-                Customers pay through QwikHelp. Funds stay in escrow while the
-                work is underway, then move to your wallet after both sides confirm
-                the job is complete.
+              <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center lg:text-left">
+                Customers pay upfront through QwikHelp. Funds stay securely in escrow
+                while you work, and transfer to your in-app wallet immediately when
+                both sides confirm completion.
               </p>
-              <ul className="mt-8 space-y-4 text-left">
+              <ul className="mt-6 space-y-3.5 text-left w-full max-w-md">
                 {[
-                  "Check escrow payment before you begin.",
-                  "Confirm the finished job together in the app.",
-                  "Use the formal dispute process if something goes wrong.",
+                  "Verify customer escrow balance before traveling to the job.",
+                  "Zero awkward payment chasing after a hard day's work.",
+                  "Dedicated in-app dispute support if client scope changes.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm sm:text-base">
                     <CheckCircleIcon
@@ -488,6 +488,7 @@ export default function ProviderLandingPage() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="mb-12 max-w-2xl text-center md:text-left mx-auto md:mx-0">
+
             <h2
               id="provider-reputation-title"
               className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center md:text-left"
@@ -502,7 +503,7 @@ export default function ProviderLandingPage() {
             </p>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-3">
             {[
               {
                 title: "Customer ratings",
@@ -522,12 +523,12 @@ export default function ProviderLandingPage() {
             ].map((s) => (
               <article
                 key={s.title}
-                className="flex flex-col bg-white rounded-2xl p-6 sm:p-8 hover:-translate-y-0.5 transition-all duration-200"
+                className="flex flex-col bg-white rounded-3xl p-7 hover:-translate-y-1 transition-all duration-200"
               >
-                <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
-                  <s.icon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
+                <span className="flex size-12 items-center justify-center rounded-2xl bg-blue-50 text-brand-blue mb-6">
+                  <s.icon size={24} weight="fill" className="text-brand-blue" aria-hidden="true" />
                 </span>
-                <h3 className="mt-6 text-base sm:text-lg font-bold text-gray-950 font-sans">
+                <h3 className="text-lg font-bold text-gray-950 font-sans">
                   {s.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600 text-pretty">
@@ -540,7 +541,7 @@ export default function ProviderLandingPage() {
       </section>
 
       {/* =========================================================================
-          6. SERVICE CATEGORIES (Solid Rainbow Boxes, No Borders/Shadows)
+          6. SERVICE CATEGORIES (Solid Rainbow Boxes)
           ========================================================================= */}
       <section
         aria-labelledby="provider-categories-title"
@@ -548,17 +549,18 @@ export default function ProviderLandingPage() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between text-center sm:text-left">
-            <h2
-              id="provider-categories-title"
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center sm:text-left"
-            >
-              Bring your craft
-              <br />
-              to the neighbourhood.
-            </h2>
+            <div>
+              <h2
+                id="provider-categories-title"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center sm:text-left"
+              >
+                Bring your craft
+                <br />
+                to the neighbourhood.
+              </h2>
+            </div>
             <p className="max-w-xs text-sm sm:text-base leading-relaxed text-gray-600 text-pretty mx-auto sm:mx-0 sm:text-right">
-              QwikHelp connects customers with verified professionals across
-              everyday household needs and skilled trades.
+              QwikHelp connects verified pros with everyday household needs and skilled trades across town.
             </p>
           </div>
 
@@ -583,7 +585,7 @@ export default function ProviderLandingPage() {
       </section>
 
       {/* =========================================================================
-          7. GETTING STARTED (#getting-started)
+          7. GETTING STARTED: 2-COLUMN WITH VERIFICATION ILLUSTRATION STAGE
           ========================================================================= */}
       <section
         id="getting-started"
@@ -592,7 +594,9 @@ export default function ProviderLandingPage() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+            {/* Left: Requirements list */}
             <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+
               <h2
                 id="getting-started-title"
                 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-[-0.03em] leading-[1.12] text-balance font-sans text-center lg:text-left"
@@ -602,20 +606,19 @@ export default function ProviderLandingPage() {
                 <br />
                 can trust.
               </h2>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center lg:text-left">
-                Provider accounts are thoroughly reviewed before they go live. Keep
-                these ready for the identity verification process.
+              <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-600 leading-relaxed text-pretty text-center lg:text-left">
+                Provider accounts are reviewed promptly. Keep these ready for your identity check.
               </p>
               <ul className="mt-8 grid gap-3 sm:grid-cols-2 w-full text-left">
                 {[
                   "NIN or BVN check",
-                  "Photo ID",
+                  "Valid Photo ID",
                   "Face verification",
-                  "A guarantor",
+                  "A verified guarantor",
                 ].map((req) => (
                   <li
                     key={req}
-                    className="flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-gray-900 bg-white rounded-xl px-4 py-3"
+                    className="flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-gray-900 bg-white rounded-2xl px-4 py-3.5"
                   >
                     <CheckCircleIcon
                       className="shrink-0 text-brand-blue"
@@ -629,48 +632,24 @@ export default function ProviderLandingPage() {
               </ul>
             </div>
 
-            <div className="rounded-3xl bg-white p-7 sm:p-8 text-left">
-              <div className="flex items-center gap-3">
-                <span className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
-                  <IdentificationCardIcon size={22} weight="fill" className="text-brand-blue" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-sm font-bold text-gray-950 font-sans">
-                    Identity review
-                  </p>
-                  <p className="mt-0.5 text-xs text-gray-500">
-                    A required step before your profile goes live
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-7 divide-y divide-gray-100">
-                {[
-                  "Identity details submitted",
-                  "Photo and face checked",
-                  "Profile reviewed by QwikHelp",
-                ].map((item, index) => (
-                  <div key={item} className="flex items-center gap-4 py-4">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-blue text-xs font-bold text-white tabular-nums">
-                      {index + 1}
-                    </span>
-                    <span className="text-sm font-medium text-gray-800">
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <p className="mt-5 text-xs leading-relaxed text-gray-500">
-                Submit identity documents through the official in-app process when
-                provider registration is available. Do not send documents by email.
-              </p>
-              <Link
-                href="mailto:support@qwikhelp.com?subject=Provider%20onboarding"
-                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-brand-blue px-6 text-sm font-semibold text-white hover:bg-brand-blue-hover transition-all duration-150 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+            {/* Right: Verification Illustration Slot */}
+            <div className="w-full flex justify-center">
+              <IllustrationSlot
+                // label="Trust & Identity Review Showcase"
+                // hint="Place your document review / verified badge illustration here"
+                aspect="aspect-[4/3] sm:aspect-[16/11]"
+                variant="white"
+                imageSrc="/illustrations/id-check.svg"
               >
-                Ask about joining
-              </Link>
+                {/* Overlay Step Pill */}
+                <div className="absolute bottom-6 inset-x-6 z-20 flex items-center justify-between rounded-2xl bg-[#F8FAFF] p-4 text-xs font-semibold text-gray-700">
+                  <span className="flex items-center gap-2">
+                    <UserCheckIcon size={18} weight="fill" className="text-brand-blue" />
+                    <span>Background & ID check</span>
+                  </span>
+                  <span className="text-emerald-600 font-bold">Fast-tracked</span>
+                </div>
+              </IllustrationSlot>
             </div>
           </div>
         </div>
@@ -696,8 +675,7 @@ export default function ProviderLandingPage() {
                 answered.
               </h2>
               <p className="mt-4 max-w-xs text-sm sm:text-base leading-relaxed text-gray-600 text-pretty mx-auto md:mx-0 text-center md:text-left">
-                The essentials on verification, jobs, payments, and how QwikHelp
-                works for providers.
+                The essentials on verification, jobs, escrow payments, and how QwikHelp works for you.
               </p>
             </div>
 
@@ -718,19 +696,17 @@ export default function ProviderLandingPage() {
                       <span>{item.question}</span>
                       <span
                         aria-hidden="true"
-                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-base font-medium transition-all duration-200 ${
-                          isOpen
-                            ? "rotate-45 bg-blue-50 text-brand-blue"
-                            : "text-gray-500 bg-gray-100 hover:bg-gray-200/80"
-                        }`}
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-base font-medium transition-all duration-200 ${isOpen
+                          ? "rotate-45 bg-blue-50 text-brand-blue"
+                          : "text-gray-500 bg-gray-100 hover:bg-gray-200/80"
+                          }`}
                       >
                         +
                       </span>
                     </button>
                     <div
-                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
-                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                      }`}
+                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                        }`}
                     >
                       <div className="overflow-hidden">
                         <p className="pt-3 text-sm sm:text-[15px] leading-relaxed text-gray-600 text-pretty">

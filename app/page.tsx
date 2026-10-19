@@ -18,7 +18,7 @@ export default function Home() {
       {/* =========================================================================
           1. HERO SECTION
           ========================================================================= */}
-      <main className="flex-1 flex flex-col items-center justify-start pt-8 md:pt-28 lg:pt-32 pb-8 sm:pb-12 px-5 sm:px-8 lg:px-12 relative w-full">
+      <main className="flex-1 flex flex-col items-center justify-start pt-24 sm:pt-28 md:pt-28 lg:pt-32 pb-8 sm:pb-12 px-5 sm:px-8 lg:px-12 relative w-full">
         {/* Soft Ambient Background Highlights */}
         <div
           className="absolute top-12 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-gradient-to-b from-blue-50/70 via-indigo-50/30 to-transparent blur-3xl rounded-full pointer-events-none -z-10"
