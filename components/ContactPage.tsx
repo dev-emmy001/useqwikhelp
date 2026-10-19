@@ -98,6 +98,13 @@ const quickHelpItems = [
 
 export default function ContactPage() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([]);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndices((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -299,23 +306,50 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="divide-y divide-gray-200/80 border-t border-b border-gray-200/80">
-              {quickHelpItems.map((item) => (
-                <details key={item.q} className="group py-5">
-                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-sm text-sm sm:text-[15px] font-semibold text-gray-950 marker:hidden hover:text-brand-blue transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue [&::-webkit-details-marker]:hidden">
-                    {item.q}
-                    <span
-                      aria-hidden="true"
-                      className="flex size-8 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-600 bg-gray-50/50 transition-all duration-200 group-open:rotate-45 group-open:bg-blue-50 group-open:text-brand-blue group-open:border-brand-blue/30"
+            <div className="flex flex-col gap-3.5 sm:gap-4">
+              {quickHelpItems.map((item, index) => {
+                const isOpen = openFaqIndices.includes(index);
+                return (
+                  <div
+                    key={item.q}
+                    className={`rounded-2xl border bg-white p-5 sm:p-6 transition-all duration-200 ${
+                      isOpen
+                        ? "border-brand-blue/40 shadow-[0_4px_16px_0_rgba(30,91,247,0.06)]"
+                        : "border-gray-200/80 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)] hover:border-brand-blue/20 hover:shadow-sm"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(index)}
+                      aria-expanded={isOpen}
+                      className="flex w-full cursor-pointer items-center justify-between gap-4 text-left font-sans text-sm sm:text-[16px] font-semibold text-gray-950 transition-colors hover:text-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
                     >
-                      +
-                    </span>
-                  </summary>
-                  <p className="max-w-2xl pb-2 pr-10 pt-3 text-sm sm:text-[15px] leading-relaxed text-gray-600 text-pretty">
-                    {item.a}
-                  </p>
-                </details>
-              ))}
+                      <span>{item.q}</span>
+                      <span
+                        aria-hidden="true"
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full border text-base font-medium transition-all duration-200 ${
+                          isOpen
+                            ? "rotate-45 bg-blue-50 text-brand-blue border-brand-blue/30"
+                            : "border-gray-200 text-gray-500 bg-gray-50/70 hover:bg-gray-100"
+                        }`}
+                      >
+                        +
+                      </span>
+                    </button>
+                    <div
+                      className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
+                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="pt-3 text-sm sm:text-[15px] leading-relaxed text-gray-600 text-pretty">
+                          {item.a}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
