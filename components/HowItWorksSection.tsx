@@ -4,6 +4,10 @@ import {
   CalendarCheckIcon,
   CheckCircleIcon,
   ClockIcon,
+  BroomIcon,
+  CookingPotIcon,
+  HammerIcon,
+  LightningIcon,
   MagnifyingGlassIcon,
   MapPinIcon,
   ShieldCheckIcon,
@@ -33,6 +37,14 @@ const steps = [
       "Review the completed work, then approve payment. If something is not right, we are here to help.",
     visual: "complete",
   },
+] as const;
+
+const serviceIcons = [
+  { label: "Cleaning", icon: BroomIcon, position: "mt-10" },
+  { label: "Cooking", icon: CookingPotIcon, position: "mt-4" },
+  { label: "Repairs", icon: WrenchIcon, position: "mt-0" },
+  { label: "Electrical", icon: LightningIcon, position: "mt-4" },
+  { label: "Carpentry", icon: HammerIcon, position: "mt-10" },
 ] as const;
 
 function StepVisual({ step }: { step: (typeof steps)[number]["visual"] }) {
@@ -180,6 +192,60 @@ export default function HowItWorksSection() {
             </li>
           ))}
         </ol>
+
+        <aside
+          aria-labelledby="how-it-works-cta-title"
+          className="relative mt-16 overflow-hidden rounded-[32px] bg-[#f4f3ec] px-5 py-10 text-center sm:mt-20 sm:rounded-[40px] sm:px-8 sm:py-14 lg:py-16"
+        >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-[-460px] h-[620px] w-[min(1000px,140vw)] -translate-x-1/2 rounded-[50%] bg-white/60"
+          />
+
+          <div className="relative mx-auto max-w-2xl">
+            <div
+              aria-hidden="true"
+              className="mx-auto flex h-36 max-w-sm items-start justify-center gap-2 sm:h-44 sm:gap-4"
+            >
+              {serviceIcons.map(({ label, icon: Icon, position }, index) => (
+                <span
+                  key={label}
+                  className={`flex size-14 shrink-0 items-center justify-center rounded-[20px] shadow-sm sm:size-[72px] sm:rounded-[24px] ${
+                    index % 2 === 0
+                      ? "bg-white text-brand-blue"
+                      : "bg-brand-blue text-white"
+                  } ${position}`}
+                >
+                  <Icon size={28} weight="fill" className="sm:hidden" />
+                  <Icon size={34} weight="fill" className="hidden sm:block" />
+                </span>
+              ))}
+            </div>
+
+            <span className="inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand-blue shadow-sm">
+              Help is closer than you think
+            </span>
+            <h3
+              id="how-it-works-cta-title"
+              className="mx-auto mt-4 max-w-xl text-3xl font-extrabold leading-tight text-gray-950 text-balance sm:text-4xl lg:text-5xl"
+            >
+              Home help should feel simple, not stressful.
+            </h3>
+            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600 text-pretty sm:text-lg">
+              Book trusted local professionals, pay securely, and know you have
+              support if anything goes wrong.
+            </p>
+            <Link
+              href="#get-started"
+              className="mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-gray-950 px-6 text-sm font-semibold text-white shadow-md transition-colors hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-950"
+            >
+              Find your help
+            </Link>
+            <p className="mt-3 text-sm text-gray-500">
+              Trusted help for the jobs that matter.
+            </p>
+          </div>
+        </aside>
       </div>
     </section>
   );

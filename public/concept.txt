@@ -1,0 +1,123 @@
+Why does finding a reliable plumber in Nigeria feel like a gamble? Why does a 
+skilled cook spend almost her week chasing word-of-mouth leads instead of 
+doing more of the work she is actually good at? Why does someone pay a 
+technician in cash, upfront, with no way to verify who he is or what happens if 
+the job is wrong? 
+These are not questions about technology. They are questions about trust. And 
+the answer, in every case, is the same: there is no system. The Nigerian urban 
+service economy, worth tens of billions of dollars annually, runs on personal 
+referrals, WhatsApp messages, and hope. Almost nobody has built the 
+infrastructure that makes these transactions safe, fair, and accountable for both 
+sides. 
+That is why QwikHelp exists. We do not exist because it seemed like a good 
+market opportunity. We exist because the people in this market: the customer 
+who gets burned, the provider who sometimes goes unpaid/underpaid, deserve 
+better than what currently exists. 
+Trust is the foundation of every transaction. QwikHelp exists to build that foundation 
+for the Nigerian service economy 
+The Problem 
+The Nigerian informal service economy is large, active, and completely 
+unstructured. Millions of transactions happen every day between households 
+needing services and workers providing them, with no verified identity, no 
+payment protection, and no accountability when things go wrong. 
+Four Compounding Problems 
+1.  No trusted discovery 
+There is no structured way to find a service provider and verify who they are 
+before allowing them into your home or business. The only filter is personal 
+referral, which is unreliable, unscalable, and excludes providers who are 
+genuinely skilled but poorly connected. 
+2.  No payment protection 
+Customers pay cash upfront with no recourse if the work is substandard or 
+incomplete. Providers do the work and sometimes collect nothing, or less than 
+agreed. Neither party has any financial protection in the transaction. 
+3.  No dispute mechanism 
+When something goes wrong: poor work, damage, non-payment, there is no 
+formal process to resolve it. Disputes end in confrontation, social media 
+complaints, or financial loss with no outcome. Both parties absorb the cost of 
+having no system. 
+4.  No provider income stability 
+Skilled service workers in Nigeria have no platform to build a verifiable 
+reputation, no guaranteed workflow, and no digital financial record of their 
+earnings. Income is feast or famine, entirely dependent on personal networks 
+that take years to build and can disappear overnight. 
+The Solution  
+QwikHelp provides the trust infrastructure that will make service transactions in 
+Nigeria safe, fair, and accountable for both sides. It will not be a directory or a 
+social platform: it will be a structured marketplace with verified identities, secure 
+payments, in-app communication, and a formal dispute resolution system. 
+How it works: Customer 
+• Opens QwikHelp and searches for providers by proximity or posts a 
+broadcast request. 
+• Reviews verified profiles: real identity, service category, ratings, and job 
+history. 
+• Books and pays through the app. Payment is held securely until both 
+parties confirm completion. 
+• Communicates entirely in-app via text, voice notes, and calls. 
+• Confirms job completion. A 24-hour window allows dispute submission if 
+needed. 
+• Funds released to the provider's wallet. Rating submitted. 
+How it works:  Provider 
+• Signs up and completes identity verification: NIN/BVN check, photo ID, 
+face verification, and a Guarantor. 
+• Admin reviews and approves the account. Profile goes live. 
+• Toggles online and appears in proximity search results. 
+• Receives job requests directly or responds to customer broadcast requests. 
+• Sees payment confirmed in escrow before starting any work. 
+• Completes job, confirms with customer, earnings credited to wallet 
+instantly. 
+• Withdraws to any Nigerian bank account on demand. 
+Visibility on QwikHelp will be earned, not purchased. Provider ranking is 
+determined entirely by rating, completion rate, and response time. No provider 
+can pay for a higher position. This will keep the platform fair for providers and 
+trustworthy for customers. 
+The Product 
+QwikHelp is a cross-platform mobile application built for iOS and Android. The 
+product has two distinct user experiences: one for customers and one for 
+providers, each designed for the specific needs and journey of that user type.
+
+Core Features 
+Feature 
+Customer benefit 
+Provider benefit 
+Proximity search 
+Find verified providers nearby 
+instantly 
+Be discovered by customers in 
+your area 
+Broadcast requests 
+Post a job and get responses from 
+available providers 
+Respond to job opportunities in 
+real time 
+In-app chat + voice notes Communicate without sharing 
+personal numbers 
+Clarify job requirements before 
+accepting 
+In-app voice calls Call provider directly through the 
+app 
+Receive calls without number 
+exposure 
+Secure escrow payment Pay safely — money protected 
+until job is done 
+Know payment is confirmed 
+before starting 
+Dual completion 
+confirmation 
+Both parties confirm before 
+funds move 
+Protection against unfair 
+non-payment claims 
+Dispute resolution Submit evidence if something 
+goes wrong 
+Fair process if customer disputes 
+incorrectly 
+Provider verification See verified identity before 
+booking 
+Verified badge builds customer 
+trust 
+Ratings and reviews Make informed decisions based 
+on real job history 
+Build a reputation that grows 
+over time 
+In-app wallet + withdrawal N/A Instant earnings, withdraw to 
+any bank anytime
