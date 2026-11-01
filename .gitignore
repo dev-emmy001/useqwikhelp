@@ -42,3 +42,5 @@ next-env.d.ts
 .mcp.json
 # illustration pipeline intermediates (rebuild: node scripts/illustrations/build.mjs)
 /tmp-svgs/
+# raw photos of people (originals stay local; only processed cut-outs ship)
+/photos-raw/

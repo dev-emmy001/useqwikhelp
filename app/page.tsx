@@ -9,12 +9,12 @@ import Reveal from "@/components/landing/Reveal";
 /* ── Content ──────────────────────────────────────────────────────── */
 
 const services = [
-  { title: "Cooks", text: "Daily meals, meal prep or a party.", art: "Illustration: cook stirring a pot" },
-  { title: "Cleaners", text: "Regular, deep or move-out cleans.", art: "Illustration: cleaner with mop and bucket" },
-  { title: "Plumbers", text: "Leaks, blocked drains, new fittings.", art: "Illustration: plumber under a sink" },
-  { title: "Electricians", text: "Wiring, sockets and inverters.", art: "Illustration: electrician at a fuse box" },
-  { title: "AC & appliances", text: "Servicing, gas top-ups and repairs.", art: "Illustration: technician fixing an AC unit" },
-  { title: "Carpenters", text: "Furniture, doors and fittings.", art: "Illustration: carpenter with a saw" },
+  { title: "Cooks", text: "Daily meals, meal prep or a party.", photo: "/assets/images/service-cook.jpg", focus: "50% 22%" },
+  { title: "Cleaners", text: "Regular, deep or move-out cleans.", photo: "/assets/images/service-cleaner.jpg", focus: "50% 6%" },
+  { title: "Plumbers", text: "Leaks, blocked drains, new fittings.", photo: "/assets/images/service-plumber.jpg", focus: "50% 12%" },
+  { title: "Electricians", text: "Wiring, sockets and inverters.", photo: "/assets/images/service-electrician.jpg", focus: "50% 25%" },
+  { title: "AC & appliances", text: "Servicing, gas top-ups and repairs.", photo: "/assets/images/service-ac-technician.jpg", focus: "50% 55%" },
+  { title: "Carpenters", text: "Furniture, doors and fittings.", photo: "/assets/images/service-carpenter.jpg", focus: "50% 28%" },
 ];
 
 const steps = [
@@ -98,9 +98,11 @@ export default function Home() {
           <Reveal>
             <div style={i(4)} className="enter-once enter-soft">
               <Illustration
-                label="Hero illustration: a verified pro arriving at a home, phone showing the QwikHelp booking"
+                src="/assets/images/hero-pro-arriving-with-phone.jpg"
+                photo
+                focus="50% 22%"
+                label="A smiling QwikHelp pro on a phone call"
                 tone="blue"
-                float
                 className="aspect-square sm:aspect-[5/4] lg:aspect-square"
               />
             </div>
@@ -111,9 +113,11 @@ export default function Home() {
         <section id="about" aria-labelledby="about-title" className="">
           <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
             <Illustration
-              label="Illustration: homeowner unsure about a stranger at the gate"
+              src="/assets/images/about-cautious-homeowner.jpg"
+              photo
+              focus="50% 35%"
+              label="A woman on a phone call, looking unsure"
               tone="white"
-              float
               className="reveal-item aspect-[4/3]"
             />
             <div>
@@ -140,7 +144,7 @@ export default function Home() {
             {services.map((s, n) => (
               <li key={s.title} style={i(n % 3)} className="reveal-item group rounded-[32px] bg-gray-50 p-3">
                 <div className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-1">
-                  <Illustration label={s.art} tone="white" className="aspect-[4/3]" />
+                  <Illustration src={s.photo} photo focus={s.focus} label={s.title} decorative tone="white" className="aspect-[4/3]" />
                 </div>
                 <div className="px-4 pt-5 pb-4">
                   <h3 className="text-xl font-bold text-gray-950">{s.title}</h3>

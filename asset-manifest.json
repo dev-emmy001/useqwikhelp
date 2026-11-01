@@ -7,7 +7,8 @@
     "Skipped as out of scope: app/opengraph-image.png and app/provider/opengraph-image.png (static share cards), app/not-found.tsx (no image slots), unused legacy components (AboutSection, HowItWorksSection, HeroImageStage, etc.).",
     "status 'inactive' = the section is currently commented out in app/page.tsx; not generated unless you say so.",
     "reuses = slot uses another entry's file instead of generating a duplicate.",
-    "aspectRatio = the frame the asset is shown in; generated art should be composed for it with transparent padding."
+    "aspectRatio = the frame the asset is shown in; generated art should be composed for it with transparent padding.",
+    "Photo slots use free Pexels stock shown full-bleed (scripts/stock-photos.mjs). Third-party branding blurred on service-electrician and service-carpenter. Replace with real QwikHelp pros (signed releases) before using faces as proof/testimonials."
   ],
   "assets": [
     {
@@ -17,8 +18,11 @@
       "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/hero-home.jpg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1 (5:4 on tablet)",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian male artisan in his late 20s, clean navy work polo with tool belt, warm confident smile, holding up a smartphone toward the viewer as if showing a confirmed booking; three-quarter body, slight angle, friendly approachable posture, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian male artisan in his late 20s, clean navy work polo with tool belt, warm confident smile, holding up a smartphone toward the viewer as if showing a confirmed booking; three-quarter body, slight angle, friendly approachable posture, isolated cut-out.",
+      "source": "Pexels 4042144 by Sylvester Orji — https://www.pexels.com/photo/4042144/",
+      "newAsset": "/assets/images/hero-pro-arriving-with-phone.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "about-cautious-homeowner.png",
@@ -27,8 +31,11 @@
       "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/about-homeowner.jpg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian woman homeowner in her 30s, modern smart-casual Ankara-print top, looking at her phone with a thoughtful, slightly unsure expression (hand near chin), waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian woman homeowner in her 30s, modern smart-casual Ankara-print top, looking at her phone with a thoughtful, slightly unsure expression (hand near chin), waist-up, isolated cut-out.",
+      "source": "Pexels 10081921 by ilabappa — https://www.pexels.com/photo/10081921/",
+      "newAsset": "/assets/images/about-cautious-homeowner.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "service-cook.png",
@@ -37,8 +44,11 @@
       "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/service-cook.jpg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian female cook in a crisp white chef jacket and headwrap, stirring a pot of jollof rice, warm smile, waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian female cook in a crisp white chef jacket and headwrap, stirring a pot of jollof rice, warm smile, waist-up, isolated cut-out.",
+      "source": "Pexels 32224391 by Tochukwu Ekeh — https://www.pexels.com/photo/32224391/",
+      "newAsset": "/assets/images/service-cook.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "service-cleaner.png",
@@ -47,8 +57,11 @@
       "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/service-cleaner.jpg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian female cleaner in a fitted blue work tunic and gloves, holding a mop and a bucket of supplies, cheerful expression, three-quarter body, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian female cleaner in a fitted blue work tunic and gloves, holding a mop and a bucket of supplies, cheerful expression, three-quarter body, isolated cut-out.",
+      "source": "Pexels 4353622 by Ketut Subiyanto — https://www.pexels.com/photo/4353622/",
+      "newAsset": "/assets/images/service-cleaner.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "service-plumber.png",
@@ -57,8 +70,11 @@
       "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/service-plumber.svg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian male plumber in navy overalls over a fitted tee, holding a red pipe wrench and a length of PVC pipe, confident smile, waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian male plumber in navy overalls over a fitted tee, holding a red pipe wrench and a length of PVC pipe, confident smile, waist-up, isolated cut-out.",
+      "source": "Pexels 8486978 by Kindel Media — https://www.pexels.com/photo/8486978/",
+      "newAsset": "/assets/images/service-plumber.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "service-electrician.png",
@@ -67,8 +83,11 @@
       "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/service-electrician.svg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian male electrician in a hi-vis vest and yellow hard hat, coil of cable over one shoulder, holding a voltage tester, friendly expression, waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian male electrician in a hi-vis vest and yellow hard hat, coil of cable over one shoulder, holding a voltage tester, friendly expression, waist-up, isolated cut-out.",
+      "source": "Pexels 39125909 by imma-syfa — https://www.pexels.com/photo/39125909/ (branding blurred)",
+      "newAsset": "/assets/images/service-electrician.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "service-ac-technician.png",
@@ -77,8 +96,11 @@
       "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/service-ac.svg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian male AC technician in a grey work shirt with a tool pouch, holding refrigerant pressure gauges, focused but warm expression, waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian male AC technician in a grey work shirt with a tool pouch, holding refrigerant pressure gauges, focused but warm expression, waist-up, isolated cut-out.",
+      "source": "Pexels 5463582 by José Andrés Pacheco Cortes — https://www.pexels.com/photo/5463582/",
+      "newAsset": "/assets/images/service-ac-technician.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "service-carpenter.png",
@@ -87,8 +109,11 @@
       "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/service-carpenter.jpg)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "4:3",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian male carpenter in an olive shirt and brown leather apron, holding a claw hammer and a wooden plank, proud smile, waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian male carpenter in an olive shirt and brown leather apron, holding a claw hammer and a wooden plank, proud smile, waist-up, isolated cut-out.",
+      "source": "Pexels 20853365 by Illustrate Digital — https://www.pexels.com/photo/20853365/ (branding blurred)",
+      "newAsset": "/assets/images/service-carpenter.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     },
     {
       "id": "step-find-nearby-pro.png",
@@ -183,9 +208,10 @@
       "currentAsset": "/hero-workers.png (already a transparent cut-out of 4 Nigerian pros)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "16:9, figures cropped flush at bottom edge",
-      "status": "active",
+      "status": "keep",
       "visualSpec": "Four authentic Nigerian service pros standing side by side, waist-up, cropped flush at the bottom: a woman chef in white jacket, a man electrician in hi-vis vest and hard hat, a man plumber in navy overalls holding up a smartphone with a blank screen facing the viewer, and a man carpenter in a leather apron; warm confident smiles, isolated cut-out.",
-      "warning": "The blue phone-screen overlay (ProviderLandingPage.tsx:144) and the OG cards are hand-positioned to the current photo. Regenerating means re-measuring the overlay or dropping it. Recommend KEEPING the current photo."
+      "warning": "The blue phone-screen overlay (ProviderLandingPage.tsx:144) and the OG cards are hand-positioned to the current photo. Regenerating means re-measuring the overlay or dropping it. Recommend KEEPING the current photo.",
+      "notes": "Keeping existing /hero-workers.png (phone overlay + OG cards are fitted to it)."
     },
     {
       "id": "provider-nearby-matching.png",
@@ -260,9 +286,12 @@
       "currentAsset": "placeholder div",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1",
-      "status": "active",
+      "status": "swapped",
       "reuses": "service-cook.png",
-      "visualSpec": "Reuses the home services cook cut-out."
+      "visualSpec": "Reuses the home services cook cut-out.",
+      "newAsset": "/assets/images/service-cook.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out",
+      "source": "Pexels 32224391 by Tochukwu Ekeh — https://www.pexels.com/photo/32224391/"
     },
     {
       "id": "provider-craft-cleaning",
@@ -271,9 +300,12 @@
       "currentAsset": "placeholder div",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1",
-      "status": "active",
+      "status": "swapped",
       "reuses": "service-cleaner.png",
-      "visualSpec": "Reuses the home services cleaner cut-out."
+      "visualSpec": "Reuses the home services cleaner cut-out.",
+      "newAsset": "/assets/images/service-cleaner.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out",
+      "source": "Pexels 4353622 by Ketut Subiyanto — https://www.pexels.com/photo/4353622/"
     },
     {
       "id": "provider-craft-plumbing",
@@ -282,9 +314,12 @@
       "currentAsset": "placeholder div",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1",
-      "status": "active",
+      "status": "swapped",
       "reuses": "service-plumber.png",
-      "visualSpec": "Reuses the home services plumber cut-out."
+      "visualSpec": "Reuses the home services plumber cut-out.",
+      "newAsset": "/assets/images/service-plumber.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out",
+      "source": "Pexels 8486978 by Kindel Media — https://www.pexels.com/photo/8486978/"
     },
     {
       "id": "provider-craft-electrical",
@@ -293,9 +328,12 @@
       "currentAsset": "placeholder div",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1",
-      "status": "active",
+      "status": "swapped",
       "reuses": "service-electrician.png",
-      "visualSpec": "Reuses the home services electrician cut-out."
+      "visualSpec": "Reuses the home services electrician cut-out.",
+      "newAsset": "/assets/images/service-electrician.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out",
+      "source": "Pexels 39125909 by imma-syfa — https://www.pexels.com/photo/39125909/ (branding blurred)"
     },
     {
       "id": "provider-craft-ac",
@@ -304,9 +342,12 @@
       "currentAsset": "placeholder div",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1",
-      "status": "active",
+      "status": "swapped",
       "reuses": "service-ac-technician.png",
-      "visualSpec": "Reuses the home services AC technician cut-out."
+      "visualSpec": "Reuses the home services AC technician cut-out.",
+      "newAsset": "/assets/images/service-ac-technician.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out",
+      "source": "Pexels 5463582 by José Andrés Pacheco Cortes — https://www.pexels.com/photo/5463582/"
     },
     {
       "id": "provider-craft-carpentry",
@@ -315,9 +356,12 @@
       "currentAsset": "placeholder div",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1",
-      "status": "active",
+      "status": "swapped",
       "reuses": "service-carpenter.png",
-      "visualSpec": "Reuses the home services carpenter cut-out."
+      "visualSpec": "Reuses the home services carpenter cut-out.",
+      "newAsset": "/assets/images/service-carpenter.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out",
+      "source": "Pexels 20853365 by Illustrate Digital — https://www.pexels.com/photo/20853365/ (branding blurred)"
     },
     {
       "id": "provider-verification-checklist.png",
@@ -337,8 +381,11 @@
       "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/contact-chat.svg, 0 bytes)",
       "category": "PHOTO_CUTOUT",
       "aspectRatio": "1:1 (5:4 on tablet)",
-      "status": "active",
-      "visualSpec": "Authentic Nigerian young woman in modern smart-casual attire (neat braids, simple blouse), smiling warmly while reading a message on her phone, waist-up, isolated cut-out."
+      "status": "swapped",
+      "visualSpec": "Authentic Nigerian young woman in modern smart-casual attire (neat braids, simple blouse), smiling warmly while reading a message on her phone, waist-up, isolated cut-out.",
+      "source": "Pexels 31826813 by darkshadephotos — https://www.pexels.com/photo/31826813/",
+      "newAsset": "/assets/images/contact-reading-message.jpg",
+      "display": "full-bleed photo (object-cover), not a cut-out"
     }
   ]
 }

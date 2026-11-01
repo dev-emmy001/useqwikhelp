@@ -37,12 +37,12 @@ const ranking = [
 ];
 
 const crafts = [
-  { label: "Cooking", art: "Illustration: cook" },
-  { label: "Cleaning", art: "Illustration: cleaner" },
-  { label: "Plumbing", art: "Illustration: plumber" },
-  { label: "Electrical", art: "Illustration: electrician" },
-  { label: "AC servicing", art: "Illustration: AC technician" },
-  { label: "Carpentry", art: "Illustration: carpenter" },
+  { label: "Cooking", photo: "/assets/images/service-cook.jpg", focus: "50% 22%" },
+  { label: "Cleaning", photo: "/assets/images/service-cleaner.jpg", focus: "50% 6%" },
+  { label: "Plumbing", photo: "/assets/images/service-plumber.jpg", focus: "50% 12%" },
+  { label: "Electrical", photo: "/assets/images/service-electrician.jpg", focus: "50% 25%" },
+  { label: "AC servicing", photo: "/assets/images/service-ac-technician.jpg", focus: "50% 55%" },
+  { label: "Carpentry", photo: "/assets/images/service-carpenter.jpg", focus: "50% 28%" },
 ];
 
 const requirements = ["NIN or BVN", "Valid photo ID", "Face verification", "A guarantor"];
@@ -154,7 +154,7 @@ export default function ProviderLandingPage() {
       </section>
 
       {/* 2. WHY */}
-      <section aria-labelledby="why-title" className="bg-gray-50">
+      <section aria-labelledby="why-title" className="">
         <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
           <div>
             <h2 id="why-title" className={`reveal-item ${h2}`}>
@@ -198,7 +198,7 @@ export default function ProviderLandingPage() {
       </section>
 
       {/* 4. ESCROW */}
-      <section aria-labelledby="escrow-title" className="bg-gray-50">
+      <section aria-labelledby="escrow-title" className="">
         <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
           <Illustration
             src="/assets/images/provider-escrow-before-start.png"
@@ -249,7 +249,7 @@ export default function ProviderLandingPage() {
         <Reveal as="ul" className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {crafts.map((c, n) => (
             <li key={c.label} style={i(n)} className="reveal-item rounded-[28px] bg-gray-50 p-2.5">
-              <Illustration label={c.art} tone="white" className="aspect-square !rounded-[20px] !p-4" />
+              <Illustration src={c.photo} photo focus={c.focus} label={c.label} decorative tone="white" className="aspect-square !rounded-[20px]" />
               <p className="px-2 pt-3 pb-2 text-base font-bold text-gray-950">{c.label}</p>
             </li>
           ))}

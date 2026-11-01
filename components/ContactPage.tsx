@@ -75,9 +75,11 @@ export default function ContactPage() {
         <Reveal>
           <div style={i(4)} className="enter-once enter-soft">
             <Illustration
-              label="Illustration: friendly person reading a message on their phone"
+              src="/assets/images/contact-reading-message.jpg"
+              photo
+              focus="42% 40%"
+              label="A woman reading a message on her phone"
               tone="blue"
-              float
               className="aspect-square sm:aspect-[5/4] lg:aspect-square"
             />
           </div>
