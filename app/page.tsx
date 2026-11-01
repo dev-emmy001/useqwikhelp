@@ -270,6 +270,26 @@ export default function Home() {
             />
           </Reveal>
         </section>
+        {/* Scroll-fade overlay — sticky so it stops before the footer */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "sticky",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "120px",
+            marginTop: "-120px",
+            pointerEvents: "none",
+            zIndex: 40,
+            background:
+              "linear-gradient(to top, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 100%)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+            maskImage: "linear-gradient(to top, black 0%, black 30%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to top, black 0%, black 30%, transparent 100%)",
+          }}
+        />
       </main>
 
       <Footer />

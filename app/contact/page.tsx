@@ -4,8 +4,19 @@ import ContactPage from "@/components/ContactPage";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Contact QwikHelp",
+  title: "Contact",
   description: "Questions, feedback or partnerships? Email the QwikHelp team.",
+  openGraph: {
+    type: "website",
+    siteName: "QwikHelp",
+    title: "Contact | QwikHelp",
+    description: "Questions, feedback or partnerships? Email the QwikHelp team.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | QwikHelp",
+    description: "Questions, feedback or partnerships? Email the QwikHelp team.",
+  },
 };
 
 export default function Page() {

@@ -12,10 +12,36 @@ const googleSans = Google_Sans_Flex({
   fallback: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 });
 
+const description =
+  "Book verified cooks, cleaners, plumbers and electricians near you. Your money is held safely until the job is done.";
+
+// Absolute base for OG/Twitter image URLs. Set NEXT_PUBLIC_SITE_URL to the live domain
+// (on Vercel, Next falls back to the production URL automatically when this is unset).
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
-  title: "QwikHelp Verified Local Services",
-  description:
-    "Find verified cooks, cleaners, plumbers, and more near you; pay securely, communicate in-app, and get real recourse if anything goes wrong.",
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  title: {
+    default: "QwikHelp | Verified home help near you",
+    template: "%s | QwikHelp",
+  },
+  description,
+  applicationName: "QwikHelp",
+  authors: [{ name: "TeamCobuild" }],
+  creator: "TeamCobuild",
+  publisher: "TeamCobuild",
+  openGraph: {
+    type: "website",
+    siteName: "QwikHelp",
+    title: "QwikHelp | Verified home help near you",
+    description,
+    locale: "en_NG",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "QwikHelp | Verified home help near you",
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -34,24 +60,6 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-white tracking-tighter text-gray-900 selection:bg-blue-100 selection:text-blue-900"
       >
         {children}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "120px",
-            pointerEvents: "none",
-            zIndex: 40,
-            background:
-              "linear-gradient(to top, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 100%)",
-            backdropFilter: "blur(6px)",
-            WebkitBackdropFilter: "blur(6px)",
-            maskImage: "linear-gradient(to top, black 0%, black 30%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to top, black 0%, black 30%, transparent 100%)",
-          }}
-        />
       </body>
     </html>
   );

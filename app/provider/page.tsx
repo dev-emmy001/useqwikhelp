@@ -4,9 +4,19 @@ import Navbar from "@/components/Navbar";
 import ProviderLandingPage from "@/components/ProviderLandingPage";
 
 export const metadata: Metadata = {
-  title: "Become a QwikHelp Provider",
-  description:
-    "Grow your service business with a verified QwikHelp profile, escrow-protected jobs, in-app communication, and wallet withdrawals.",
+  title: "Become a pro",
+  description: "Get matched with verified customers near you. Payment is secured in escrow before you start.",
+  openGraph: {
+    type: "website",
+    siteName: "QwikHelp",
+    title: "Become a pro | QwikHelp",
+    description: "Get matched with verified customers near you. Payment is secured in escrow before you start.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Become a pro | QwikHelp",
+    description: "Get matched with verified customers near you. Payment is secured in escrow before you start.",
+  },
 };
 
 export default function ProviderPage() {

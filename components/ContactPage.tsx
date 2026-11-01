@@ -7,7 +7,7 @@ import Illustration from "@/components/landing/Illustration";
 import Reveal from "@/components/landing/Reveal";
 
 // Single contact address — swap for a QwikHelp domain address when one exists.
-const CONTACT_EMAIL = "celestialzenny@gmail.com";
+const CONTACT_EMAIL = "cobuildofficial@hotmail.com";
 
 const i = (n: number) => ({ "--i": n }) as React.CSSProperties;
 
