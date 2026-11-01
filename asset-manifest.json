@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "outputDir": "/public/assets/images/",
+  "notes": [
+    "Scope: every visual slot rendered by / (app/page.tsx), /provider (components/ProviderLandingPage.tsx) and /contact (components/ContactPage.tsx). No src/ directory exists.",
+    "Skipped by rule: navbar/footer brand logos, small UI icons (FAQ plus, copy/check), the 24px check SVG overlaid on the provider hero phone.",
+    "Skipped as out of scope: app/opengraph-image.png and app/provider/opengraph-image.png (static share cards), app/not-found.tsx (no image slots), unused legacy components (AboutSection, HowItWorksSection, HeroImageStage, etc.).",
+    "status 'inactive' = the section is currently commented out in app/page.tsx; not generated unless you say so.",
+    "reuses = slot uses another entry's file instead of generating a duplicate.",
+    "aspectRatio = the frame the asset is shown in; generated art should be composed for it with transparent padding."
+  ],
+  "assets": [
+    {
+      "id": "hero-pro-arriving-with-phone.png",
+      "componentPath": "app/page.tsx:100",
+      "section": "Home hero: 'Based on our calculations, you need QwikHelp.'",
+      "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/hero-home.jpg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1 (5:4 on tablet)",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian male artisan in his late 20s, clean navy work polo with tool belt, warm confident smile, holding up a smartphone toward the viewer as if showing a confirmed booking; three-quarter body, slight angle, friendly approachable posture, isolated cut-out."
+    },
+    {
+      "id": "about-cautious-homeowner.png",
+      "componentPath": "app/page.tsx:113",
+      "section": "Home problem: 'Finding good help shouldn't feel like a gamble.'",
+      "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/about-homeowner.jpg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian woman homeowner in her 30s, modern smart-casual Ankara-print top, looking at her phone with a thoughtful, slightly unsure expression (hand near chin), waist-up, isolated cut-out."
+    },
+    {
+      "id": "service-cook.png",
+      "componentPath": "app/page.tsx:12",
+      "section": "Home services card: 'Cooks — Daily meals, meal prep or a party.'",
+      "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/service-cook.jpg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian female cook in a crisp white chef jacket and headwrap, stirring a pot of jollof rice, warm smile, waist-up, isolated cut-out."
+    },
+    {
+      "id": "service-cleaner.png",
+      "componentPath": "app/page.tsx:13",
+      "section": "Home services card: 'Cleaners — Regular, deep or move-out cleans.'",
+      "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/service-cleaner.jpg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian female cleaner in a fitted blue work tunic and gloves, holding a mop and a bucket of supplies, cheerful expression, three-quarter body, isolated cut-out."
+    },
+    {
+      "id": "service-plumber.png",
+      "componentPath": "app/page.tsx:14",
+      "section": "Home services card: 'Plumbers — Leaks, blocked drains, new fittings.'",
+      "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/service-plumber.svg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian male plumber in navy overalls over a fitted tee, holding a red pipe wrench and a length of PVC pipe, confident smile, waist-up, isolated cut-out."
+    },
+    {
+      "id": "service-electrician.png",
+      "componentPath": "app/page.tsx:15",
+      "section": "Home services card: 'Electricians — Wiring, sockets and inverters.'",
+      "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/service-electrician.svg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian male electrician in a hi-vis vest and yellow hard hat, coil of cable over one shoulder, holding a voltage tester, friendly expression, waist-up, isolated cut-out."
+    },
+    {
+      "id": "service-ac-technician.png",
+      "componentPath": "app/page.tsx:16",
+      "section": "Home services card: 'AC & appliances — Servicing, gas top-ups and repairs.'",
+      "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/service-ac.svg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian male AC technician in a grey work shirt with a tool pouch, holding refrigerant pressure gauges, focused but warm expression, waist-up, isolated cut-out."
+    },
+    {
+      "id": "service-carpenter.png",
+      "componentPath": "app/page.tsx:17",
+      "section": "Home services card: 'Carpenters — Furniture, doors and fittings.'",
+      "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/service-carpenter.jpg)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "4:3",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian male carpenter in an olive shirt and brown leather apron, holding a claw hammer and a wooden plank, proud smile, waist-up, isolated cut-out."
+    },
+    {
+      "id": "step-find-nearby-pro.png",
+      "componentPath": "app/page.tsx:24",
+      "section": "Home how it works, step 1: 'Find a pro near you — Pick a service and see verified pros in your area.'",
+      "currentAsset": "/illustrations/proximity.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3",
+      "status": "swapped",
+      "visualSpec": "Flat phone mockup showing a simplified map in #E8F0FE with a #0057FF location pin; three rounded pro cards fan out beside it, each with a circular avatar of a Nigerian pro (skin #5C3824 / #3D2314 / #8D5524) and a small #00B862 verified pill; dashed #0057FF connectors link pin to cards.",
+      "newAsset": "/assets/images/step-find-nearby-pro.png"
+    },
+    {
+      "id": "step-book-pay-escrow.png",
+      "componentPath": "app/page.tsx:29",
+      "section": "Home how it works, step 2: 'Book and pay safely — Choose a time. Your payment waits in escrow.'",
+      "currentAsset": "/illustrations/id-check.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3",
+      "status": "swapped",
+      "visualSpec": "Rounded booking card (#FFFFFF on #E8F0FE pad) with a calendar strip and a selected #0057FF time pill; below it a #082567 vault/lock badge with a dashed line flowing from a naira coin into it; small #00B862 'secured' pill.",
+      "newAsset": "/assets/images/step-book-pay-escrow.png"
+    },
+    {
+      "id": "step-approve-release-payment.png",
+      "componentPath": "app/page.tsx:34",
+      "section": "Home how it works, step 3: 'Approve, then they get paid — Release payment in one tap.'",
+      "currentAsset": "/illustrations/paid.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3",
+      "status": "swapped",
+      "visualSpec": "Large rounded #0057FF button with a white check being tapped by a flat hand (skin #8D5524); dashed connector arcs from the button to a wallet card where a #00B862 naira amount pill appears; small star rating row in #082567.",
+      "newAsset": "/assets/images/step-approve-release-payment.png"
+    },
+    {
+      "id": "trust-verified-identity.png",
+      "componentPath": "app/page.tsx:42",
+      "section": "Home trust: 'Every pro is verified — ID, face match, skills check and a guarantor.'",
+      "currentAsset": "/illustrations/verify.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Rounded ID card in #FFFFFF with a flat portrait of a Nigerian pro (skin #3D2314, navy shirt #082567), pill-shaped text lines in #E8F0FE, and a large #00B862 shield-check badge overlapping the corner; dashed face-scan brackets in #0057FF around the portrait.",
+      "newAsset": "/assets/images/trust-verified-identity.png"
+    },
+    {
+      "id": "trust-escrow-protection.png",
+      "componentPath": "app/page.tsx:47",
+      "section": "Home trust: 'Your money is protected — Payment is released only when you approve.'",
+      "currentAsset": "/illustrations/wallet.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Flat #082567 safe/vault with a rounded door and a #0057FF dial; a stack of naira coins rests inside; a padlock pill in #00B862 floats above; dashed path from vault to a 'released' #FFFFFF card.",
+      "newAsset": "/assets/images/trust-escrow-protection.png"
+    },
+    {
+      "id": "trust-recourse-guarantee.png",
+      "componentPath": "app/page.tsx:52",
+      "section": "Home trust: 'We've got your back — If a job goes wrong, we fix it or refund you.'",
+      "currentAsset": "/illustrations/approved.svg (624KB)",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Rounded support chat bubble in #0057FF with a white wrench glyph, a second #FFFFFF bubble with a circular refund-arrow in #00B862; behind them a large #E8F0FE shield shape; dashed connector between bubbles.",
+      "newAsset": "/assets/images/trust-recourse-guarantee.png"
+    },
+    {
+      "id": "home-pros-group.png",
+      "componentPath": "app/page.tsx:224",
+      "section": "Home for-pros band: 'Good at what you do? Get paid for it, every time.'",
+      "currentAsset": "/illustrations/users.svg",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "inactive",
+      "visualSpec": "Two authentic Nigerian artisans (a woman tailor and a man mechanic) side by side in contemporary trade attire, relaxed proud smiles, waist-up, isolated cut-out."
+    },
+    {
+      "id": "cta-app-launch.png",
+      "componentPath": "app/page.tsx:265",
+      "section": "Home final CTA: 'Be first in line.'",
+      "currentAsset": "placeholder div (unwired SVG on disk: /illustrations/cta-app-confetti.svg)",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3",
+      "status": "inactive",
+      "visualSpec": "Flat phone mockup with a #0057FF screen and white check, surrounded by geometric confetti (pills, circles, triangles) in #0057FF, #00B862 and #082567; a small #FFFFFF 'You're on the list' pill."
+    },
+    {
+      "id": "provider-hero-pros-group.png",
+      "componentPath": "components/ProviderLandingPage.tsx:134",
+      "section": "Provider hero: 'Good work deserves to be seen.'",
+      "currentAsset": "/hero-workers.png (already a transparent cut-out of 4 Nigerian pros)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "16:9, figures cropped flush at bottom edge",
+      "status": "active",
+      "visualSpec": "Four authentic Nigerian service pros standing side by side, waist-up, cropped flush at the bottom: a woman chef in white jacket, a man electrician in hi-vis vest and hard hat, a man plumber in navy overalls holding up a smartphone with a blank screen facing the viewer, and a man carpenter in a leather apron; warm confident smiles, isolated cut-out.",
+      "warning": "The blue phone-screen overlay (ProviderLandingPage.tsx:144) and the OG cards are hand-positioned to the current photo. Regenerating means re-measuring the overlay or dropping it. Recommend KEEPING the current photo."
+    },
+    {
+      "id": "provider-nearby-matching.png",
+      "componentPath": "components/ProviderLandingPage.tsx:167",
+      "section": "Provider why: 'Less chasing work. More doing what you do best.'",
+      "currentAsset": "/illustrations/proximity.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3",
+      "status": "swapped",
+      "visualSpec": "Flat neighbourhood of rounded house blocks in #E8F0FE and #FFFFFF; a central #0057FF pro pin with a Nigerian pro avatar (skin #5C3824); dashed #0057FF radius ring and dashed connectors to three houses, each with a small #00B862 'new request' pill.",
+      "newAsset": "/assets/images/provider-nearby-matching.png"
+    },
+    {
+      "id": "provider-step-get-verified.png",
+      "componentPath": "components/ProviderLandingPage.tsx:14",
+      "section": "Provider journey step 1: 'Get verified — Submit your NIN or BVN, photo ID and a guarantor.'",
+      "currentAsset": "/illustrations/verify.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Phone in #082567 showing an upload checklist of three pill rows (NIN/BVN, photo ID, guarantor) with #00B862 ticks; a rounded ID card with a Nigerian woman's portrait (skin #8D5524) slides in along a dashed path.",
+      "newAsset": "/assets/images/provider-step-get-verified.png"
+    },
+    {
+      "id": "provider-step-go-live.png",
+      "componentPath": "components/ProviderLandingPage.tsx:19",
+      "section": "Provider journey step 2: 'Go live — We review your details and your profile goes live.'",
+      "currentAsset": "/illustrations/approved.svg (624KB)",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Rounded profile card with a Nigerian male pro avatar (skin #3D2314), name pills, and a large #00B862 'Live' pill; a #0057FF verified seal badge overlaps the corner; small sparkle shapes in #0057FF.",
+      "newAsset": "/assets/images/provider-step-go-live.png"
+    },
+    {
+      "id": "provider-step-meet-clients.png",
+      "componentPath": "components/ProviderLandingPage.tsx:24",
+      "section": "Provider journey step 3: 'Meet nearby clients — Households near you find and book you directly.'",
+      "currentAsset": "/illustrations/users.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Two flat Nigerian figures (pro, skin #5C3824, in navy work shirt; homeowner, skin #8D5524, in smart-casual top) greeting at a rounded doorway in #E8F0FE; a #0057FF booking notification pill floats above with a dashed connector.",
+      "newAsset": "/assets/images/provider-step-meet-clients.png"
+    },
+    {
+      "id": "provider-step-get-paid.png",
+      "componentPath": "components/ProviderLandingPage.tsx:29",
+      "section": "Provider journey step 4: 'Do the work, get paid — Payment is released to your wallet when the job is done.'",
+      "currentAsset": "/illustrations/paid.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "1:1",
+      "status": "swapped",
+      "visualSpec": "Rounded wallet card in #0057FF with a white naira symbol; dashed path from a #082567 escrow vault into the wallet; #00B862 '+ payment received' pill; a bank building glyph in #E8F0FE at the end of a second dashed path (withdraw).",
+      "newAsset": "/assets/images/provider-step-get-paid.png"
+    },
+    {
+      "id": "provider-escrow-before-start.png",
+      "componentPath": "components/ProviderLandingPage.tsx:203",
+      "section": "Provider escrow: 'No more starting a job on a promise.'",
+      "currentAsset": "/illustrations/wallet.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3",
+      "status": "swapped",
+      "visualSpec": "Split composition: left, a customer phone sending naira coins along a dashed path into a central #082567 vault with an #00B862 lock pill; right, a pro's phone showing a #00B862 'Payment secured — start job' card. Flat, rounded, no outlines.",
+      "newAsset": "/assets/images/provider-escrow-before-start.png"
+    },
+    {
+      "id": "provider-craft-cooking",
+      "componentPath": "components/ProviderLandingPage.tsx:40",
+      "section": "Provider crafts card: 'Cooking'",
+      "currentAsset": "placeholder div",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "active",
+      "reuses": "service-cook.png",
+      "visualSpec": "Reuses the home services cook cut-out."
+    },
+    {
+      "id": "provider-craft-cleaning",
+      "componentPath": "components/ProviderLandingPage.tsx:41",
+      "section": "Provider crafts card: 'Cleaning'",
+      "currentAsset": "placeholder div",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "active",
+      "reuses": "service-cleaner.png",
+      "visualSpec": "Reuses the home services cleaner cut-out."
+    },
+    {
+      "id": "provider-craft-plumbing",
+      "componentPath": "components/ProviderLandingPage.tsx:42",
+      "section": "Provider crafts card: 'Plumbing'",
+      "currentAsset": "placeholder div",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "active",
+      "reuses": "service-plumber.png",
+      "visualSpec": "Reuses the home services plumber cut-out."
+    },
+    {
+      "id": "provider-craft-electrical",
+      "componentPath": "components/ProviderLandingPage.tsx:43",
+      "section": "Provider crafts card: 'Electrical'",
+      "currentAsset": "placeholder div",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "active",
+      "reuses": "service-electrician.png",
+      "visualSpec": "Reuses the home services electrician cut-out."
+    },
+    {
+      "id": "provider-craft-ac",
+      "componentPath": "components/ProviderLandingPage.tsx:44",
+      "section": "Provider crafts card: 'AC servicing'",
+      "currentAsset": "placeholder div",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "active",
+      "reuses": "service-ac-technician.png",
+      "visualSpec": "Reuses the home services AC technician cut-out."
+    },
+    {
+      "id": "provider-craft-carpentry",
+      "componentPath": "components/ProviderLandingPage.tsx:45",
+      "section": "Provider crafts card: 'Carpentry'",
+      "currentAsset": "placeholder div",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1",
+      "status": "active",
+      "reuses": "service-carpenter.png",
+      "visualSpec": "Reuses the home services carpenter cut-out."
+    },
+    {
+      "id": "provider-verification-checklist.png",
+      "componentPath": "components/ProviderLandingPage.tsx:284",
+      "section": "Provider getting started (blue band): 'Be among the first verified pros.'",
+      "currentAsset": "/illustrations/id-check.svg",
+      "category": "ILLUSTRATION",
+      "aspectRatio": "4:3 (1:1 on desktop), shown on a white pad inside the #0057FF band",
+      "status": "swapped",
+      "visualSpec": "Rounded clipboard card in #FFFFFF with four pill rows (NIN or BVN, photo ID, face verification, guarantor), each with a #00B862 tick; a flat face-scan frame with a Nigerian man's face (skin #5C3824) in dashed #0057FF brackets beside it.",
+      "newAsset": "/assets/images/provider-verification-checklist.png"
+    },
+    {
+      "id": "contact-reading-message.png",
+      "componentPath": "components/ContactPage.tsx:77",
+      "section": "Contact: 'Say hello!'",
+      "currentAsset": "placeholder div (unwired candidate on disk: /illustrations/contact-chat.svg, 0 bytes)",
+      "category": "PHOTO_CUTOUT",
+      "aspectRatio": "1:1 (5:4 on tablet)",
+      "status": "active",
+      "visualSpec": "Authentic Nigerian young woman in modern smart-casual attire (neat braids, simple blouse), smiling warmly while reading a message on her phone, waist-up, isolated cut-out."
+    }
+  ]
+}

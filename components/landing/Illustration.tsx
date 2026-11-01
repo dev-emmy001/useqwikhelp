@@ -44,6 +44,8 @@ export default function Illustration({
           alt={decorative ? "" : label}
           width={width}
           height={height}
+          // Frames are at most ~half the 1440px container on desktop, full width on mobile.
+          sizes="(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 600px"
           className={`h-full max-h-full w-auto max-w-full object-contain ${float ? "float-art" : ""}`}
         />
       ) : (

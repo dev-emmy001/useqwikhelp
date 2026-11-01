@@ -11,22 +11,22 @@ const steps = [
   {
     title: "Get verified",
     text: "Submit your NIN or BVN, photo ID and a guarantor.",
-    art: { src: "/illustrations/verify.svg", width: 319, height: 354 },
+    art: { src: "/assets/images/provider-step-get-verified.png", width: 1200, height: 1200 },
   },
   {
     title: "Go live",
     text: "We review your details and your profile goes live.",
-    art: { src: "/illustrations/approved.svg", width: 288, height: 288 },
+    art: { src: "/assets/images/provider-step-go-live.png", width: 1200, height: 1200 },
   },
   {
     title: "Meet nearby clients",
     text: "Households near you find and book you directly.",
-    art: { src: "/illustrations/users.svg", width: 334, height: 367 },
+    art: { src: "/assets/images/provider-step-meet-clients.png", width: 1200, height: 1200 },
   },
   {
     title: "Do the work, get paid",
     text: "Payment is released to your wallet when the job is done.",
-    art: { src: "/illustrations/paid.svg", width: 1529, height: 1211 },
+    art: { src: "/assets/images/provider-step-get-paid.png", width: 1200, height: 1200 },
   },
 ];
 
@@ -165,9 +165,9 @@ export default function ProviderLandingPage() {
             </p>
           </div>
           <Illustration
-            src="/illustrations/proximity.svg"
-            width={426}
-            height={196}
+            src="/assets/images/provider-nearby-matching.png"
+            width={1600}
+            height={1200}
             label="Pros matched to nearby homes"
             decorative
             tone="white"
@@ -201,9 +201,9 @@ export default function ProviderLandingPage() {
       <section aria-labelledby="escrow-title" className="bg-gray-50">
         <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
           <Illustration
-            src="/illustrations/wallet.svg"
-            width={231}
-            height={265}
+            src="/assets/images/provider-escrow-before-start.png"
+            width={1600}
+            height={1200}
             label="Payment held in escrow"
             decorative
             tone="white"
@@ -282,12 +282,12 @@ export default function ProviderLandingPage() {
           </div>
 
           <Illustration
-            src="/illustrations/id-check.svg"
-            width={128}
-            height={80}
+            src="/assets/images/provider-verification-checklist.png"
+            width={1600}
+            height={1200}
             label="ID verification"
             decorative
-            tone="white"
+            tone="blue"
             float
             className="reveal-item aspect-[4/3] lg:aspect-square"
           />

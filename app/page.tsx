@@ -21,17 +21,17 @@ const steps = [
   {
     title: "Find a pro near you",
     text: "Pick a service and see verified pros in your area.",
-    art: { src: "/illustrations/proximity.svg", width: 426, height: 196 },
+    art: { src: "/assets/images/step-find-nearby-pro.png", width: 1600, height: 1200 },
   },
   {
     title: "Book and pay safely",
     text: "Choose a time. Your payment waits in escrow.",
-    art: { src: "/illustrations/id-check.svg", width: 128, height: 80 },
+    art: { src: "/assets/images/step-book-pay-escrow.png", width: 1600, height: 1200 },
   },
   {
     title: "Approve, then they get paid",
     text: "Happy with the work? Release payment in one tap.",
-    art: { src: "/illustrations/paid.svg", width: 1529, height: 1211 },
+    art: { src: "/assets/images/step-approve-release-payment.png", width: 1600, height: 1200 },
   },
 ];
 
@@ -39,17 +39,17 @@ const promises = [
   {
     title: "Every pro is verified",
     text: "ID, face match, skills check and a guarantor, before their first job.",
-    art: { src: "/illustrations/verify.svg", width: 319, height: 354 },
+    art: { src: "/assets/images/trust-verified-identity.png", width: 1200, height: 1200 },
   },
   {
     title: "Your money is protected",
     text: "Pros are never paid upfront. Payment is released only when you approve.",
-    art: { src: "/illustrations/wallet.svg", width: 231, height: 265 },
+    art: { src: "/assets/images/trust-escrow-protection.png", width: 1200, height: 1200 },
   },
   {
     title: "We've got your back",
     text: "If a job goes wrong, we send someone to fix it or refund you.",
-    art: { src: "/illustrations/approved.svg", width: 288, height: 288 },
+    art: { src: "/assets/images/trust-recourse-guarantee.png", width: 1200, height: 1200 },
   },
 ];
 
@@ -163,7 +163,7 @@ export default function Home() {
             <Reveal as="ol" className="mt-12 grid gap-10 md:grid-cols-3 md:gap-6">
               {steps.map((step, n) => (
                 <li key={step.title} style={i(n)} className="reveal-item">
-                  <Illustration {...step.art} label={step.title} decorative tone="white" float className="aspect-[4/3]" />
+                  <Illustration {...step.art} label={step.title} decorative tone="blue" float className="aspect-[4/3]" />
                   <p className="mt-6 text-sm font-bold text-brand-blue">Step {n + 1}</p>
                   <h3 className="mt-1 text-2xl font-bold text-gray-950 text-balance">{step.title}</h3>
                   <p className="mt-2 text-[15px] text-gray-600 text-pretty">{step.text}</p>

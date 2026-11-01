@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" rx="32" fill="#eff5ff"/>
+  <!-- AC Unit on wall -->
+  <rect x="60" y="60" width="280" height="100" rx="20" fill="#0f172a"/>
+  <rect x="80" y="80" width="240" height="60" rx="12" fill="#1e5bf7"/>
+  <!-- Vents on AC -->
+  <rect x="100" y="96" width="160" height="8" rx="4" fill="#eff5ff" opacity="0.5"/>
+  <rect x="100" y="112" width="160" height="8" rx="4" fill="#eff5ff" opacity="0.5"/>
+  <!-- Power indicator -->
+  <circle cx="300" cy="100" r="10" fill="#10b981"/>
+  <!-- Cool air waves -->
+  <path d="M80 180 Q120 200 160 180" stroke="#1e5bf7" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M100 200 Q140 220 180 200" stroke="#1e5bf7" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <path d="M240 180 Q280 200 320 180" stroke="#1e5bf7" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Technician figure -->
+  <circle cx="210" cy="260" r="34" fill="#0f172a"/>
+  <rect x="178" y="292" width="64" height="72" rx="20" fill="#1e5bf7"/>
+  <!-- Tool/screwdriver -->
+  <rect x="244" y="252" width="60" height="16" rx="8" fill="#10b981" transform="rotate(-30 244 260)"/>
+  <!-- Floor -->
+  <rect x="40" y="360" width="320" height="12" rx="6" fill="#0f172a" opacity="0.08"/>
+</svg>
+
