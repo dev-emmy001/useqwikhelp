@@ -1,139 +1,277 @@
-import Navbar from "@/components/Navbar";
-import HeroImageStage from "@/components/HeroImageStage";
-import AboutSection from "@/components/AboutSection";
-import ServicesGridSection from "@/components/ServicesGridSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import WhyUsBentoSection from "@/components/WhyUsBentoSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FaqSection from "@/components/FaqSection";
-import AppCtaBanner from "@/components/AppCtaBanner";
-import Footer from "@/components/Footer";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import WaitlistForm from "@/components/landing/WaitlistForm";
+import Illustration from "@/components/landing/Illustration";
+import LandingFaq from "@/components/landing/LandingFaq";
+import Reveal from "@/components/landing/Reveal";
+
+/* ── Content ──────────────────────────────────────────────────────── */
+
+const services = [
+  { title: "Cooks", text: "Daily meals, meal prep or a party.", art: "Illustration: cook stirring a pot" },
+  { title: "Cleaners", text: "Regular, deep or move-out cleans.", art: "Illustration: cleaner with mop and bucket" },
+  { title: "Plumbers", text: "Leaks, blocked drains, new fittings.", art: "Illustration: plumber under a sink" },
+  { title: "Electricians", text: "Wiring, sockets and inverters.", art: "Illustration: electrician at a fuse box" },
+  { title: "AC & appliances", text: "Servicing, gas top-ups and repairs.", art: "Illustration: technician fixing an AC unit" },
+  { title: "Carpenters", text: "Furniture, doors and fittings.", art: "Illustration: carpenter with a saw" },
+];
+
+const steps = [
+  {
+    title: "Find a pro near you",
+    text: "Pick a service and see verified pros in your area.",
+    art: { src: "/illustrations/proximity.svg", width: 426, height: 196 },
+  },
+  {
+    title: "Book and pay safely",
+    text: "Choose a time. Your payment waits in escrow.",
+    art: { src: "/illustrations/id-check.svg", width: 128, height: 80 },
+  },
+  {
+    title: "Approve, then they get paid",
+    text: "Happy with the work? Release payment in one tap.",
+    art: { src: "/illustrations/paid.svg", width: 1529, height: 1211 },
+  },
+];
+
+const promises = [
+  {
+    title: "Every pro is verified",
+    text: "ID, face match, skills check and a guarantor, before their first job.",
+    art: { src: "/illustrations/verify.svg", width: 319, height: 354 },
+  },
+  {
+    title: "Your money is protected",
+    text: "Pros are never paid upfront. Payment is released only when you approve.",
+    art: { src: "/illustrations/wallet.svg", width: 231, height: 265 },
+  },
+  {
+    title: "We've got your back",
+    text: "If a job goes wrong, we send someone to fix it or refund you.",
+    art: { src: "/illustrations/approved.svg", width: 288, height: 288 },
+  },
+];
+
+const proPerks = [
+  { title: "Jobs near you", text: "No more chasing referrals." },
+  { title: "Guaranteed pay", text: "Every completed job pays out." },
+  { title: "A verified profile", text: "Reviews that grow your business." },
+];
+
+/* ── Shared styles ────────────────────────────────────────────────── */
+
+const container = "mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12";
+const sectionY = "py-20 lg:py-28";
+const h2 = "text-3xl font-extrabold leading-[1.1] text-gray-950 text-balance sm:text-4xl lg:text-5xl";
+const lead = "text-lg leading-relaxed text-gray-600 text-pretty";
+const i = (n: number) => ({ "--i": n }) as React.CSSProperties;
+
+/* ── Page ─────────────────────────────────────────────────────────── */
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-[#F8FAFF] flex flex-col overflow-x-hidden selection:bg-blue-100 selection:text-brand-blue">
-      {/* =========================================================================
-          NAVIGATION BAR
-          - Floating pill on Desktop (md+)
-          - Non-floating docked top bar on Mobile (< md)
-          ========================================================================= */}
+    <div className="flex min-h-dvh flex-col bg-white">
       <Navbar />
 
-      {/* =========================================================================
-          1. HERO SECTION
-          ========================================================================= */}
-      <main className="flex-1 flex flex-col items-center justify-start pt-24 sm:pt-28 md:pt-28 lg:pt-32 pb-8 sm:pb-12 px-5 sm:px-8 lg:px-12 relative w-full">
-        {/* Soft Ambient Background Highlights */}
-        <div
-          className="absolute top-12 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-gradient-to-b from-blue-50/70 via-indigo-50/30 to-transparent blur-3xl rounded-full pointer-events-none -z-10"
-          aria-hidden="true"
-        />
-
-        {/* Hero Text Content Container */}
-        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-          {/* Main Display Headline */}
-          <h1 className="text-[34px] sm:text-5xl md:text-[56px] lg:text-[62px] font-extrabold tracking-[-0.03em] leading-[1.12] text-gray-950 font-sans text-balance">
-            Based on our Calculations,
-            <span className="block mt-1 sm:mt-2">
-              You Need{" "}
-              <span className="text-brand-blue font-extrabold">
-                Qwikhelp!
-              </span>
-            </span>
-          </h1>
-
-          {/* Subtitle / Value Proposition */}
-          <p className="mt-5 sm:mt-6 text-[15px] sm:text-lg md:text-[18.5px] leading-relaxed text-gray-600 max-w-2xl font-normal text-pretty px-2">
-            Find verified cooks, cleaners, plumbers, and more near you; pay
-            securely, communicate in-app, and get real recourse if anything goes
-            wrong.
-          </p>
-
-          {/* Action CTAs */}
-          <div className="mt-8 flex flex-row items-center justify-center gap-3.5 sm:gap-4 flex-wrap">
-            {/* Primary CTA */}
-            <Link
-              href="#services"
-              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-blue text-white text-sm sm:text-[15px] font-semibold transition-all duration-150 hover:bg-brand-blue-hover motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
+      <main className="flex-1">
+        {/* 1. HERO ─ the one orchestrated entrance on the page */}
+        <section className={`${container} grid items-center gap-12 pt-28 pb-20 md:pt-36 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-28`}>
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+            <h1
+              style={i(1)}
+              className="enter-once mt-6 text-[40px] font-extrabold leading-[1.05] text-gray-950 text-balance sm:text-6xl lg:text-7xl"
             >
-              <span>Explore Services</span>
-              <svg
-                className="size-4 transition-transform duration-150 group-hover:translate-x-0.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </Link>
+              Based on our calculations, you need QwikHelp!
+            </h1>
 
-            {/* Secondary CTA */}
-            <Link
-              href="/provider"
-              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-gray-800 text-sm sm:text-[15px] font-medium transition-all duration-150 hover:bg-gray-50 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.96] [-webkit-tap-highlight-color:transparent]"
-            >
-              Join as a Provider
-            </Link>
+            <p style={i(2)} className={`enter-once mt-6 max-w-lg ${lead} sm:text-xl`}>
+              Book verified cooks, cleaners and fixers near you. Your money is held safely until the job is done.
+            </p>
+
+            <div style={i(3)} className="enter-once mt-8 flex w-full flex-col items-center lg:items-start">
+              <WaitlistForm />
+              <p className="mt-3 text-xs text-gray-300">Free to join. We&apos;ll email you when we launch in your city.</p>
+            </div>
           </div>
-        </div>
 
-        {/* HERO IMAGE STAGE */}
-        <section
-          aria-label="Verified Service Professionals"
-          className="w-full flex justify-center"
-        >
-          <HeroImageStage
-            imageSrc="/hero-workers.png"
-            imageAlt="QwikHelp verified team: chef, electrician, plumber, and carpenter"
-          />
+          <Reveal>
+            <div style={i(4)} className="enter-once enter-soft">
+              <Illustration
+                label="Hero illustration: a verified pro arriving at a home, phone showing the QwikHelp booking"
+                tone="blue"
+                float
+                className="aspect-square sm:aspect-[5/4] lg:aspect-square"
+              />
+            </div>
+          </Reveal>
+        </section>
+
+        {/* 2. THE PROBLEM / WHAT QWIKHELP IS */}
+        <section id="about" aria-labelledby="about-title" className="bg-gray-50">
+          <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
+            <Illustration
+              label="Illustration: homeowner unsure about a stranger at the gate"
+              tone="white"
+              float
+              className="reveal-item aspect-[4/3]"
+            />
+            <div>
+              <h2 id="about-title" style={i(1)} className={`reveal-item ${h2}`}>
+                Finding good help shouldn&apos;t feel like a gamble.
+              </h2>
+              <p style={i(2)} className={`reveal-item mt-6 max-w-xl ${lead}`}>
+                Right now it&apos;s referrals, cash upfront and hope. QwikHelp checks every pro, holds your payment, and
+                steps in if anything goes wrong.
+              </p>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* 3. SERVICES */}
+        <section id="services" aria-labelledby="services-title" className={`${container} ${sectionY} scroll-mt-20`}>
+          <Reveal>
+            <h2 id="services-title" className={`reveal-item max-w-2xl ${h2}`}>
+              Help for every corner of your home.
+            </h2>
+          </Reveal>
+
+          <Reveal as="ul" className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s, n) => (
+              <li key={s.title} style={i(n % 3)} className="reveal-item group rounded-[32px] bg-gray-50 p-3">
+                <div className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-1">
+                  <Illustration label={s.art} tone="white" className="aspect-[4/3]" />
+                </div>
+                <div className="px-4 pt-5 pb-4">
+                  <h3 className="text-xl font-bold text-gray-950">{s.title}</h3>
+                  <p className="mt-1 text-[15px] text-gray-600 text-pretty">{s.text}</p>
+                </div>
+              </li>
+            ))}
+          </Reveal>
+        </section>
+
+        {/* 4. HOW IT WORKS */}
+        <section id="how-it-works" aria-labelledby="how-title" className="scroll-mt-20 bg-gray-50">
+          <div className={`${container} ${sectionY}`}>
+            <Reveal>
+              <h2 id="how-title" className={`reveal-item ${h2}`}>
+                How it works
+              </h2>
+            </Reveal>
+
+            <Reveal as="ol" className="mt-12 grid gap-10 md:grid-cols-3 md:gap-6">
+              {steps.map((step, n) => (
+                <li key={step.title} style={i(n)} className="reveal-item">
+                  <Illustration {...step.art} label={step.title} decorative tone="white" float className="aspect-[4/3]" />
+                  <p className="mt-6 text-sm font-bold text-brand-blue">Step {n + 1}</p>
+                  <h3 className="mt-1 text-2xl font-bold text-gray-950 text-balance">{step.title}</h3>
+                  <p className="mt-2 text-[15px] text-gray-600 text-pretty">{step.text}</p>
+                </li>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* 5. TRUST */}
+        <section aria-labelledby="trust-title" className={`${container} ${sectionY}`}>
+          <Reveal>
+            <h2 id="trust-title" className={`reveal-item max-w-2xl ${h2}`}>
+              Built on trust, not hope.
+            </h2>
+          </Reveal>
+
+          <Reveal className="mt-12 grid gap-10 md:grid-cols-3 md:gap-6">
+            {promises.map((p, n) => (
+              <div key={p.title} style={i(n)} className="reveal-item">
+                <Illustration {...p.art} label={p.title} decorative tone="blue" float className="aspect-square" />
+                <h3 className="mt-6 text-2xl font-bold text-gray-950 text-balance">{p.title}</h3>
+                <p className="mt-2 text-[15px] text-gray-600 text-pretty">{p.text}</p>
+              </div>
+            ))}
+          </Reveal>
+        </section>
+
+        {/* 6. FOR PROS */}
+        <section aria-labelledby="pros-title" className="px-3 sm:px-5 lg:px-8">
+          <Reveal className="mx-auto grid w-full max-w-[1440px] items-center gap-12 rounded-[40px] bg-brand-blue px-6 py-14 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:rounded-[56px] lg:px-16 lg:py-20">
+            <div>
+              <h2
+                id="pros-title"
+                className="reveal-item text-3xl font-extrabold leading-[1.1] text-white text-balance sm:text-4xl lg:text-5xl"
+              >
+                Good at what you do? Get paid for it, every time.
+              </h2>
+
+              <ul className="mt-10 grid gap-6 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {proPerks.map((perk, n) => (
+                  <li key={perk.title} style={i(n + 1)} className="reveal-item">
+                    <p className="text-lg font-bold text-white">{perk.title}</p>
+                    <p className="mt-1 text-[15px] text-white">{perk.text}</p>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/provider"
+                style={i(4)}
+                className="reveal-item mt-10 inline-flex min-h-12 items-center rounded-full bg-white px-6 text-[15px] font-semibold text-gray-950 transition-[background-color,scale] duration-150 ease-out hover:bg-brand-blue-light motion-safe:active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Join as a Pro
+              </Link>
+            </div>
+
+            <Illustration
+              src="/illustrations/users.svg"
+              width={334}
+              height={367}
+              label="QwikHelp pros"
+              decorative
+              tone="white"
+              float
+              className="reveal-item aspect-[4/3] lg:aspect-square"
+            />
+          </Reveal>
+        </section>
+
+        {/* 7. FAQ */}
+        <section id="faq" aria-labelledby="faq-title" className={`${container} ${sectionY} scroll-mt-20`}>
+          <Reveal className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+            <h2 id="faq-title" className={`reveal-item ${h2}`}>
+              Questions, answered.
+            </h2>
+            <LandingFaq />
+          </Reveal>
+        </section>
+
+        {/* 8. FINAL WAITLIST CTA */}
+        <section id="waitlist" aria-labelledby="waitlist-title" className="scroll-mt-24 px-3 pb-8 sm:px-5 lg:px-8">
+          <Reveal className="mx-auto grid w-full max-w-[1440px] items-center gap-10 rounded-[40px] bg-brand-blue-light px-6 py-14 sm:px-10 lg:grid-cols-[1.2fr_1fr] lg:rounded-[56px] lg:px-16 lg:py-20">
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <h2
+                id="waitlist-title"
+                className="reveal-item text-4xl font-extrabold leading-[1.05] text-gray-950 text-balance sm:text-5xl lg:text-6xl"
+              >
+                Be first in line.
+              </h2>
+              <p style={i(1)} className={`reveal-item mt-4 ${lead}`}>
+                Get early access when QwikHelp launches in your city. Coming to iOS and Android.
+              </p>
+              <div style={i(2)} className="reveal-item mt-8 w-full">
+                <WaitlistForm className="mx-auto lg:mx-0" />
+              </div>
+            </div>
+
+            <Illustration
+              label="Illustration: phone with the QwikHelp app, confetti"
+              tone="white"
+              float
+              className="reveal-item aspect-[4/3]"
+            />
+          </Reveal>
         </section>
       </main>
 
-      {/* =========================================================================
-          2. ABOUT / WHAT IS QWIKHELP
-          ========================================================================= */}
-      <AboutSection />
-
-      {/* =========================================================================
-          3. VERIFIED SERVICES DIRECTORY (Cooks, Cleaners, Plumbers, Electricians...)
-          ========================================================================= */}
-      <ServicesGridSection />
-
-      {/* =========================================================================
-          4. HOW IT WORKS 3-STEP FLOW
-          ========================================================================= */}
-      <HowItWorksSection />
-
-      {/* =========================================================================
-          5. WHY QWIKHELP / TRUST PILLARS
-          ========================================================================= */}
-      <WhyUsBentoSection />
-
-      {/* =========================================================================
-          6. VERIFIED STORIES / TESTIMONIALS
-          ========================================================================= */}
-      <TestimonialsSection />
-
-      {/* =========================================================================
-          7. FREQUENTLY ASKED QUESTIONS
-          ========================================================================= */}
-      <FaqSection />
-
-      {/* =========================================================================
-          8. APP CTA BANNER (iOS & Android)
-          ========================================================================= */}
-      <AppCtaBanner />
-
-      {/* =========================================================================
-          FOOTER
-          ========================================================================= */}
       <Footer />
     </div>
   );

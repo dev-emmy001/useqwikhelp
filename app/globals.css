@@ -4,7 +4,7 @@
   /* ==========================================================================
      QwikHelp Design System - Color Palette
      ========================================================================== */
-  
+
   /* Primary Brand Blues */
   --brand-blue: #1e5bf7;
   --brand-blue-hover: #1649d8;
@@ -87,33 +87,42 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-sans: var(--font-google-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, monospace;
 }
 
 /* Animations for lively whimsical decorative doodle badges */
 @keyframes doodle-float-1 {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-8px) rotate(4deg);
   }
 }
 
 @keyframes doodle-float-2 {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-6px) rotate(-5deg);
   }
 }
 
 @keyframes doodle-pulse-subtle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.06);
   }
@@ -136,6 +145,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(-360deg);
   }
@@ -145,6 +155,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -158,6 +169,76 @@
   animation: spin-clockwise 30s linear infinite;
 }
 
+/* Subtle Premium Entrance Animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-spin-anticlockwise,
+  .animate-spin-clockwise,
+  .animate-doodle-float-1,
+  .animate-doodle-float-2,
+  .animate-doodle-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Base styles */
 body {
   background-color: var(--bg-page);
@@ -165,11 +246,137 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Selection highlight */
 ::selection {
   background-color: var(--brand-blue-tint);
   color: var(--brand-dark);
+}
+
+/* ==========================================================================
+   Landing motion (subtle, compositor-only, reduced-motion aware)
+   ========================================================================== */
+
+/* Hero: one staggered entrance on load (title → copy → form → art) */
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes enter-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.enter-once {
+  animation: enter-fade 300ms ease-out both;
+  animation-delay: calc(var(--i, 0) * 100ms);
+}
+
+/* Scroll reveal: children of <Reveal> fade in once, staggered by --i */
+.reveal-item {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+  transition-delay: calc(var(--i, 0) * 100ms);
+}
+
+[data-seen] .reveal-item {
+  opacity: 1;
+}
+
+/* Idle float for illustrations, only while on screen */
+@keyframes float-art {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.float-art {
+  animation: float-art 6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+[data-inview] .float-art {
+  animation-play-state: running;
+}
+
+/* FAQ answer fades in when a <details> opens */
+.faq-answer {
+  transition: opacity 200ms ease-out;
+}
+
+@starting-style {
+  .faq-item[open] .faq-answer {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter-once {
+    animation-name: enter-up;
+  }
+
+  .reveal-item {
+    transform: translateY(12px);
+    transition-property: opacity, transform;
+  }
+
+  [data-seen] .reveal-item {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-art {
+    animation: none;
+  }
+}
+
+@media (scripting: none) {
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Large surfaces (hero stages, big art) enter without blur to keep scrolling smooth */
+@media (prefers-reduced-motion: no-preference) {
+  .enter-once.enter-soft {
+    animation-name: enter-up-soft;
+  }
+}
+
+@keyframes enter-up-soft {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ==========================================================================
+   Scrolling: no visible scrollbars, anchors clear the fixed navbar
+   ========================================================================== */
+html {
+  scroll-padding-top: 6.5rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }

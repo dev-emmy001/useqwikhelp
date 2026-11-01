@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 export default function ProviderPage() {
   return (
-    <>
+    <div className="flex min-h-dvh flex-col bg-white">
       <Navbar variant="provider" />
       <ProviderLandingPage />
       <Footer />
-    </>
+    </div>
   );
 }

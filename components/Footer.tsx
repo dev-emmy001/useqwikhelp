@@ -10,9 +10,9 @@ import {
 } from "@phosphor-icons/react";
 
 const navItems = [
-  { label: "Our Work", href: "/#work" },
   { label: "Services", href: "/#services" },
-  { label: "About", href: "/#about" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "FAQs", href: "/#faq" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -57,7 +57,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-3 border-white/25 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <p className="text-sm text-white/85">
             Trusted hands, everyday help. Right near you.
           </p>
@@ -76,7 +76,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/10 py-4 text-sm text-white/85 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="flex flex-col gap-3 py-4 text-sm text-white/85 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <p>© 2026 QwikHelp. All rights reserved.</p>
 
           <nav
