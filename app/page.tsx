@@ -108,7 +108,7 @@ export default function Home() {
         </section>
 
         {/* 2. THE PROBLEM / WHAT QWIKHELP IS */}
-        <section id="about" aria-labelledby="about-title" className="bg-gray-50">
+        <section id="about" aria-labelledby="about-title" className="">
           <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
             <Illustration
               label="Illustration: homeowner unsure about a stranger at the gate"
@@ -152,7 +152,7 @@ export default function Home() {
         </section>
 
         {/* 4. HOW IT WORKS */}
-        <section id="how-it-works" aria-labelledby="how-title" className="scroll-mt-20 bg-gray-50">
+        <section id="how-it-works" aria-labelledby="how-title" className="scroll-mt-20">
           <div className={`${container} ${sectionY}`}>
             <Reveal>
               <h2 id="how-title" className={`reveal-item ${h2}`}>
@@ -193,7 +193,7 @@ export default function Home() {
         </section>
 
         {/* 6. FOR PROS */}
-        <section aria-labelledby="pros-title" className="px-3 sm:px-5 lg:px-8">
+        {/* <section aria-labelledby="pros-title" className="px-3 sm:px-5 lg:px-8">
           <Reveal className="mx-auto grid w-full max-w-[1440px] items-center gap-12 rounded-[40px] bg-brand-blue px-6 py-14 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:rounded-[56px] lg:px-16 lg:py-20">
             <div>
               <h2
@@ -232,7 +232,7 @@ export default function Home() {
               className="reveal-item aspect-[4/3] lg:aspect-square"
             />
           </Reveal>
-        </section>
+        </section> */}
 
         {/* 7. FAQ */}
         <section id="faq" aria-labelledby="faq-title" className={`${container} ${sectionY} scroll-mt-20`}>
@@ -245,7 +245,7 @@ export default function Home() {
         </section>
 
         {/* 8. FINAL WAITLIST CTA */}
-        <section id="waitlist" aria-labelledby="waitlist-title" className="scroll-mt-24 px-3 pb-8 sm:px-5 lg:px-8">
+        {/* <section id="waitlist" aria-labelledby="waitlist-title" className="scroll-mt-24 px-3 pb-8 sm:px-5 lg:px-8">
           <Reveal className="mx-auto grid w-full max-w-[1440px] items-center gap-10 rounded-[40px] bg-brand-blue-light px-6 py-14 sm:px-10 lg:grid-cols-[1.2fr_1fr] lg:rounded-[56px] lg:px-16 lg:py-20">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
               <h2
@@ -269,7 +269,7 @@ export default function Home() {
               className="reveal-item aspect-[4/3]"
             />
           </Reveal>
-        </section>
+        </section> */}
         {/* Scroll-fade overlay — sticky so it stops before the footer */}
         <div
           aria-hidden="true"

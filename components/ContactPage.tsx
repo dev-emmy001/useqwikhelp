@@ -32,7 +32,7 @@ export default function ContactPage() {
             style={i(0)}
             className="enter-once text-[40px] font-extrabold leading-[1.05] text-gray-950 text-balance sm:text-6xl lg:text-7xl"
           >
-            Say hello.
+            Say hello!
           </h1>
 
           <p style={i(1)} className="enter-once mt-6 max-w-md text-lg leading-relaxed text-gray-600 text-pretty sm:text-xl">

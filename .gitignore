@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.mcp.json
+# illustration pipeline intermediates (rebuild: node scripts/illustrations/build.mjs)
+/tmp-svgs/
