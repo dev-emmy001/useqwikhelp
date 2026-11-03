@@ -3,22 +3,22 @@
  *
  *   node scripts/illustrations/build.mjs
  *
- * 1. Builds each illustration as a flat, multi-layer SVG in /tmp-svgs/
- *    (Material-style geometry, rx >= 12, pills, dashed connectors, flat cel-shading, no outlines,
- *    strict palette, transparent root canvas, no text so rendering is font-independent).
- * 2. Exports every SVG in /tmp-svgs/ to a 2x transparent PNG in /public/assets/images/ with sharp.
+ * Writes each illustration as a flat, multi-layer SVG to /public/assets/images/
+ * (Material-style geometry, rx >= 12, pills, dashed connectors, flat cel-shading, no outlines,
+ * strict palette, no text so rendering is font-independent). Diagrams have a transparent canvas;
+ * scenes (services, hero, about, contact) fill their canvas and are shown full-bleed.
  */
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import sharp from "sharp";
 
 const ROOT = process.cwd();
-const SVG_DIR = join(ROOT, "tmp-svgs");
 const OUT_DIR = join(ROOT, "public", "assets", "images");
 
 /* ── Strict palette ─────────────────────────────────────────────── */
 const C = { blue: "#0057FF", green: "#00B862", navy: "#082567", ice: "#E8F0FE", white: "#FFFFFF" };
 const SKIN = { warm: "#8D5524", mid: "#5C3824", deep: "#3D2314" };
+/** Scene accents, used sparingly: food, wood, ankara, warning. */
+const X = { amber: "#FFB020", orange: "#F26B1D", wood: "#C98A4B", woodDark: "#8F5A2E", floor: "#D5E2FB", steel: "#B9C9E8" };
 
 /* ── Primitives ─────────────────────────────────────────────────── */
 let uid = 0;
@@ -225,6 +225,231 @@ const hand = (tipX, tipY, s, skin) => {
 
 const plus = (cx, cy, s, color) =>
   pill(cx - s / 2, cy - s * 0.1, s, s * 0.2, color) + pill(cx - s * 0.1, cy - s / 2, s * 0.2, s, color);
+
+/* ── Scene kit: characters, rooms, props ────────────────────────── */
+
+/** Thick round-capped stroke, used for limbs and tool handles. */
+const limb = (d, color, w) => `<path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+/** Ankara wax-print tile, used as a fill: `url(#id)`. */
+const ankara = (id, base, a, b, scale = 1) =>
+  `<defs><pattern id="${id}" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="scale(${scale})">` +
+  `<rect width="40" height="40" fill="${base}"/>` +
+  `<circle cx="10" cy="10" r="7" fill="${a}"/><circle cx="10" cy="10" r="3" fill="${base}"/>` +
+  `<path d="M30 21 L38 29 L30 37 L22 29 Z" fill="${b}"/><circle cx="30" cy="29" r="2.4" fill="${base}"/>` +
+  `<circle cx="30" cy="10" r="2.6" fill="${b}"/><circle cx="10" cy="30" r="2.6" fill="${a}"/></pattern></defs>`;
+
+/**
+ * Nigerian character, waist-up or full body. Head (≈ 30*s) centred at (cx, cy).
+ * hat:   short | puff | braids | wrap | hardhat | chef | cap
+ * arms:  [{ side: "l"|"r", elbow: [x,y], hand: [x,y], back?, long?, sleeve?, hold?, holdFront? }] in absolute coords;
+ *        `hold` is drawn under the hand (a tool handle), `holdFront` over it.
+ * legs:  { floor, color, shoe } for full-body figures.
+ * outfit: { apron?, vest?, buttons?, collar? }
+ */
+const person = (cx, cy, s, o) => {
+  const S = (n) => +(n * s).toFixed(2);
+  const { skin, top, hat = "short", hatFill = C.green, mood = "smile", beard = false, look = 0, arms = [], legs, torsoLen = 210 } = o;
+  const shoulder = { l: [cx - S(44), cy + S(76)], r: [cx + S(44), cy + S(76)] };
+  const bottom = cy + S(torsoLen);
+  const torsoD = `M${cx - S(58)} ${bottom} V${cy + S(98)} Q${cx - S(58)} ${cy + S(52)} ${cx - S(28)} ${cy + S(50)} H${cx + S(28)} Q${cx + S(58)} ${cy + S(52)} ${cx + S(58)} ${cy + S(98)} V${bottom} Z`;
+  const tk = nid("torso");
+
+  const drawArm = (a) => {
+    const [sx, sy] = shoulder[a.side];
+    const [ex, ey] = a.elbow;
+    const [hx, hy] = a.hand;
+    const sleeve = a.sleeve ?? (top === C.white ? "#D9E3F5" : top);
+    return (
+      limb(`M${sx} ${sy} L${ex} ${ey}`, a.long ? sleeve : skin, S(a.long ? 30 : 26)) +
+      limb(`M${ex} ${ey} L${hx} ${hy}`, a.long ? sleeve : skin, S(24)) +
+      (a.long ? "" : limb(`M${sx} ${sy} L${sx + (ex - sx) * 0.55} ${sy + (ey - sy) * 0.55}`, sleeve, S(33))) +
+      (a.hold ?? "") +
+      circle(hx, hy, S(14), skin) +
+      (a.holdFront ?? "")
+    );
+  };
+
+  let hairBack = "";
+  let hairFront = "";
+  const capD = `M${cx - S(31)} ${cy - S(2)} Q${cx - S(33)} ${cy - S(40)} ${cx} ${cy - S(39)} Q${cx + S(33)} ${cy - S(40)} ${cx + S(31)} ${cy - S(2)} Q${cx + S(24)} ${cy - S(22)} ${cx} ${cy - S(24)} Q${cx - S(24)} ${cy - S(22)} ${cx - S(31)} ${cy - S(2)} Z`;
+  if (["short", "puff", "braids", "hardhat", "cap"].includes(hat)) hairFront = path(capD, C.navy);
+  if (hat === "puff") hairBack = circle(cx, cy - S(38), S(28), C.navy);
+  if (hat === "braids") hairBack = pill(cx - S(42), cy - S(12), S(18), S(110), C.navy) + pill(cx + S(24), cy - S(12), S(18), S(110), C.navy);
+  if (hat === "wrap") {
+    hairFront =
+      path(`M${cx - S(35)} ${cy - S(2)} Q${cx - S(44)} ${cy - S(60)} ${cx - S(4)} ${cy - S(64)} Q${cx + S(44)} ${cy - S(66)} ${cx + S(36)} ${cy - S(2)} Q${cx} ${cy - S(24)} ${cx - S(35)} ${cy - S(2)} Z`, hatFill) +
+      path(`M${cx + S(4)} ${cy - S(64)} Q${cx + S(44)} ${cy - S(66)} ${cx + S(36)} ${cy - S(2)} Q${cx + S(20)} ${cy - S(16)} ${cx + S(4)} ${cy - S(20)} Z`, C.navy, `fill-opacity=".14"`) +
+      path(`M${cx + S(8)} ${cy - S(56)} Q${cx + S(30)} ${cy - S(96)} ${cx + S(62)} ${cy - S(74)} Q${cx + S(52)} ${cy - S(50)} ${cx + S(26)} ${cy - S(42)} Z`, hatFill) +
+      circle(cx + S(16), cy - S(54), S(11), hatFill) +
+      circle(cx + S(16), cy - S(54), S(11), C.navy, `fill-opacity=".14"`);
+  }
+  if (hat === "hardhat") {
+    hairFront +=
+      path(`M${cx - S(36)} ${cy - S(16)} Q${cx - S(36)} ${cy - S(56)} ${cx} ${cy - S(58)} Q${cx + S(36)} ${cy - S(56)} ${cx + S(36)} ${cy - S(16)} Z`, hatFill) +
+      path(`M${cx + S(6)} ${cy - S(58)} Q${cx + S(36)} ${cy - S(56)} ${cx + S(36)} ${cy - S(16)} H${cx + S(6)} Z`, C.navy, `fill-opacity=".12"`) +
+      pill(cx - S(5), cy - S(60), S(10), S(44), C.white, `fill-opacity=".35"`) +
+      pill(cx - S(46), cy - S(22), S(92), S(12), hatFill);
+  }
+  if (hat === "cap") {
+    hairFront +=
+      path(`M${cx - S(33)} ${cy - S(14)} Q${cx - S(33)} ${cy - S(52)} ${cx} ${cy - S(52)} Q${cx + S(33)} ${cy - S(52)} ${cx + S(33)} ${cy - S(14)} Z`, hatFill) +
+      pill(cx - S(6), cy - S(22), S(60), S(12), hatFill) +
+      path(`M${cx + S(6)} ${cy - S(52)} Q${cx + S(33)} ${cy - S(52)} ${cx + S(33)} ${cy - S(14)} H${cx + S(6)} Z`, C.navy, `fill-opacity=".12"`);
+  }
+  if (hat === "chef") {
+    hairFront =
+      path(capD, C.navy) +
+      circle(cx - S(22), cy - S(50), S(20), C.white) +
+      circle(cx + S(22), cy - S(50), S(20), C.white) +
+      circle(cx, cy - S(62), S(24), C.white) +
+      rect(cx - S(32), cy - S(44), S(64), S(26), S(8), C.white) +
+      rect(cx - S(32), cy - S(28), S(64), S(10), S(5), C.navy, `fill-opacity=".1"`);
+  }
+
+  const mouth =
+    mood === "unsure"
+      ? stroke(`M${cx - S(8)} ${cy + S(20)} Q${cx} ${cy + S(15)} ${cx + S(8)} ${cy + S(20)}`, C.navy, S(3))
+      : stroke(`M${cx - S(9)} ${cy + S(15)} Q${cx} ${cy + S(23)} ${cx + S(9)} ${cy + S(15)}`, C.white, S(3));
+  const brows =
+    mood === "unsure"
+      ? stroke(`M${cx - S(17)} ${cy - S(9)} L${cx - S(5)} ${cy - S(12)}`, C.navy, S(3)) + stroke(`M${cx + S(5)} ${cy - S(14)} Q${cx + S(11)} ${cy - S(18)} ${cx + S(17)} ${cy - S(13)}`, C.navy, S(3))
+      : "";
+  const beardD = `M${cx - S(27)} ${cy + S(13)} Q${cx - S(24)} ${cy + S(40)} ${cx} ${cy + S(40)} Q${cx + S(24)} ${cy + S(40)} ${cx + S(27)} ${cy + S(13)} Q${cx + S(18)} ${cy + S(31)} ${cx} ${cy + S(31)} Q${cx - S(18)} ${cy + S(31)} ${cx - S(27)} ${cy + S(13)} Z`;
+
+  let outfit = "";
+  if (o.apron) {
+    outfit +=
+      path(`M${cx - S(34)} ${bottom} V${cy + S(98)} Q${cx - S(34)} ${cy + S(90)} ${cx - S(26)} ${cy + S(90)} H${cx + S(26)} Q${cx + S(34)} ${cy + S(90)} ${cx + S(34)} ${cy + S(98)} V${bottom} Z`, o.apron) +
+      limb(`M${cx - S(28)} ${cy + S(94)} L${cx - S(20)} ${cy + S(54)}`, o.apron, S(7)) +
+      limb(`M${cx + S(28)} ${cy + S(94)} L${cx + S(20)} ${cy + S(54)}`, o.apron, S(7)) +
+      rect(cx - S(20), cy + S(130), S(40), S(30), S(8), C.navy, `fill-opacity=".14"`);
+  }
+  if (o.vest) {
+    outfit +=
+      `<g clip-path="url(#${tk})">` +
+      rect(cx - S(64), cy + S(44), S(50), S(torsoLen), 0, o.vest) +
+      rect(cx + S(14), cy + S(44), S(50), S(torsoLen), 0, o.vest) +
+      rect(cx - S(64), cy + S(132), S(50), S(10), 0, C.white, `fill-opacity=".85"`) +
+      rect(cx + S(14), cy + S(132), S(50), S(10), 0, C.white, `fill-opacity=".85"`) +
+      `</g>`;
+  }
+  if (o.buttons) {
+    outfit += [0, 1, 2].map((i) => circle(cx - S(14), cy + S(92 + i * 30), S(4.5), C.navy) + circle(cx + S(14), cy + S(92 + i * 30), S(4.5), C.navy)).join("");
+  }
+  if (o.strap) {
+    outfit += `<g clip-path="url(#${tk})">${limb(`M${cx - S(40)} ${cy + S(50)} L${cx + S(62)} ${cy + S(220)}`, o.strap, S(13))}</g>`;
+  }
+  if (o.collar) {
+    outfit +=
+      path(`M${cx - S(26)} ${cy + S(50)} L${cx - S(4)} ${cy + S(76)} L${cx - S(18)} ${cy + S(80)} Z`, o.collar) +
+      path(`M${cx + S(26)} ${cy + S(50)} L${cx + S(4)} ${cy + S(76)} L${cx + S(18)} ${cy + S(80)} Z`, o.collar);
+  }
+
+  let legsSvg = "";
+  if (legs) {
+    const hipY = bottom - S(16);
+    const footY = legs.floor - S(16);
+    legsSvg =
+      limb(`M${cx - S(26)} ${hipY} L${cx - S(30)} ${footY}`, legs.color, S(40)) +
+      limb(`M${cx + S(26)} ${hipY} L${cx + S(30)} ${footY}`, legs.color, S(40)) +
+      limb(`M${cx + S(16)} ${hipY} L${cx + S(18)} ${footY}`, C.navy, S(14)).replace(`stroke="${C.navy}"`, `stroke="${C.navy}" stroke-opacity=".12"`) +
+      pill(cx - S(62), legs.floor - S(22), S(52), S(22), legs.shoe ?? C.navy) +
+      pill(cx + S(10), legs.floor - S(22), S(52), S(22), legs.shoe ?? C.navy);
+  }
+
+  return (
+    arms.filter((a) => a.back).map(drawArm).join("") +
+    legsSvg +
+    hairBack +
+    `<clipPath id="${tk}"><path d="${torsoD}"/></clipPath>` +
+    path(torsoD, top) +
+    path(`M${cx + S(12)} ${cy + S(50)} H${cx + S(28)} Q${cx + S(58)} ${cy + S(52)} ${cx + S(58)} ${cy + S(98)} V${bottom} H${cx + S(12)} Z`, C.navy, `fill-opacity=".1"`) +
+    outfit +
+    rect(cx - S(13), cy + S(18), S(26), S(34), S(11), skin) +
+    rect(cx - S(13), cy + S(18), S(26), S(18), S(9), C.navy, `fill-opacity=".18"`) +
+    path(`M${cx - S(20)} ${cy + S(47)} Q${cx} ${cy + S(63)} ${cx + S(20)} ${cy + S(47)} Z`, skin) +
+    circle(cx - S(29), cy + S(4), S(7), skin) +
+    circle(cx + S(29), cy + S(4), S(7), skin) +
+    `<ellipse cx="${cx}" cy="${cy}" rx="${S(29)}" ry="${S(33)}" fill="${skin}"/>` +
+    path(`M${cx + S(4)} ${cy - S(33)} A${S(29)} ${S(33)} 0 0 1 ${cx + S(4)} ${cy + S(33)} A${S(20)} ${S(33)} 0 0 0 ${cx + S(4)} ${cy - S(33)} Z`, C.navy, `fill-opacity=".12"`) +
+    (beard ? path(beardD, C.navy) : "") +
+    circle(cx - S(10), cy + S(2), S(4.4), C.white) +
+    circle(cx + S(10), cy + S(2), S(4.4), C.white) +
+    circle(cx - S(10) + S(look), cy + S(2.6), S(2.6), C.navy) +
+    circle(cx + S(10) + S(look), cy + S(2.6), S(2.6), C.navy) +
+    brows +
+    mouth +
+    hairFront +
+    arms.filter((a) => !a.back).map(drawArm).join("")
+  );
+};
+
+/** Small handheld phone (rounded to its own size, unlike the large `phone`). */
+const handset = (x, y, w, h, screen = C.blue, content = "") => {
+  const k = nid("hs");
+  const b = w * 0.08;
+  const r = w * 0.2;
+  return (
+    rect(x, y, w, h, r, C.navy) +
+    `<clipPath id="${k}">${rect(x + b, y + b, w - 2 * b, h - 2 * b, r - b, "#000")}</clipPath>` +
+    rect(x + b, y + b, w - 2 * b, h - 2 * b, r - b, screen) +
+    `<g clip-path="url(#${k})">${content}</g>` +
+    pill(x + w / 2 - w * 0.16, y + b + w * 0.04, w * 0.32, w * 0.07, C.navy)
+  );
+};
+
+/** Wall tile grid lines. */
+const tiles = (x, y, w, h, size, color = C.white, opacity = 0.6) => {
+  let d = "";
+  for (let gx = x + size; gx < x + w; gx += size) d += rect(gx - 1.5, y, 3, h, 0, color, `fill-opacity="${opacity}"`);
+  for (let gy = y + size; gy < y + h; gy += size) d += rect(x, gy - 1.5, w, 3, 0, color, `fill-opacity="${opacity}"`);
+  return d;
+};
+
+/** Louvre window with burglar-proof bars, as in most Nigerian homes. */
+const louvre = (x, y, w, h) => {
+  const slats = [];
+  for (let sy = y + 22; sy < y + h - 24; sy += 26) slats.push(rect(x + 16, sy, w - 32, 14, 4, C.blue, `fill-opacity=".22"`));
+  const bars = [];
+  for (let bx = x + 34; bx < x + w - 20; bx += 30) bars.push(rect(bx - 2.5, y + 14, 5, h - 28, 2.5, C.navy, `fill-opacity=".55"`));
+  return rect(x, y, w, h, 16, C.navy) + rect(x + 12, y + 12, w - 24, h - 24, 8, "#F7FAFF") + slats.join("") + bars.join("");
+};
+
+/** Question mark drawn as strokes (no fonts). */
+const qmark = (cx, cy, s, color) =>
+  stroke(`M${cx - s * 0.32} ${cy - s * 0.28} Q${cx - s * 0.3} ${cy - s * 0.66} ${cx} ${cy - s * 0.66} Q${cx + s * 0.34} ${cy - s * 0.66} ${cx + s * 0.34} ${cy - s * 0.34} Q${cx + s * 0.34} ${cy - s * 0.08} ${cx} ${cy + s * 0.02} V${cy + s * 0.18}`, color, s * 0.17) +
+  circle(cx, cy + s * 0.48, s * 0.11, color);
+
+/** Speech bubble with a tail at the bottom-left or bottom-right. */
+const bubble = (x, y, w, h, fill, tail = "left") => {
+  const tx = tail === "left" ? x + 34 : x + w - 34;
+  const dir = tail === "left" ? -1 : 1;
+  return (
+    rect(x, y + 10, w, h, 26, C.navy, `fill-opacity=".08"`) +
+    path(`M${tx - 14} ${y + h - 4} L${tx + dir * 14} ${y + h + 22} L${tx + 16} ${y + h - 4} Z`, fill, `stroke="${fill}" stroke-width="6" stroke-linejoin="round"`) +
+    rect(x, y, w, h, 26, fill)
+  );
+};
+
+const wrench = (x1, y1, x2, y2, w, color = X.orange) => {
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  const deg = (a * 180) / Math.PI;
+  return (
+    limb(`M${x1} ${y1} L${x2} ${y2}`, color, w) +
+    `<g transform="rotate(${deg} ${x2} ${y2})">` +
+    path(`M${x2 - w * 0.4} ${y2 - w * 1.3} H${x2 + w * 1.5} Q${x2 + w * 1.9} ${y2 - w * 1.3} ${x2 + w * 1.9} ${y2 - w * 0.9} V${y2 - w * 0.25} H${x2 + w * 0.7} V${y2 + w * 0.25} H${x2 + w * 1.9} V${y2 + w * 0.9} Q${x2 + w * 1.9} ${y2 + w * 1.3} ${x2 + w * 1.5} ${y2 + w * 1.3} H${x2 - w * 0.4} Z`, color) +
+    `</g>`
+  );
+};
+
+const hammer = (x1, y1, x2, y2, w) => {
+  const deg = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+  return (
+    limb(`M${x1} ${y1} L${x2} ${y2}`, X.wood, w) +
+    `<g transform="rotate(${deg} ${x2} ${y2})">${rect(x2 - w * 0.9, y2 - w * 2.4, w * 1.8, w * 4.2, w * 0.4, C.navy)}${rect(x2 - w * 0.9, y2 - w * 2.4, w * 1.8, w * 1.2, w * 0.4, C.white, `fill-opacity=".2"`)}</g>`
+  );
+};
 
 /* ── Scenes ─────────────────────────────────────────────────────── */
 const scenes = {
@@ -564,24 +789,539 @@ const scenes = {
         badgeCheck(716, 418, 28),
     };
   },
+
+  /* ── Full-bleed scenes: services, hero, about, contact ─────────── */
+
+  "service-cook": () => {
+    const steam = [536, 568, 600].map((x) => `<path d="M${x} 228 q-14 -20 0 -40 q14 -20 0 -40" fill="none" stroke="${C.blue}" stroke-opacity=".3" stroke-width="8" stroke-linecap="round"/>`).join("");
+    const spoon = limb(`M446 230 L532 302`, X.wood, 9);
+    return {
+      w: 800,
+      h: 600,
+      body:
+        ankara("ak-cook", X.orange, C.blue, C.green, 0.8) +
+        rect(0, 0, 800, 600, 0, C.ice) +
+        tiles(0, 0, 800, 430, 64) +
+        louvre(586, 60, 170, 190) +
+        pill(52, 134, 228, 12, C.navy) +
+        rect(72, 86, 36, 48, 10, C.green) + rect(77, 76, 26, 14, 5, C.navy) +
+        rect(126, 72, 40, 62, 10, X.orange) + rect(132, 62, 28, 14, 5, C.navy) +
+        rect(184, 92, 36, 42, 10, C.blue) + rect(189, 82, 26, 14, 5, C.navy) +
+        rect(236, 100, 28, 34, 9, X.amber) +
+        steam +
+        person(330, 205, 1.15, {
+          skin: SKIN.warm,
+          top: C.white,
+          hat: "wrap",
+          hatFill: "url(#ak-cook)",
+          buttons: true,
+          look: 4,
+          arms: [
+            { side: "l", elbow: [262, 364], hand: [318, 404], long: true },
+            { side: "r", elbow: [416, 330], hand: [466, 247], long: true, hold: spoon },
+          ],
+        }) +
+        // counter
+        rect(0, 430, 800, 26, 0, C.white) +
+        rect(0, 456, 800, 144, 0, C.blue) +
+        rect(0, 456, 800, 10, 0, C.navy, `fill-opacity=".14"`) +
+        [200, 400, 600].map((x) => rect(x - 2, 474, 4, 126, 2, C.navy, `fill-opacity=".2"`)).join("") +
+        [170, 230, 570, 630].map((x) => pill(x - 22, 494, 44, 10, C.white, `fill-opacity=".7"`)).join("") +
+        // tabletop gas stove + pot of jollof
+        [508, 538, 568, 598, 628].map((x) => path(`M${x} 402 Q${x - 9} 390 ${x} 374 Q${x + 9} 390 ${x} 402 Z`, C.blue)).join("") +
+        rect(452, 400, 232, 32, 10, C.navy) +
+        circle(478, 416, 7, X.steel) +
+        circle(658, 416, 7, X.steel) +
+        pill(458, 314, 40, 14, C.navy) +
+        pill(638, 314, 40, 14, C.navy) +
+        rect(488, 298, 160, 86, 24, C.navy) +
+        rect(568, 298, 80, 86, 24, C.white, `fill-opacity=".06"`) +
+        pill(500, 320, 12, 48, C.white, `fill-opacity=".18"`) +
+        path(`M494 298 Q568 236 642 298 Z`, X.orange) +
+        circle(540, 282, 5, C.green) + circle(574, 268, 5, C.green) + circle(604, 284, 5, X.amber) + circle(556, 290, 4, X.amber) + circle(590, 292, 4, C.green) +
+        pill(482, 290, 172, 16, C.navy) +
+        // bowl of dodo
+        path(`M88 398 H232 Q226 432 160 432 Q94 432 88 398 Z`, C.green) +
+        path(`M160 398 H232 Q226 432 160 432 Z`, C.navy, `fill-opacity=".12"`) +
+        [[112, 392, -20], [142, 386, 10], [174, 388, -8], [206, 393, 18], [158, 378, 0]]
+          .map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="20" ry="11" fill="${X.amber}" stroke="${X.orange}" stroke-width="4" transform="rotate(${r} ${x} ${y})"/>`)
+          .join(""),
+    };
+  },
+
+  "service-cleaner": () => {
+    const mop =
+      limb(`M486 186 L566 508`, X.steel, 10) +
+      pill(528, 498, 80, 16, C.navy) +
+      [0, 1, 2, 3, 4, 5].map((i) => pill(526 + i * 14, 506, 12, 32, C.white)).join("");
+    return {
+      w: 800,
+      h: 600,
+      body:
+        ankara("ak-sofa", C.green, X.amber, C.white, 0.7) +
+        rect(0, 0, 800, 600, 0, C.ice) +
+        rect(0, 456, 800, 144, 0, X.floor) +
+        tiles(0, 456, 800, 144, 100, C.white, 0.6) +
+        louvre(90, 60, 190, 200) +
+        // sofa with ankara cushions
+        rect(52, 300, 262, 110, 32, C.blue) +
+        rect(40, 380, 286, 72, 26, C.blue) +
+        rect(40, 380, 286, 18, 9, C.navy, `fill-opacity=".14"`) +
+        rect(76, 318, 84, 72, 20, "url(#ak-sofa)") +
+        rect(176, 326, 74, 64, 20, "url(#ak-sofa)") +
+        pill(62, 448, 16, 26, C.navy) +
+        pill(290, 448, 16, 26, C.navy) +
+        // plant
+        rect(686, 410, 74, 70, 16, C.navy) +
+        `<ellipse cx="704" cy="380" rx="18" ry="44" fill="${C.green}" transform="rotate(-24 704 380)"/>` +
+        `<ellipse cx="744" cy="378" rx="18" ry="46" fill="${C.green}" transform="rotate(22 744 378)"/>` +
+        `<ellipse cx="724" cy="360" rx="18" ry="54" fill="${C.green}"/>` +
+        // shine on the fresh floor
+        sparkle(196, 512, 16, C.white) +
+        sparkle(330, 548, 11, C.white) +
+        sparkle(660, 532, 13, C.blue) +
+        pill(140, 540, 90, 8, C.white, `fill-opacity=".8"`) +
+        pill(250, 516, 54, 8, C.white, `fill-opacity=".8"`) +
+        // bucket
+        path(`M600 470 H680 L670 536 Q668 544 660 544 H620 Q612 544 610 536 Z`, C.blue) +
+        pill(594, 462, 92, 14, C.navy) +
+        stroke(`M604 466 Q640 418 676 466`, C.navy, 5) +
+        person(430, 176, 1, {
+          skin: SKIN.deep,
+          top: C.green,
+          hat: "puff",
+          collar: C.white,
+          look: 3,
+          legs: { floor: 534, color: C.navy },
+          arms: [
+            { side: "r", elbow: [494, 300], hand: [500, 258], hold: mop },
+            { side: "l", elbow: [430, 324], hand: [516, 326] },
+          ],
+        }),
+    };
+  },
+
+  "service-plumber": () => {
+    const tank =
+      rect(92, 82, 196, 176, 16, C.navy) +
+      rect(104, 94, 172, 152, 8, "#F7FAFF") +
+      rect(150, 120, 80, 72, 16, C.navy) +
+      pill(160, 112, 60, 14, C.navy) +
+      [138, 156, 174].map((y) => rect(150, y, 80, 4, 2, C.white, `fill-opacity=".18"`)).join("") +
+      rect(156, 192, 6, 54, 3, C.navy, `fill-opacity=".6"`) +
+      rect(218, 192, 6, 54, 3, C.navy, `fill-opacity=".6"`) +
+      rect(156, 214, 68, 5, 2.5, C.navy, `fill-opacity=".6"`);
+    return {
+      w: 800,
+      h: 600,
+      body:
+        rect(0, 0, 800, 600, 0, C.ice) +
+        tiles(0, 0, 800, 470, 58) +
+        rect(0, 470, 800, 130, 0, X.floor) +
+        tank +
+        // mirror, tap and basin
+        rect(532, 70, 136, 156, 30, C.white) +
+        pill(560, 100, 12, 70, C.ice) +
+        pill(582, 96, 12, 40, C.ice) +
+        rect(592, 250, 16, 44, 6, X.steel) +
+        pill(570, 244, 50, 14, X.steel) +
+        pill(586, 236, 28, 10, C.navy) +
+        path(`M490 292 H710 Q700 364 600 366 Q500 364 490 292 Z`, C.white) +
+        path(`M600 292 H710 Q700 364 600 366 Z`, C.navy, `fill-opacity=".08"`) +
+        pill(484, 284, 232, 16, C.white) +
+        // waste pipe and trap
+        limb(`M600 364 V398 Q600 428 630 428 Q660 428 660 404 V400 H770`, X.steel, 20) +
+        pill(586, 384, 28, 14, C.navy, `fill-opacity=".3"`) +
+        path(`M632 450 Q622 464 632 474 Q642 464 632 450 Z`, C.blue) +
+        `<ellipse cx="632" cy="512" rx="40" ry="8" fill="${C.blue}" fill-opacity=".25"/>` +
+        badgeCheck(726, 330, 24) +
+        // toolbox
+        rect(140, 472, 140, 66, 14, X.orange) +
+        rect(140, 494, 140, 8, 0, C.navy, `fill-opacity=".18"`) +
+        stroke(`M180 472 V458 H240 V472`, C.navy, 8) +
+        person(392, 180, 1, {
+          skin: SKIN.mid,
+          top: C.blue,
+          apron: C.navy,
+          hat: "cap",
+          hatFill: C.green,
+          beard: true,
+          look: 4,
+          legs: { floor: 548, color: C.navy },
+          arms: [
+            { side: "l", elbow: [318, 322], hand: [350, 366] },
+            { side: "r", elbow: [494, 334], hand: [548, 398], hold: wrench(540, 400, 590, 402, 13) },
+          ],
+        }),
+    };
+  },
+
+  "service-electrician": () => {
+    const breakers = [170, 252]
+      .flatMap((y, row) =>
+        [0, 1, 2, 3].map((i) => {
+          const on = row === 0 && i === 1;
+          const x = 532 + i * 38;
+          return rect(x, y, 28, 58, 8, C.white) + rect(x + 7, y + (on ? 8 : 30), 14, 20, 5, on ? C.green : C.navy);
+        })
+      )
+      .join("");
+    const driver = limb(`M516 214 L534 194`, X.orange, 14) + limb(`M534 194 L556 170`, X.steel, 5);
+    return {
+      w: 800,
+      h: 600,
+      body:
+        rect(0, 0, 800, 600, 0, C.ice) +
+        rect(0, 470, 800, 130, 0, X.floor) +
+        // bulb powered by the inverter
+        rect(222, 0, 4, 70, 2, C.navy) +
+        circle(224, 112, 56, X.amber, `fill-opacity=".18"`) +
+        rect(212, 66, 24, 22, 6, C.navy) +
+        circle(224, 110, 26, X.amber) +
+        [-60, -20, 20, 60].map((a) => `<g transform="rotate(${a} 224 110)">${pill(220, 30, 8, 18, X.amber)}</g>`).join("") +
+        [120, 240].map((a) => `<g transform="rotate(${a} 224 110)">${pill(220, 30, 8, 18, X.amber)}</g>`).join("") +
+        // distribution board
+        rect(504, 120, 200, 236, 26, C.navy) +
+        rect(518, 150, 172, 192, 14, C.white, `fill-opacity=".08"`) +
+        pill(560, 132, 88, 8, C.white, `fill-opacity=".3"`) +
+        breakers +
+        // cable to inverter
+        limb(`M604 356 V430 Q604 446 588 446 H316`, C.navy, 7) +
+        // inverter on its battery
+        rect(150, 452, 150, 72, 16, C.navy) +
+        pill(170, 442, 22, 14, X.orange) +
+        pill(256, 442, 22, 14, C.navy) +
+        path(`M232 470 L218 492 H230 L222 510 L242 484 H230 Z`, X.amber) +
+        rect(156, 338, 138, 108, 18, C.white) +
+        rect(174, 356, 64, 36, 8, C.navy) +
+        pill(182, 368, 40, 10, C.green) +
+        circle(262, 364, 7, C.green) +
+        circle(262, 384, 7, X.amber) +
+        [408, 420].map((y) => pill(174, y, 102, 6, C.ice)).join("") +
+        person(410, 186, 1, {
+          skin: SKIN.deep,
+          top: C.blue,
+          vest: C.green,
+          hat: "hardhat",
+          hatFill: X.amber,
+          look: 4,
+          legs: { floor: 548, color: C.navy },
+          arms: [
+            { side: "l", elbow: [332, 316], hand: [366, 360] },
+            { side: "r", elbow: [500, 262], hand: [522, 208], hold: driver },
+          ],
+        }),
+    };
+  },
+
+  "service-ac": () => {
+    const air = [610, 670].map((x) => `<path d="M${x} 222 q18 16 0 32 q-18 16 0 32" fill="none" stroke="${C.blue}" stroke-opacity=".45" stroke-width="7" stroke-linecap="round"/>`).join("");
+    const flake = (cx, cy, s) => [0, 60, 120].map((a) => `<g transform="rotate(${a} ${cx} ${cy})">${pill(cx - 2.5, cy - s, 5, s * 2, C.blue)}</g>`).join("");
+    const gauge = circle(318, 444, 26, C.navy) + circle(318, 444, 19, C.white) + stroke(`M318 444 L328 432`, X.orange, 4);
+    const driver = limb(`M468 226 L476 208`, X.orange, 13) + limb(`M476 208 L484 190`, X.steel, 5);
+    return {
+      w: 800,
+      h: 600,
+      body:
+        rect(0, 0, 800, 600, 0, C.ice) +
+        rect(0, 484, 800, 116, 0, X.floor) +
+        // split unit
+        rect(420, 92, 330, 108, 32, C.navy, `fill-opacity=".08"`) +
+        rect(420, 82, 330, 108, 32, C.white) +
+        pill(452, 164, 266, 10, C.navy, `fill-opacity=".14"`) +
+        pill(672, 110, 40, 12, C.blue) +
+        circle(660, 116, 4, C.green) +
+        air +
+        flake(730, 262, 13) +
+        flake(560, 268, 9) +
+        // condenser
+        pill(578, 508, 26, 14, C.navy) +
+        pill(714, 508, 26, 14, C.navy) +
+        rect(560, 366, 196, 144, 22, C.white) +
+        circle(636, 438, 50, X.steel) +
+        circle(636, 438, 36, C.white, `fill-opacity=".5"`) +
+        [0, 120, 240].map((a) => `<ellipse cx="636" cy="414" rx="10" ry="22" fill="${C.navy}" fill-opacity=".55" transform="rotate(${a} 636 438)"/>`).join("") +
+        circle(636, 438, 7, C.navy) +
+        [392, 412, 432, 452, 472].map((y) => pill(700, y, 40, 8, C.ice)).join("") +
+        // hose from gauge to condenser
+        limb(`M318 470 Q380 560 566 470`, C.navy, 6) +
+        // toolbox
+        rect(110, 486, 120, 58, 14, X.orange) +
+        stroke(`M146 486 V472 H194 V486`, C.navy, 8) +
+        person(360, 248, 1, {
+          skin: SKIN.warm,
+          top: C.green,
+          collar: C.white,
+          hat: "cap",
+          hatFill: C.blue,
+          look: 4,
+          legs: { floor: 560, color: C.navy },
+          arms: [
+            { side: "l", elbow: [290, 392], hand: [306, 438], holdFront: gauge },
+            { side: "r", elbow: [452, 290], hand: [466, 232], hold: driver },
+          ],
+        }),
+    };
+  },
+
+  "service-carpenter": () => {
+    const tools =
+      rect(52, 70, 228, 170, 22, C.white) +
+      [...Array(5)].flatMap((_, r) => [...Array(8)].map((_, c) => circle(74 + c * 26, 92 + r * 32, 3.5, C.ice))).join("") +
+      path(`M86 116 H196 L178 176 ${[...Array(9)].map((_, i) => `L${168 - i * 10} ${i % 2 ? 176 : 184}`).join(" ")} L86 176 Z`, X.steel) +
+      rect(70, 112, 30, 52, 10, X.wood) +
+      rect(214, 104, 12, 100, 6, X.wood) +
+      rect(200, 98, 40, 22, 6, C.navy) +
+      pill(80, 198, 180, 16, X.amber);
+    const shaving = (x, y, r) => `<path d="M${x} ${y} a10 10 0 1 1 10 10" fill="none" stroke="${X.wood}" stroke-width="5" stroke-linecap="round" transform="rotate(${r} ${x} ${y})"/>`;
+    return {
+      w: 800,
+      h: 600,
+      body:
+        rect(0, 0, 800, 600, 0, C.ice) +
+        rect(0, 504, 800, 96, 0, X.floor) +
+        tools +
+        // finished door leaning on the wall
+        rect(660, 150, 120, 360, 16, X.wood) +
+        rect(678, 172, 84, 140, 10, X.woodDark, `fill-opacity=".5"`) +
+        rect(678, 330, 84, 160, 10, X.woodDark, `fill-opacity=".5"`) +
+        circle(672, 330, 7, X.amber) +
+        person(380, 200, 1.1, {
+          torsoLen: 182,
+          skin: SKIN.deep,
+          top: C.blue,
+          apron: X.woodDark,
+          hat: "cap",
+          hatFill: C.green,
+          beard: true,
+          look: 5,
+          arms: [
+            { side: "l", elbow: [326, 352], hand: [432, 346] },
+            { side: "r", elbow: [500, 262], hand: [526, 204], hold: hammer(520, 220, 558, 158, 12) },
+          ],
+        }) +
+        // bench, plank, nail
+        rect(220, 354, 300, 26, 8, "#E3B27A") +
+        rect(220, 354, 300, 8, 4, C.white, `fill-opacity=".25"`) +
+        rect(556, 326, 6, 30, 3, C.navy) +
+        pill(548, 322, 22, 8, C.navy) +
+        rect(200, 380, 440, 30, 10, X.wood) +
+        rect(200, 404, 440, 14, 0, X.woodDark) +
+        rect(222, 418, 24, 90, 8, X.woodDark) +
+        rect(594, 418, 24, 90, 8, X.woodDark) +
+        rect(240, 456, 360, 14, 7, X.woodDark, `fill-opacity=".7"`) +
+        shaving(300, 530, 0) +
+        shaving(356, 548, 120) +
+        shaving(470, 534, 220) +
+        shaving(600, 370, 60),
+    };
+  },
+
+  "hero-pro-arriving-with-phone": () => {
+    const screen =
+      circle(616, 398, 40, C.green) +
+      check(616, 398, 38, C.white, 9) +
+      pill(570, 458, 92, 14, C.white) +
+      pill(584, 482, 64, 12, C.white, `fill-opacity=".55"`) +
+      pill(560, 514, 112, 32, C.white);
+    return {
+      w: 800,
+      h: 800,
+      body:
+        rect(0, 0, 800, 800, 0, C.ice) +
+        circle(430, 420, 300, C.white, `fill-opacity=".55"`) +
+        // front door
+        rect(60, 180, 200, 520, 22, C.white) +
+        rect(80, 200, 160, 500, 14, C.blue) +
+        rect(100, 226, 120, 180, 10, C.navy, `fill-opacity=".16"`) +
+        rect(100, 428, 120, 240, 10, C.navy, `fill-opacity=".16"`) +
+        circle(220, 450, 9, X.amber) +
+        rect(0, 690, 800, 110, 0, X.floor) +
+        // plant
+        rect(650, 580, 100, 110, 20, C.navy) +
+        `<ellipse cx="672" cy="540" rx="22" ry="56" fill="${C.green}" transform="rotate(-24 672 540)"/>` +
+        `<ellipse cx="728" cy="536" rx="22" ry="58" fill="${C.green}" transform="rotate(22 728 536)"/>` +
+        `<ellipse cx="700" cy="516" rx="22" ry="66" fill="${C.green}"/>` +
+        person(420, 318, 1.55, {
+          skin: SKIN.mid,
+          top: C.navy,
+          collar: C.white,
+          strap: X.orange,
+          beard: true,
+          look: 2,
+          torsoLen: 320,
+          arms: [
+            { side: "l", elbow: [286, 400], hand: [300, 292] },
+            { side: "r", elbow: [560, 600], hand: [556, 540], hold: handset(546, 330, 140, 252, C.blue, screen) },
+          ],
+        }) +
+        stroke(`M262 262 Q252 284 262 306`, C.navy, 6) +
+        stroke(`M244 252 Q228 284 244 316`, C.navy, 6) +
+        // verified chip
+        card(540, 120, 210, 84, 26) +
+        badgeCheck(586, 162, 22) +
+        pill(620, 146, 104, 14, C.navy) +
+        pill(620, 170, 70, 12, C.ice) +
+        // rating chip
+        card(96, 570, 220, 72, 24) +
+        [0, 1, 2, 3, 4].map((i) => star(130 + i * 38, 606, 13, X.amber)).join(""),
+    };
+  },
+
+  "about-cautious-homeowner": () => {
+    const screen = pill(410, 300, 44, 8, C.white) + pill(410, 316, 30, 8, C.white, `fill-opacity=".55"`) + rect(410, 340, 60, 30, 8, C.white);
+    return {
+      w: 800,
+      h: 600,
+      body:
+        ankara("ak-about", C.blue, X.amber, C.white, 0.75) +
+        rect(0, 0, 800, 600, 0, C.ice) +
+        circle(300, 330, 230, C.white, `fill-opacity=".55"`) +
+        // plant
+        rect(40, 470, 90, 130, 18, C.navy) +
+        `<ellipse cx="62" cy="430" rx="20" ry="52" fill="${C.green}" transform="rotate(-24 62 430)"/>` +
+        `<ellipse cx="110" cy="428" rx="20" ry="54" fill="${C.green}" transform="rotate(22 110 428)"/>` +
+        `<ellipse cx="86" cy="410" rx="20" ry="62" fill="${C.green}"/>` +
+        dashed(`M486 286 C 520 250, 520 210, 540 196`) +
+        dashed(`M486 330 C 520 330, 540 330, 566 320`) +
+        person(300, 222, 1.3, {
+          skin: SKIN.warm,
+          top: "url(#ak-about)",
+          hat: "braids",
+          mood: "unsure",
+          look: 4,
+          torsoLen: 300,
+          arms: [
+            { side: "r", elbow: [404, 452], hand: [426, 394], hold: handset(396, 268, 92, 150, C.navy, screen) },
+            { side: "l", elbow: [210, 430], hand: [282, 290] },
+          ],
+        }) +
+        // "Pay ₦… upfront?" message
+        bubble(520, 84, 240, 108, C.white, "left") +
+        coin(578, 138, 30) +
+        pill(622, 118, 112, 16, C.navy) +
+        pill(622, 146, 76, 14, C.ice) +
+        bubble(566, 252, 150, 104, C.blue, "left") +
+        qmark(641, 306, 70, C.white) +
+        qmark(170, 104, 54, X.orange) +
+        qmark(112, 176, 34, C.blue),
+    };
+  },
+
+  "contact-reading-message": () => {
+    const screen =
+      rect(452, 444, 60, 22, 10, C.ice) +
+      rect(474, 474, 50, 22, 10, C.blue) +
+      rect(452, 504, 64, 22, 10, C.ice) +
+      rect(468, 534, 56, 22, 10, C.blue);
+    return {
+      w: 800,
+      h: 800,
+      body:
+        ankara("ak-contact", C.green, C.white, X.amber, 0.9) +
+        rect(0, 0, 800, 800, 0, C.ice) +
+        circle(380, 440, 300, C.white, `fill-opacity=".55"`) +
+        person(330, 330, 1.6, {
+          skin: SKIN.deep,
+          top: C.blue,
+          hat: "wrap",
+          hatFill: "url(#ak-contact)",
+          look: 5,
+          torsoLen: 300,
+          arms: [
+            { side: "l", elbow: [316, 668], hand: [440, 602] },
+            { side: "r", elbow: [470, 650], hand: [458, 590], hold: handset(436, 420, 104, 188, C.white, screen) },
+          ],
+        }) +
+        bubble(510, 110, 250, 96, C.white, "left") +
+        pill(540, 140, 150, 14, C.navy) +
+        pill(540, 166, 100, 12, C.ice) +
+        bubble(550, 246, 210, 84, C.blue, "right") +
+        pill(578, 272, 110, 14, C.white) +
+        check(712, 296, 18, C.white, 4) +
+        check(724, 296, 18, C.white, 4) +
+        pill(578, 296, 70, 12, C.white, `fill-opacity=".5"`) +
+        bubble(590, 380, 150, 64, C.white, "left") +
+        circle(632, 412, 8, C.navy, `fill-opacity=".35"`) +
+        circle(664, 412, 8, C.navy, `fill-opacity=".55"`) +
+        circle(696, 412, 8, C.navy, `fill-opacity=".75"`) +
+        sparkle(120, 170, 22) +
+        sparkle(160, 240, 12, C.green) +
+        sparkle(700, 560, 16, C.green),
+    };
+  },
+
+  /** Provider hero: four pros, waist-up, flush with the bottom edge (transparent canvas). */
+  "provider-hero-pros": () => {
+    const coil =
+      `<circle cx="566" cy="560" r="58" fill="none" stroke="${X.orange}" stroke-width="16"/>` +
+      `<circle cx="566" cy="560" r="38" fill="none" stroke="${C.navy}" stroke-width="12"/>`;
+    const proPhone = handset(1030, 330, 124, 226, C.blue, circle(1092, 430, 34, C.white) + check(1092, 430, 32, C.blue, 8) + pill(1058, 486, 68, 12, C.white, `fill-opacity=".6"`));
+    return {
+      w: 1600,
+      h: 900,
+      body:
+        person(300, 310, 2.1, {
+          skin: SKIN.warm,
+          top: C.white,
+          hat: "chef",
+          buttons: true,
+          torsoLen: 290,
+          arms: [
+            { side: "r", elbow: [404, 640], hand: [246, 618], long: true },
+            { side: "l", elbow: [196, 636], hand: [354, 610], long: true },
+          ],
+        }) +
+        person(640, 300, 2.1, {
+          skin: SKIN.mid,
+          top: C.navy,
+          vest: C.green,
+          hat: "hardhat",
+          hatFill: X.amber,
+          beard: true,
+          torsoLen: 290,
+          arms: [
+            { side: "l", elbow: [520, 640], hand: [566, 600], back: false, hold: coil },
+            { side: "r", elbow: [756, 650], hand: [730, 760] },
+          ],
+        }) +
+        person(970, 300, 2.1, {
+          skin: SKIN.deep,
+          top: C.blue,
+          apron: C.navy,
+          torsoLen: 290,
+          arms: [
+            { side: "l", elbow: [860, 640], hand: [884, 750], hold: wrench(884, 750, 900, 860, 18) },
+            { side: "r", elbow: [1110, 640], hand: [1060, 548], hold: proPhone },
+          ],
+        }) +
+        person(1300, 310, 2.1, {
+          skin: SKIN.warm,
+          top: C.green,
+          apron: X.woodDark,
+          hat: "cap",
+          hatFill: C.navy,
+          beard: true,
+          torsoLen: 290,
+          arms: [
+            { side: "l", elbow: [1190, 650], hand: [1236, 760] },
+            { side: "r", elbow: [1430, 640], hand: [1412, 540], hold: hammer(1414, 560, 1390, 400, 16) },
+          ],
+        }),
+    };
+  },
 };
 
 /* ── Build ──────────────────────────────────────────────────────── */
 const wrap = ({ w, h, body }) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none">${body}</svg>\n`;
 
-await mkdir(SVG_DIR, { recursive: true });
 await mkdir(OUT_DIR, { recursive: true });
 
+const only = process.argv.slice(2);
 for (const [name, build] of Object.entries(scenes)) {
-  await writeFile(join(SVG_DIR, `${name}.svg`), wrap(build()));
-}
-
-const files = (await readdir(SVG_DIR)).filter((f) => f.endsWith(".svg"));
-for (const f of files) {
-  const svg = await readFile(join(SVG_DIR, f));
-  const out = join(OUT_DIR, f.replace(/\.svg$/, ".png"));
-  // SVG user units are 72dpi in librsvg → density 144 renders at exactly 2x.
-  const info = await sharp(svg, { density: 144 }).png({ compressionLevel: 9 }).toFile(out);
-  console.log(`${f.padEnd(40)} → ${info.width}×${info.height}  ${(info.size / 1024).toFixed(0)}KB`);
+  if (only.length && !only.includes(name)) continue;
+  const svg = wrap(build());
+  await writeFile(join(OUT_DIR, `${name}.svg`), svg);
+  console.log(`${`${name}.svg`.padEnd(40)} ${(svg.length / 1024).toFixed(1)}KB`);
 }

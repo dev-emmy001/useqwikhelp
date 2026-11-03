@@ -11,22 +11,22 @@ const steps = [
   {
     title: "Get verified",
     text: "Submit your NIN or BVN, photo ID and a guarantor.",
-    art: { src: "/assets/images/provider-step-get-verified.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/provider-step-get-verified.svg", width: 1200, height: 1200 },
   },
   {
     title: "Go live",
     text: "We review your details and your profile goes live.",
-    art: { src: "/assets/images/provider-step-go-live.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/provider-step-go-live.svg", width: 1200, height: 1200 },
   },
   {
     title: "Meet nearby clients",
     text: "Households near you find and book you directly.",
-    art: { src: "/assets/images/provider-step-meet-clients.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/provider-step-meet-clients.svg", width: 1200, height: 1200 },
   },
   {
     title: "Do the work, get paid",
     text: "Payment is released to your wallet when the job is done.",
-    art: { src: "/assets/images/provider-step-get-paid.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/provider-step-get-paid.svg", width: 1200, height: 1200 },
   },
 ];
 
@@ -37,12 +37,12 @@ const ranking = [
 ];
 
 const crafts = [
-  { label: "Cooking", photo: "/assets/images/service-cook.jpg", focus: "50% 22%" },
-  { label: "Cleaning", photo: "/assets/images/service-cleaner.jpg", focus: "50% 6%" },
-  { label: "Plumbing", photo: "/assets/images/service-plumber.jpg", focus: "50% 12%" },
-  { label: "Electrical", photo: "/assets/images/service-electrician.jpg", focus: "50% 25%" },
-  { label: "AC servicing", photo: "/assets/images/service-ac-technician.jpg", focus: "50% 55%" },
-  { label: "Carpentry", photo: "/assets/images/service-carpenter.jpg", focus: "50% 28%" },
+  { label: "Cooking", art: "/assets/images/service-cook.svg" },
+  { label: "Cleaning", art: "/assets/images/service-cleaner.svg" },
+  { label: "Plumbing", art: "/assets/images/service-plumber.svg" },
+  { label: "Electrical", art: "/assets/images/service-electrician.svg" },
+  { label: "AC servicing", art: "/assets/images/service-ac.svg" },
+  { label: "Carpentry", art: "/assets/images/service-carpenter.svg" },
 ];
 
 const requirements = ["NIN or BVN", "Valid photo ID", "Face verification", "A guarantor"];
@@ -125,30 +125,21 @@ export default function ProviderLandingPage() {
           </ul>
         </div>
 
-        {/* Flat stage; the cut-out photo sits flush on the bottom edge */}
+        {/* Flat stage; the illustration sits flush on the bottom edge */}
         <div
           style={i(4)}
           className="enter-once enter-soft mx-auto mt-12 w-full max-w-[1100px] overflow-hidden rounded-[32px] bg-brand-blue-light px-4 pt-10 sm:mt-16 sm:rounded-[48px] sm:px-10 sm:pt-16"
         >
           <div className="relative mx-auto w-full max-w-[900px]">
             <Image
-              src="/hero-workers.png"
-              alt="QwikHelp pros: a chef, an electrician, a plumber holding a phone, and a carpenter"
-              width={1672}
-              height={941}
+              src="/assets/images/provider-hero-pros.svg"
+              alt="Illustration of QwikHelp pros: a chef, an electrician, a plumber holding a phone, and a carpenter"
+              width={1600}
+              height={900}
               priority
               sizes="(max-width: 640px) 92vw, (max-width: 1200px) 80vw, 900px"
               className="block h-auto w-full select-none"
             />
-            {/* Fills the plumber's blank phone screen (positioned in % of the image box) */}
-            <div
-              aria-hidden="true"
-              className="absolute top-[34.5%] left-[47.8%] flex h-[18.4%] w-[4.6%] items-center justify-center rounded-[22%/10%] bg-brand-blue"
-            >
-              <svg viewBox="0 0 24 24" className="w-1/2 text-white" fill="none" stroke="currentColor" strokeWidth="3">
-                <path d="M5 12.5l4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
           </div>
         </div>
       </section>
@@ -165,7 +156,7 @@ export default function ProviderLandingPage() {
             </p>
           </div>
           <Illustration
-            src="/assets/images/provider-nearby-matching.png"
+            src="/assets/images/provider-nearby-matching.svg"
             width={1600}
             height={1200}
             label="Pros matched to nearby homes"
@@ -201,7 +192,7 @@ export default function ProviderLandingPage() {
       <section aria-labelledby="escrow-title" className="">
         <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
           <Illustration
-            src="/assets/images/provider-escrow-before-start.png"
+            src="/assets/images/provider-escrow-before-start.svg"
             width={1600}
             height={1200}
             label="Payment held in escrow"
@@ -249,7 +240,7 @@ export default function ProviderLandingPage() {
         <Reveal as="ul" className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {crafts.map((c, n) => (
             <li key={c.label} style={i(n)} className="reveal-item rounded-[28px] bg-gray-50 p-2.5">
-              <Illustration src={c.photo} photo focus={c.focus} label={c.label} decorative tone="white" className="aspect-square !rounded-[20px]" />
+              <Illustration src={c.art} photo label={c.label} decorative tone="white" className="aspect-square !rounded-[20px]" />
               <p className="px-2 pt-3 pb-2 text-base font-bold text-gray-950">{c.label}</p>
             </li>
           ))}
@@ -277,12 +268,12 @@ export default function ProviderLandingPage() {
               ))}
             </ul>
             <div style={i(3)} className="reveal-item mt-8">
-              <WaitlistForm tone="onBlue" />
+              <WaitlistForm tone="onBlue" role="provider" source="provider-getting-started" />
             </div>
           </div>
 
           <Illustration
-            src="/assets/images/provider-verification-checklist.png"
+            src="/assets/images/provider-verification-checklist.svg"
             width={1600}
             height={1200}
             label="ID verification"

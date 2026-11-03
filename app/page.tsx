@@ -9,29 +9,29 @@ import Reveal from "@/components/landing/Reveal";
 /* ── Content ──────────────────────────────────────────────────────── */
 
 const services = [
-  { title: "Cooks", text: "Daily meals, meal prep or a party.", photo: "/assets/images/service-cook.jpg", focus: "50% 22%" },
-  { title: "Cleaners", text: "Regular, deep or move-out cleans.", photo: "/assets/images/service-cleaner.jpg", focus: "50% 6%" },
-  { title: "Plumbers", text: "Leaks, blocked drains, new fittings.", photo: "/assets/images/service-plumber.jpg", focus: "50% 12%" },
-  { title: "Electricians", text: "Wiring, sockets and inverters.", photo: "/assets/images/service-electrician.jpg", focus: "50% 25%" },
-  { title: "AC & appliances", text: "Servicing, gas top-ups and repairs.", photo: "/assets/images/service-ac-technician.jpg", focus: "50% 55%" },
-  { title: "Carpenters", text: "Furniture, doors and fittings.", photo: "/assets/images/service-carpenter.jpg", focus: "50% 28%" },
+  { title: "Cooks", text: "Daily meals, meal prep or a party.", art: "/assets/images/service-cook.svg" },
+  { title: "Cleaners", text: "Regular, deep or move-out cleans.", art: "/assets/images/service-cleaner.svg" },
+  { title: "Plumbers", text: "Leaks, blocked drains, new fittings.", art: "/assets/images/service-plumber.svg" },
+  { title: "Electricians", text: "Wiring, sockets and inverters.", art: "/assets/images/service-electrician.svg" },
+  { title: "AC & appliances", text: "Servicing, gas top-ups and repairs.", art: "/assets/images/service-ac.svg" },
+  { title: "Carpenters", text: "Furniture, doors and fittings.", art: "/assets/images/service-carpenter.svg" },
 ];
 
 const steps = [
   {
     title: "Find a pro near you",
     text: "Pick a service and see verified pros in your area.",
-    art: { src: "/assets/images/step-find-nearby-pro.png", width: 1600, height: 1200 },
+    art: { src: "/assets/images/step-find-nearby-pro.svg", width: 1600, height: 1200 },
   },
   {
     title: "Book and pay safely",
     text: "Choose a time. Your payment waits in escrow.",
-    art: { src: "/assets/images/step-book-pay-escrow.png", width: 1600, height: 1200 },
+    art: { src: "/assets/images/step-book-pay-escrow.svg", width: 1600, height: 1200 },
   },
   {
     title: "Approve, then they get paid",
     text: "Happy with the work? Release payment in one tap.",
-    art: { src: "/assets/images/step-approve-release-payment.png", width: 1600, height: 1200 },
+    art: { src: "/assets/images/step-approve-release-payment.svg", width: 1600, height: 1200 },
   },
 ];
 
@@ -39,17 +39,17 @@ const promises = [
   {
     title: "Every pro is verified",
     text: "ID, face match, skills check and a guarantor, before their first job.",
-    art: { src: "/assets/images/trust-verified-identity.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/trust-verified-identity.svg", width: 1200, height: 1200 },
   },
   {
     title: "Your money is protected",
     text: "Pros are never paid upfront. Payment is released only when you approve.",
-    art: { src: "/assets/images/trust-escrow-protection.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/trust-escrow-protection.svg", width: 1200, height: 1200 },
   },
   {
     title: "We've got your back",
     text: "If a job goes wrong, we send someone to fix it or refund you.",
-    art: { src: "/assets/images/trust-recourse-guarantee.png", width: 1200, height: 1200 },
+    art: { src: "/assets/images/trust-recourse-guarantee.svg", width: 1200, height: 1200 },
   },
 ];
 
@@ -90,7 +90,7 @@ export default function Home() {
             </p>
 
             <div style={i(3)} className="enter-once mt-8 flex w-full flex-col items-center lg:items-start">
-              <WaitlistForm />
+              <WaitlistForm source="home-hero" />
               <p className="mt-3 text-xs text-gray-300">Free to join. We&apos;ll email you when we launch in your city.</p>
             </div>
           </div>
@@ -98,10 +98,9 @@ export default function Home() {
           <Reveal>
             <div style={i(4)} className="enter-once enter-soft">
               <Illustration
-                src="/assets/images/hero-pro-arriving-with-phone.jpg"
+                src="/assets/images/hero-pro-arriving-with-phone.svg"
                 photo
-                focus="50% 22%"
-                label="A smiling QwikHelp pro on a phone call"
+                label="Illustration of a QwikHelp pro at a front door, showing a confirmed booking on his phone"
                 tone="blue"
                 className="aspect-square sm:aspect-[5/4] lg:aspect-square"
               />
@@ -113,10 +112,9 @@ export default function Home() {
         <section id="about" aria-labelledby="about-title" className="">
           <Reveal className={`${container} ${sectionY} grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
             <Illustration
-              src="/assets/images/about-cautious-homeowner.jpg"
+              src="/assets/images/about-cautious-homeowner.svg"
               photo
-              focus="50% 35%"
-              label="A woman on a phone call, looking unsure"
+              label="Illustration of a woman looking unsure at a message asking for money upfront"
               tone="white"
               className="reveal-item aspect-[4/3]"
             />
@@ -144,7 +142,7 @@ export default function Home() {
             {services.map((s, n) => (
               <li key={s.title} style={i(n % 3)} className="reveal-item group rounded-[32px] bg-gray-50 p-3">
                 <div className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-1">
-                  <Illustration src={s.photo} photo focus={s.focus} label={s.title} decorative tone="white" className="aspect-[4/3]" />
+                  <Illustration src={s.art} photo label={s.title} decorative tone="white" className="aspect-[4/3]" />
                 </div>
                 <div className="px-4 pt-5 pb-4">
                   <h3 className="text-xl font-bold text-gray-950">{s.title}</h3>
@@ -262,7 +260,7 @@ export default function Home() {
                 Get early access when QwikHelp launches in your city. Coming to iOS and Android.
               </p>
               <div style={i(2)} className="reveal-item mt-8 w-full">
-                <WaitlistForm className="mx-auto lg:mx-0" />
+                <WaitlistForm className="mx-auto lg:mx-0" source="home-final-cta" />
               </div>
             </div>
 

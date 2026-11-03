@@ -15,7 +15,7 @@ interface HeroImageStageProps {
 }
 
 export default function HeroImageStage({
-  imageSrc = "/hero-workers.png",
+  imageSrc = "/assets/images/provider-hero-pros.svg",
   imageAlt = "QwikHelp verified professionals: chef, electrician, plumber, and carpenter ready to help",
 }: HeroImageStageProps) {
   const [showSlotGuide, setShowSlotGuide] = useState(false);
@@ -97,7 +97,7 @@ export default function HeroImageStage({
                 Hero Image Space Slot
               </h4>
               <p className="text-sm text-gray-600 max-w-md mt-1">
-                Target location: <code className="bg-white px-2 py-0.5 rounded text-brand-blue font-mono text-xs">/public/hero-workers.png</code>
+                Target location: <code className="bg-white px-2 py-0.5 rounded text-brand-blue font-mono text-xs">/public/assets/images/provider-hero-pros.svg</code>
               </p>
               <div className="mt-4 grid grid-cols-2 gap-3 text-xs text-left bg-white p-3 rounded-xl border border-blue-100 max-w-sm">
                 <div>
